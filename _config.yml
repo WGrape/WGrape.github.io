@@ -13,15 +13,15 @@
 
 
 # Site settings
-title: CST Blog
-SEOTitle: CST Blog
+title: 国外CST资料翻译
+SEOTitle: 国外CST资料翻译
 header-img: img/post-bg-desk.jpg
 email: 
-description: ""
+description: "翻译国外CST(Computer Science and Technology)相关资料"
 keyword: ""
 url: "https://lvsi-china.github.io/"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "https://github.com/Lvsi-China/lvsi-china.github.io.git" # you code repository
+github_repo: "https://github.com/Lvsi-China/Akama" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
