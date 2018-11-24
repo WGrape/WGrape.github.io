@@ -10,7 +10,7 @@
 
 
 # Site settings
-title: BY Blog
+title: CST Blog
 SEOTitle: CST Blog
 header-img: img/post-bg-desk.jpg
 email: 
@@ -31,7 +31,7 @@ sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's us
 RSS: false
 # weibo_username:  
 # zhihu_username:     
-github_username:    https://github.com/Lvsi-China/
+github_username: Lvsi-China
 # facebook_username: 
 # jianshu_username:  
 #twitter_username:  
