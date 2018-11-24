@@ -15,7 +15,7 @@
 # Site settings
 title: 国外CST资料翻译
 SEOTitle: 国外CST资料翻译
-header-img: img/post-bg-desk.jpg
+header-img:
 email: 
 description: "翻译国外CST(Computer Science and Technology)相关资料"
 keyword: ""
