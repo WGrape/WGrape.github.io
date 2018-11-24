@@ -21,7 +21,7 @@ description: "翻译国外CST(Computer Science and Technology)相关资料"
 keyword: ""
 url: "https://github.com/Lvsi-China/Akama"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "https://github.com/Lvsi-China/Akama" # you code repository
+github_repo: "Akama" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
