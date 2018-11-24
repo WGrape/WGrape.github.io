@@ -25,7 +25,7 @@ github_repo: "https://github.com/Lvsi-China/Akama" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "How much of your love will determine what you going to be!"
+sidebar-about-description: "人生只够做一件事，摒弃其他一切，把热爱注入到生命的血液中，才能把事情做到极致。"
 sidebar-avatar: /img/style/eason.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
