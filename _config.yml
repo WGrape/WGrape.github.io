@@ -16,8 +16,9 @@
 title: CST Blog
 SEOTitle: CST Blog
 header-img: img/post-bg-desk.jpg
+header_motto: "人生只够做一件事，摒弃其他一切，把热爱注入到生命的血液中，才能把事情做到极致。"
 email: 
-description: "CCCCCCC"
+description: ""
 keyword: ""
 url: "https://lvsi-china.github.io/"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
