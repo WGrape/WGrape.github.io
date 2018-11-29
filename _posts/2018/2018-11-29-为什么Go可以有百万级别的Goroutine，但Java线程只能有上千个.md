@@ -7,7 +7,8 @@ author:     Lvsi
 header-img: 
 catalog: true
 tags:
-    - 原子操作
+    - 线程
+    - Goroutine
 ---
 
 ## 【译】为什么Go可以有百万级别的Goroutine，但Java线程只能有上千个？
