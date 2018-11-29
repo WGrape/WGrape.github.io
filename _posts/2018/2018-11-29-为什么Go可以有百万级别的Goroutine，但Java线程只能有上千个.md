@@ -1,6 +1,19 @@
-## 为什么Go可以有百万级别的Goroutine，但Java线程只能有上千个 ?
+---
+layout:     post
+title:      【译】为什么Go可以有百万级别的Goroutine，但Java线程只能有上千个？
+subtitle:   Goroutines & Threads
+date:       2018-11-29
+author:     Lvsi
+header-img: 
+catalog: true
+tags:
+    - 原子操作
+---
+
+## 【译】为什么Go可以有百万级别的Goroutine，但Java线程只能有上千个？
 
 > 翻译文章来自 [《Why you can have millions of Goroutines but only thousands of Java Threads》](https://rcoh.me/posts/why-you-can-have-a-million-go-routines-but-only-1000-java-threads/)
+> 译者：Lvsi / [原版翻译](https://www.infoq.cn/article/a-million-go-routines-but-only-1000-java-threads)
 
 许多有经验的工程师在使用基于JVM的语言时，都会遇到过如下的错误：
 
@@ -54,7 +67,7 @@ Golang 实现了自己的调度器，允许众多的 Goroutines 运行在相同�
 
 即便 JVM 将线程放到用户空间，它也无法支持上百万的线程。假设在按照这样新设计系统中，新线程之间的切换只需要 100 纳秒。即便你所做的只是上下文切换，如果你想要每秒钟调度每个线程十次的话，你也只能运行大约 100 万个线程。更重要的是，为了完成这一点，我们需要最大限度地利用 CPU。要支持真正的大并发需要另外一项优化：当你知道线程能够做有用的工作时，才去调度它。如果你运行大量线程的话，其实只有少量的线程会执行有用的工作。Go 通过集成通道（channel）和调度器（scheduler）来实现这一点。如果某个 Goroutine 在一个空的通道上等待，那么调度器会看到这一点并且不会运行该 Goroutine。Go 更近一步，将大多数空闲的线程都放到它的操作系统线程上。通过这种方式，活跃的 Goroutine（预期数量会少得多）会在同一个线程上调度执行，而数以百万计的大多数休眠的 Goroutine 会单独处理。这样有助于降低延迟。
 
-除非 Java 增加语言特性，允许调度器进行观察，否则的话，是不可能支持智能调度的。但是，你可以在“用户空间”中构建运行时调度器，它能够感知线程何时能够执行工作。这构成了像 Akka 这种类型的框架的基础，它能够支持上百万的 Actor.
+除非 Java 增加语言特性，允许调度器观察，否则的话，是不可能支持智能化调度的。但是，你可以在“用户空间”中构建运行时调度器，它能够感知线程何时能够执行工作。这构成了像 Akka 这种类型的框架的基础，它能够支持上百万的 Actor.
 
 ## 结论
 
