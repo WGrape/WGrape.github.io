@@ -15,7 +15,7 @@ tags:
 
 > 翻译文章来自 [《Why you can have millions of Goroutines but only thousands of Java Threads》](https://rcoh.me/posts/why-you-can-have-a-million-go-routines-but-only-1000-java-threads/)<br/>
 > 补充翻译：[原文翻译](https://www.infoq.cn/article/a-million-go-routines-but-only-1000-java-threads)<br/>
-> 本文译者：Lvsi
+> 译者：[Lvsi](https://github.com/Lvsi-China)
 
 许多有经验的工程师在使用基于JVM的语言时，都会遇到过如下的错误：
 
