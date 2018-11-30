@@ -31,7 +31,7 @@
 
 		if( time - last_refresh_time >= 2000 ){
 
-			Cookies.set(time);
+			Cookies.set("last_refresh_time", time);
 			
 			var url = (window.location.href.split('?'))[0]
 			window.location.href = url + "?refresh=" + md5(Math.random());
