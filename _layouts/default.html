@@ -20,13 +20,22 @@
 </body>
 
 <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<script src="https://cdn.bootcss.com/js-cookie/latest/js.cookie.js"></script>
 <script type="text/javascript">
 	
 	try{
 
-		var url = (window.location.href.split('?'))[0]
+		var last_refresh_time = Cookies.get("last_refresh_time");
 
-		window.location.href = url + "?refresh=" + md5(Math.random());
+		var time = new Date().getTime();
+
+		if( time - last_refresh_time >= 2000 ){
+
+			Cookies.set(time);
+			
+			var url = (window.location.href.split('?'))[0]
+			window.location.href = url + "?refresh=" + md5(Math.random());
+		}
 
 	}catch(e){
 
