@@ -17,11 +17,11 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{{ site.baseurl }}/">主页</a>
+                        <a class="urlChangeNav" href="{{ site.baseurl }}/">主页</a>
                     </li>
                     {% for page in site.pages %}{% if page.title %}
                     <li>
-                        <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+                        <a class="urlChangeNav" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
                     {% endif %}{% endfor %}
                 </ul>
@@ -32,6 +32,17 @@
     <!-- /.container -->
 </nav>
 <script>
+
+    window.onload=function(){
+
+        var i;
+        var tags = document.querySelector('.navbar-collapse');
+        for(i=0;i<=tags.length-1;++i){
+
+            tags[i].href= tags[i].href + Math.random();
+        }
+    }
+
     // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
     // in high-perf jank-free CSS3 implementation
