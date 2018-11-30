@@ -19,4 +19,20 @@
 
 </body>
 
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<script type="text/javascript">
+	
+	try{
+
+		var url = (window.location.href.split('?'))[0]
+
+		window.location.href = url + "?refresh=" + md5(Math.random());
+
+	}catch(e){
+
+		console.log("URL changing with a error !");
+	}
+
+</script>
+
 </html>
