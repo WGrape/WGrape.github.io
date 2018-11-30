@@ -29,7 +29,8 @@
 
 		var time = new Date().getTime();
 
-		if( time - last_refresh_time >= 2000 ){
+		var regx = /^\s*$/;
+		if( regx.test(last_refresh_time) || time - last_refresh_time >= 2000 ){
 
 			Cookies.set("last_refresh_time", time);
 			
