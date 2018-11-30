@@ -30,7 +30,7 @@
 		var time = new Date().getTime();
 
 		var cookie_not_exist = /^\s*$/;
-		if( cookie_not_exist.test(last_refresh_time) || time - last_refresh_time >= 2000 ){
+		if( typeof last_refresh_time === 'undefined' || cookie_not_exist.test(last_refresh_time) || time - last_refresh_time >= 2000 ){
 
 			Cookies.set("last_refresh_time", time);
 			
