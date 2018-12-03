@@ -22,7 +22,7 @@
                     <li>
                         <a class="urlChangeNav" href="{{ site.baseurl }}/long">长文</a>
                     </li>
-                    {% for page in site.pages %}{% if page.title && page.title!="长文" %}
+                    {% for page in site.pages %}{% if page.title %}
                     <li>
                         <a class="urlChangeNav" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
