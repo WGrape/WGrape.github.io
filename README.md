@@ -4,6 +4,8 @@
 
 ## 介绍
 
+<img src="https://github.com/Lvsi-China/Akama/raw/master/extra/images/logo.png">
+
 Akama 是专翻译国外CST相关资料的项目，里面收录了一些国外计算机相关的翻译后的文章资料 。 因此本项目只是用于把那些文章用博客的形式展示在网站上，所以本项目和 Akama 没有一点关系，请不要在本仓库中回复。
 
 - [Akama 仓库](https://github.com/Lvsi-China/Akama)
