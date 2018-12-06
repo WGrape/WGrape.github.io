@@ -13,3 +13,6 @@ Akama 是专翻译国外CST相关资料的项目，里面收录了一些国外�
 - [国外CST资料翻译](http://lvsi-china.github.io/)
 
 有任何问题可以到 [Akama 仓库]() 的 Issuses 里回复。
+
+> 此博客我只用来记录国外译文，如果想[看我的技术博客](https://github.com/Lvsi-China/CSTheory)，可以前往 [CSTheory](https://github.com/Lvsi-China/CSTheory) 项目，这个项目就是我唯一且永久用于记录技术的。[仓库地址](https://github.com/Lvsi-China/CSTheory)
+
