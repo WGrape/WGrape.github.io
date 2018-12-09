@@ -2,7 +2,7 @@
 
 我的 Akama 项目的网站（The Website of My Akama Project）<br>
 
-## 介绍
+## 介绍( Introduction )
 
 <img src="https://github.com/Lvsi-China/Akama/raw/master/extra/images/logo.png">
 
@@ -16,3 +16,6 @@ Akama 是专翻译国外CST相关资料的项目，里面收录了一些国外�
 
 > 此博客我只用来记录国外译文，如果想看[我的技术博客](https://lvsi-china.github.io/CSTheory/)，请前往我的 [CSTheory](https://github.com/Lvsi-China/CSTheory) 项目，这个项目就是我唯一且永久更新的技术博客。[ CSTheory 仓库地址](https://github.com/Lvsi-China/CSTheory)，[ CSTheory 博客地址](https://lvsi-china.github.io/CSTheory/)
 
+## 贡献( Contribution )
+
+<a href="https://github.com/vuejs/vue/graphs/contributors"><img src="https://opencollective.com/vuejs/contributors.svg?width=890" /></a>
