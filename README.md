@@ -14,5 +14,5 @@ Akama 是专翻译国外CST相关资料的项目，里面收录了一些国外�
 
 有任何问题可以到 [Akama 仓库](https://github.com/Lvsi-China/Akama) 的 Issuses 里回复。
 
-> 此博客我只用来记录国外译文，如果想看[我的技术博客](https://lvsi-china.github.io/CSTheory/)，请前往我的 [CSTheory](https://github.com/Lvsi-China/CSTheory) 项目，这个项目就是我唯一且永久更新的技术博客。[仓库地址](https://github.com/Lvsi-China/CSTheory)，[博客地址](https://lvsi-china.github.io/CSTheory/)
+> 此博客我只用来记录国外译文，如果想看[我的技术博客](https://lvsi-china.github.io/CSTheory/)，请前往我的 [CSTheory](https://github.com/Lvsi-China/CSTheory) 项目，这个项目就是我唯一且永久更新的技术博客。[ CSTheory 仓库地址](https://github.com/Lvsi-China/CSTheory)，[ CSTheory 博客地址](https://lvsi-china.github.io/CSTheory/)
 
