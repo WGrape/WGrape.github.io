@@ -18,4 +18,6 @@ Akama 是专翻译国外CST相关资料的项目，里面收录了一些国外�
 
 ## 贡献( Contribution )
 
-<a href="https://github.com/vuejs/vue/graphs/contributors"><img src="https://opencollective.com/vuejs/contributors.svg?width=890" /></a>
+[Lvsi-China](https://github.com/Lvsi-China)<br>
+[qiubaiying](https://github.com/qiubaiying/qiubaiying.github.io)
+
