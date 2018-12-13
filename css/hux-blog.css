@@ -875,11 +875,11 @@ img::-moz-selection {
   }
 }
 #tag-heading {
-  padding: 70px 0 60px;
+  /*padding: 70px 0 60px;*/
 }
 @media only screen and (min-width: 768px) {
   #tag-heading {
-    padding: 55px 0;
+    /*padding: 55px 0;*/
   }
 }
 #tag_cloud {
