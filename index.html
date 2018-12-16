@@ -65,6 +65,10 @@ SimpleJekyllSearch({
 </script>
 <!-- 搜索功能 -->
 
+<div>
+    浏览量：<span data-hk-page="current"> - </span>次<span class="pause"> | </span>
+</div>
+<script src="http://jerry-cdn.b0.upaiyun.com/hit-kounter/hit-kounter-0.1.1.js"></script>
 
 
 {% for post in paginator.posts %}
@@ -104,10 +108,4 @@ SimpleJekyllSearch({
     {% endif %}
 </ul>
 {% endif %}
-
-
-
-<div><span data-hk-page="current"> - </span></div>
-<script src="http://jerry-cdn.b0.upaiyun.com/hit-kounter/hit-kounter-0.1.1.js"></script>
-
 
