@@ -15,11 +15,12 @@ tags:
 > 原文 [《The Rise of Immer in React》](https://www.netlify.com/blog/2018/09/12/the-rise-of-immer-in-react/)<br/>
 > 译者：[Lvsi](https://github.com/Lvsi-China)
 
-```不变性```正在发生着变化。至少，我们在React中进行```不变性```的方式正在发生着变化。（我们都懂这个反语）
+不变性正在发生着变化。至少，我们在React中进行不变性的方式正在发生着变化(我们都懂这个反语)。
 
-<b></b><img src="/img/posts/2018/12-20/1.png">
+<img src="/img/posts/2018/12-20/1.png">
 
 ## 历史
+
 JavaScript中不可变性的需求并不明显。从本质上说，不可变性的主要优点是[较少担心的并发](https://www.infoq.com/articles/dhanji-prasanna-concurrency)，但由于JavaScript是单线程的，因此并没有太大的好处。
 
 React的不变性历史可以追溯到2013年12月在[David Notlen首次引入Om时](https://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs)。Om是使ClojureScript用户能够使用的React wrapper(包装器)，但Om的奇怪之处在于它比React更快。
@@ -31,6 +32,7 @@ React的不变性历史可以追溯到2013年12月在[David Notlen首次引入Om
 鉴于其与Flux的原理相似性，Immutable.js 很快被 [Redux社区采用](https://redux.js.org/recipes/usingimmutablejs)（以及[其他67个替代品](https://github.com/markerikson/redux-ecosystem-links/blob/master/immutable-data.md#immutable-update-utilities)），我们[也在Netlify中采用了它](https://www.netlifycms.org/docs/architecture/)！不变性得以解决！对吧？
 
 ## Immer的用户，文化，社区
+
 早在2018年，Michel Weststrate开放Immer源码。我就不在这里重复了，推荐你们读他的[介绍博客](https://hackernoon.com/introducing-immer-immutability-the-easy-way-9d73d8f71cb3)和
 [项目自述](https://github.com/mweststrate/immer)，我还推荐他的[React Finland](https://www.youtube.com/watch?v=-gJbS7YjcSo)演讲( [幻灯片](https://immer.surge.sh/) )作为后续行动。
 
