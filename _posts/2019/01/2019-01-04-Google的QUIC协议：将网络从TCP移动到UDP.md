@@ -7,7 +7,7 @@ author:     GFeather
 header-img: 
 catalog: true
 tags:
-    - QUIC
+    - HTTP
 
 
 ---
@@ -25,13 +25,13 @@ QUIC协议（Quick UDP Internet Connections）是一种全新的协议，用于�
 
 现在，网络建立在TCP之上，因为它作为传输协议的可靠性。要启动TCP连接，将执行  *3次握手*。这意味着每个启动连接的额外往返*（网络数据包来回发送）*会给任何新连接带来明显的延迟。
 
-![1](./images/1.png)
+<img src="/img/posts/2019/01-04/1.png">
 
 ​							*（来源：[UDP上的下一代多路传输（PDF）](https://www.nanog.org/sites/default/files//meetings/NANOG64/1051/20150603_Rogan_Quic_Next_Generation_v1.pdf)）*
 
 如果你还需要协商TLS，以创建安全，加密的https连接，则必须来回发送更多网络数据包。
 
-![2](./images/2.png)
+<img src="/img/posts/2019/01-04/2.png">
 
 ​							*（来源：[UDP上的下一代多路传输（PDF）](https://www.nanog.org/sites/default/files//meetings/NANOG64/1051/20150603_Rogan_Quic_Next_Generation_v1.pdf)）*
 
@@ -43,7 +43,7 @@ QUIC协议（Quick UDP Internet Connections）是一种全新的协议，用于�
 
 QUIC协议可以启动连接并协商1或2个数据包中的所有TLS（HTTPs）参数（取决于它是否是你要连接的新服务器或已知主机）。
 
-![3](./images/3.png)
+<img src="/img/posts/2019/01-04/3.png">
 
 ​							*（来源：[UDP上的下一代多路传输（PDF）](https://www.nanog.org/sites/default/files//meetings/NANOG64/1051/20150603_Rogan_Quic_Next_Generation_v1.pdf)）*
 
@@ -73,7 +73,7 @@ TCP协议受到高度监管。它的实现在Windows和Linux内核中，它在�
 
 QUIC协议实现了[自己的加密层](https://docs.google.com/document/d/1g5nIXAIkN_Y-7XJW5K45IblHd_L2f5LTaDUDwvZ5L6g/edit)，因此不使用现有的TLS 1.2。
 
-![4](./images/4.png)
+<img src="/img/posts/2019/01-04/4.png">
 
 它用UDP替换TCP，而QUIC是用于与远程服务器通信的较小的HTTP / 2 API。它更小的原因是因为QUIC已经处理了多路复用和连接管理。剩下的是对HTTP协议的解释。
 
@@ -81,7 +81,7 @@ QUIC协议实现了[自己的加密层](https://docs.google.com/document/d/1g5nI
 
 使用SPDY和[HTTP / 2](https://ma.ttias.be/?s=http2)，我们现在有一个TCP连接用于连接服务器而不是页面上每个资源的多个连接。这个TCP连接可以独立地请求和接收资源。
 
-![5](./images/5.png)
+<img src="/img/posts/2019/01-04/5.png">
 
 ​							（来源：[QUIC：UDP上的下一代多路传输](https://docs.google.com/presentation/d/13LSNCCvBijabnn1S4-Bb6wRlm79gN6hnPFHByEXXptk/present?slide=id.g17a0599c4_1164)）*
 
@@ -89,7 +89,7 @@ QUIC协议实现了[自己的加密层](https://docs.google.com/document/d/1g5nI
 
 在TCP报文需要~~到达~~正确的顺序进行处理。如果数据包在往/返服务器的路上丢失，则需要重新传输。TCP连接需要等待（或“阻塞”）该TCP数据包才能继续解析其他数据包，因为**TCP数据包的处理顺序很重要。**
 
-![6](./images/6.png)
+<img src="/img/posts/2019/01-04/6.png">
 
 *（来源：[QUIC：UDP上的下一代多路传输](https://docs.google.com/presentation/d/13LSNCCvBijabnn1S4-Bb6wRlm79gN6hnPFHByEXXptk/present?slide=id.g17a0599c4_1164)）*
 
@@ -97,7 +97,7 @@ QUIC协议实现了[自己的加密层](https://docs.google.com/document/d/1g5nI
 
 **UDP不依赖于接收数据包的顺序。**虽然数据包在传输过程中仍然可能丢失，但它们只会影响单个资源（如：单个CSS / JS文件），而不会阻止整个连接。
 
-![7](./images/7.png)
+<img src="/img/posts/2019/01-04/7.png">
 
 *（来源：[QUIC：UDP上的下一代多路传输](https://docs.google.com/presentation/d/13LSNCCvBijabnn1S4-Bb6wRlm79gN6hnPFHByEXXptk/present?slide=id.g17a0599c4_1164)）*
 
@@ -111,7 +111,7 @@ QUIC基本上是在非阻塞传输协议之上组合SPDY和HTTP2的最佳部分�
 
 当你与另一个大洲的服务器 或 通过手机运营商使用Edge，3G / 4G / LTE来交互时，这一点尤为明显。要从美国的欧洲到达服务器，你必须穿越大西洋。由于需要行进的距离，你会获得**+ 100ms**或更高的延迟惩罚。
 
-![8](./images/8.png)
+<img src="/img/posts/2019/01-04/8.png">
 
 *（来源：[QUIC：UDP上的下一代多路传输](https://docs.google.com/presentation/d/13LSNCCvBijabnn1S4-Bb6wRlm79gN6hnPFHByEXXptk/present?slide=id.g17a0599c4_1164)）*
 
@@ -151,7 +151,7 @@ tcp 0 0 31.193.180.217:443 81.82.98.95:59355 TIME_WAIT  -
 
 这就是为什么在移动设备上保持稳定连接非常困难，因为你可能会在WiFi和3G / LTE之间不断切换。
 
-![9](./images/9.png)
+<img src="/img/posts/2019/01-04/9.png">
 
 *（来源：[QUIC：UDP上的下一代多路传输](https://docs.google.com/presentation/d/13LSNCCvBijabnn1S4-Bb6wRlm79gN6hnPFHByEXXptk/present?slide=id.g17a0599c4_1164)）*
 
@@ -175,11 +175,11 @@ QUIC为称为**Connection UUID的**唯一连接实现了自己的标识符。从
 
 你可以通过立即打开`chrome://net-internals/#quic`选项卡来查看QUIC的使用方式（你还会注意到前面提到的**连接UUID**）。
 
-![10](./images/10.png)
+<img src="/img/posts/2019/01-04/10.png">
 
 如果你对低级别的详细信息感兴趣，你甚至可以查看所有实时连接并获取每个数据包的单个捕获：`chrome://net-internals/#events&q=type:QUIC_SESSION%20is:active`。
 
-![11](./images/11.png)
+<img src="/img/posts/2019/01-04/11.png">
 
 与你如何查看SDPY或HTTP / 2连接的内部结构类似。
 
@@ -189,7 +189,7 @@ QUIC为称为**Connection UUID的**唯一连接实现了自己的标识符。从
 
 例如，当我们在[Nucleus Hosting](https://www.nucleus.be/en/)为网络服务器配置防火墙时，那些防火墙规则就像这样。
 
-![12](./images/12.png)
+<img src="/img/posts/2019/01-04/12.png">
 
 请特别注意**协议列：TCP**。
 
@@ -201,7 +201,9 @@ QUIC为称为**Connection UUID的**唯一连接实现了自己的标识符。从
 
 在大型企业中，我可以看到这是一个问题。让它通过安全性以允许UDP在正常的TCP端口上听起来很*可疑*。
 
-我实际上认为这是连接方面的一个主要问题，但是谷歌已经完成了实验 - 结果[并非如此](https://www.ietf.org/proceedings/96/slides/slides-96-quic-3.pdf)。![13](./images/13.png)
+我实际上认为这是连接方面的一个主要问题，但是谷歌已经完成了实验 - 结果[并非如此](https://www.ietf.org/proceedings/96/slides/slides-96-quic-3.pdf)。
+
+<img src="/img/posts/2019/01-04/13.png">
 
 *（来源：[QUIC部署体验@Google](https://www.ietf.org/proceedings/96/slides/slides-96-quic-3.pdf)）*
 
