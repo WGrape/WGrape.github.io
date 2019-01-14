@@ -45,7 +45,7 @@ tags:
 
 通过扫描的数据，我调整旋转以寻找最大的对称性，然后我生成了这个高度图，它混合了半身像左右两侧的部分：
 
-<img src="/img/posts/2019/01-11/nefertiti512.jpg">
+<img src="/img/posts/2019/01-11/nefertiti512.png">
 
 #### 数据压缩
 
@@ -113,7 +113,7 @@ tags:
 
 作为参考与JPEG的比较：
 
-<img src="/img/posts/2019/01-11/comparison-jpeg.jpg">
+<img src="/img/posts/2019/01-11/comparison-jpeg.png">
 
 公平地说，我应该提到，这比我的压缩器有多好更能说明JPEG在高压缩率下有多糟糕。我通过压缩高度图来做到这一点，高度图的大小调整为128x128。为了帮助JPEG，我尝试将其大小调整到64x64，PSNR增加了，但即便如此，它还是比我的压缩器差很多。
 
