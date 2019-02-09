@@ -50,8 +50,12 @@ https://www.jianshu.com/p/064e2422f7c7
         padding:5px 0;
     }
 </style>
+{% count=0 %}
+{% for post in site.posts %}
+{% count++ %}
+{% endfor %}
 <div id="search-container">
-  <input type="text" id="search-input" placeholder="目前共翻译 28 篇 / 可从中快速搜索 ...">
+  <input type="text" id="search-input" placeholder="目前共翻译 {count} 篇 / 可从中快速搜索 ...">
   <ul id="results-container"></ul>
 </div>
 <script src="https://cdn.bootcss.com/simple-jekyll-search/1119c1a/jekyll-search.js"></script>
