@@ -2,12 +2,12 @@
 
 Akama 项目的网站
 
-## ♨ 介绍( Introduction )
+## 介绍
 
 <img src="https://github.com/Lvsi-China/Akama/raw/master/extra/images/logo.png">
 
-Akama 是专翻译国外CST相关资料的项目，里面收录了一些国外计算机相关的翻译后的文章资料 。
+Akama 是翻译国外CST相关资料的项目并被网站收录。
 
-- [Akama 仓库](https://github.com/Lvsi-China/Akama)
+- [Akama仓库](https://github.com/Lvsi-China/Akama)
 - [国外CST资料翻译](http://lvsi-china.github.io/)
 
