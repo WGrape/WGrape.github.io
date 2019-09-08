@@ -19,8 +19,8 @@ header-img: img/style/logo.png
 email: 
 description: "翻译国外CST(Computer Science and Technology)相关资料"
 keyword: "翻译，翻译计算机资料，翻译国外计算机资料，翻译CST资料，英文资料翻译，"
-url: "https://github.com/Lvsi-China/Akama"          # your host, for absolute URL
-baseurl: "https://lvsi-china.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
+url: "https://github.com/WGrape/Akama"          # your host, for absolute URL
+baseurl: "https://WGrape.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "Akama" # you code repository
 
 # Sidebar settings
@@ -34,7 +34,7 @@ sidebar-avatar: /img/style/eason.jpeg      # use absolute URL, seeing it's used 
 RSS: false
 # weibo_username:  
 # zhihu_username:     
-github_username: Lvsi-China
+github_username: WGrape
 # facebook_username: 
 # jianshu_username:  
 #twitter_username:  
