@@ -1,6 +1,7 @@
 ---
 layout:     post
 title:      parseAOF项目讲解之如何快速解析Redis的AOF文件
+header-img: /img/post.png
 catalog: true
 tags:
 - Redis

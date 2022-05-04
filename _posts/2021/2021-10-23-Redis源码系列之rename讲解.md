@@ -1,6 +1,7 @@
 ---
 layout:     post
 title:      Redis源码系列之rename讲解
+header-img: /img/post.png
 catalog: true
 tags:
 - Redis

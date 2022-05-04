@@ -1,6 +1,7 @@
 ---
 layout:     post
 title:      什么是Copy-on-write技术
+header-img: /img/post.png
 catalog: true
 tags:
 - CopyOnWrite
