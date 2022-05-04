@@ -26,7 +26,7 @@ github_repo: "https://github.com/WGrape/Blog" # you code repository
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "欢迎关注博客 🎉🎉🎉 ，分享原创技术文章"
-sidebar-avatar: /img/style/eason.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/author.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
