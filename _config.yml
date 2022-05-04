@@ -13,19 +13,19 @@
 
 
 # Site settings
-title: 国外CST资料翻译
-SEOTitle: 国外CST资料翻译
-header-img: img/style/logo.png
+title: WGrape的博客
+SEOTitle: WGrape的博客
+header-img:
 email: 
-description: "翻译国外CST(Computer Science and Technology)相关资料"
-keyword: "翻译，翻译计算机资料，翻译国外计算机资料，翻译CST资料，英文资料翻译，"
-url: "https://github.com/WGrape/Akama"          # your host, for absolute URL
+description: "WGrape的博客"
+keyword: "WGrape, 博客, 后端, 计算机, 编程, 前端, 程序员, golang, php, 编译器原理, 计算机网络"
+url: "https://github.com/WGrape/Blog"    # your host, for absolute URL
 baseurl: "https://WGrape.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "Akama" # you code repository
+github_repo: "https://github.com/WGrape/Blog" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "问到何时葡萄先熟透，你要静候再静候，就算失收始终要守。"
+sidebar-about-description: "欢迎关注博客 🎉🎉🎉 ，分享原创技术文章"
 sidebar-avatar: /img/style/eason.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
