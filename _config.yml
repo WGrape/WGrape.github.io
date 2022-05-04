@@ -32,12 +32,12 @@ sidebar-avatar: /img/author.png      # use absolute URL, seeing it's used in bot
 
 # SNS settings
 RSS: false
-# weibo_username:  
-# zhihu_username:     
+# weibo_username: 6426844450
+# zhihu_username: snake-60-75
 github_username: WGrape
 # facebook_username: 
-# jianshu_username:  
-#twitter_username:  
+jianshu_username: bc2af1ed9407
+#twitter_username:
 
 
 
