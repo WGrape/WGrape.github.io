@@ -17,7 +17,7 @@ title: WGrape的博客
 SEOTitle: WGrape的博客
 header-img:
 email: 
-description: "WGrape的博客"
+description: "分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章"
 keyword: "WGrape, 博客, 后端, 计算机, 编程, 前端, 程序员, golang, php, 编译器原理, 计算机网络"
 url: "https://github.com/WGrape/Blog"    # your host, for absolute URL
 baseurl: "https://WGrape.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
@@ -25,7 +25,7 @@ github_repo: "https://github.com/WGrape/Blog" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "欢迎关注博客 🎉🎉🎉 ，分享原创技术文章"
+sidebar-about-description: "分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章"
 sidebar-avatar: /img/author.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
