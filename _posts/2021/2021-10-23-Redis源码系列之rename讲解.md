@@ -28,7 +28,7 @@ tags:
 ## 1、隐式删除newKey
 由于rename操作不是renameNX，而是强制性的把旧Key名修改为新Key名。因此如果新Key名指向了数据，Redis就必先把这个数据删掉！
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631440492823-f0d05192-3749-41fb-8961-d243af58a607.png#clientId=u3b46003f-c32f-4&from=paste&height=195&id=u4dca50df&margin=%5Bobject%20Object%5D&name=image.png&originHeight=390&originWidth=1334&originalType=binary&ratio=1&size=33162&status=done&style=shadow&taskId=u2c4b2114-4838-49ba-ac1b-9b97529b24c&width=667)
+![image](https://user-images.githubusercontent.com/35942268/167286871-9df1a2f5-13c6-43e9-9107-466b514cc3d0.png)
 注 ：key对应的Value抽象为memory内存
 
 ### (1) 源码
@@ -39,11 +39,11 @@ tags:
 
 所以核心看`renameGenericCommand`函数即可
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631439469299-8d86c873-647d-4d26-80dd-3111e2454b6b.png#clientId=u3b46003f-c32f-4&from=paste&height=157&id=ub9cf6b14&margin=%5Bobject%20Object%5D&name=image.png&originHeight=314&originWidth=1260&originalType=binary&ratio=1&size=45362&status=done&style=none&taskId=ud538a3ee-4089-49b9-992b-139f6af8bc5&width=630)
+![image](https://user-images.githubusercontent.com/35942268/167286884-10a2940d-2505-42fc-87a3-c16c2efe268a.png)
 
 如下代码中 `if(lookupKeyWrite(c->db,c->argv[2]) != NULL)` ，其中`lookupKeyWrite` 函数会返回Key所指向的内存指针，如果不为空，则说明已经有数据存储，所以紧接着就会执行删除newKey的逻辑
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631439276597-a34b1d4f-0f8a-458d-b64a-b4d2d6764c7e.png#clientId=u3b46003f-c32f-4&from=paste&height=533&id=uce8d3d20&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1066&originWidth=1360&originalType=binary&ratio=1&size=169905&status=done&style=none&taskId=ue24a6701-40ae-4b31-a00a-93169762a42&width=680)
+![image](https://user-images.githubusercontent.com/35942268/167286894-9f33aacf-9f7f-441f-8004-a0dbc1123105.png)
 
 ### (2) 时间复杂度
 时间复杂度为O(M) ，M为成员数量
@@ -51,22 +51,22 @@ tags:
 ### (3) 测试
 先写一个有500W成员的Hash类型的bigkey，如下图发现写入后，内存增加约400MB，删除它需要3秒左右
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631438017336-92edec8a-b166-4845-8be6-54a352956c71.png#clientId=u3b46003f-c32f-4&from=paste&height=136&id=ua92c26a2&margin=%5Bobject%20Object%5D&name=image.png&originHeight=272&originWidth=1262&originalType=binary&ratio=1&size=51981&status=done&style=none&taskId=u966ef099-92b5-499c-90bb-e61549612a3&width=631)
+![image](https://user-images.githubusercontent.com/35942268/167286966-8ab66d48-4d8e-4593-b048-10f26fae1935.png)
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631438062315-4968c798-f3af-4018-aaff-b64aa926f418.png#clientId=u3b46003f-c32f-4&from=paste&height=210&id=u18e1dbc1&margin=%5Bobject%20Object%5D&name=image.png&originHeight=420&originWidth=1538&originalType=binary&ratio=1&size=82706&status=done&style=none&taskId=uc6b787ba-a985-4bb7-91ef-e26582b9409&width=769)
+![image](https://user-images.githubusercontent.com/35942268/167286983-2a557f2b-ef35-44d0-bb43-8531a8cf5ed5.png)
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631438223650-7b7b2924-2c3d-4ed3-91fe-a07b8a0d531e.png#clientId=u3b46003f-c32f-4&from=paste&height=116&id=uf402126a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=232&originWidth=1246&originalType=binary&ratio=1&size=37072&status=done&style=none&taskId=u1b5cd2d0-ac4e-4e71-bc4e-ee78bfe1c78&width=623)
+![image](https://user-images.githubusercontent.com/35942268/167286998-b373e2c6-7c54-4300-98eb-105dba22c529.png)
 
 然后我们执行rename操作，结果如下
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631438555807-6b768fad-9459-4a8b-9cea-3024687aef9c.png#clientId=u3b46003f-c32f-4&from=paste&height=222&id=ua84eee88&margin=%5Bobject%20Object%5D&name=image.png&originHeight=444&originWidth=1314&originalType=binary&ratio=1&size=74467&status=done&style=none&taskId=ua6a1ccfd-a9cf-48fc-b808-ce0cd9f5df8&width=657)
+![image](https://user-images.githubusercontent.com/35942268/167287027-6b7008c2-221e-4899-bbb6-5294eb365d29.png)
 
 所以rename操作会隐式的同步删除newKey，且删除耗时为O(M)
 
 ## 2、修改指针指向
 Redis有如下两种方案可以实现rename效果，第一种是数据拷贝，第二种是修改指针指向。如果采用值拷贝的方式，会增加Redis的内存峰值，且拷贝内存的时间也会增加耗时，最重要的值拷贝在Redis场景中不需要，所以Redis使用的是第二种修改指针的方式
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631441095055-0b974d39-32cd-4e7c-a1d6-92ca37b09b00.png#clientId=u3b46003f-c32f-4&from=paste&height=480&id=ue1834632&margin=%5Bobject%20Object%5D&name=image.png&originHeight=960&originWidth=2036&originalType=binary&ratio=1&size=106091&status=done&style=shadow&taskId=u9d7dc917-d7ed-480d-901e-77604da47d4&width=1018)
+![image](https://user-images.githubusercontent.com/35942268/167287046-42b63c4b-4c5c-4609-aa18-6aced4082e8d.png)
 
 注 ：key对应的Value抽象为memory内存
 
@@ -79,7 +79,7 @@ Redis有如下两种方案可以实现rename效果，第一种是数据拷贝，
 
 **由于o的引用计数为2，在删除了oldKey的指向关系后，o的引用计数还是1，并不会触发GC**，所以对象o所占用的内存空间仍然是有效的，不过变成了由newKey指向
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631442219531-48586fd8-1086-410c-8892-810b4138af7e.png#clientId=u3b46003f-c32f-4&from=paste&height=294&id=u6b213f21&margin=%5Bobject%20Object%5D&name=image.png&originHeight=588&originWidth=1360&originalType=binary&ratio=1&size=123243&status=done&style=none&taskId=ud0877f4f-6093-44e9-8bc6-b77d255fd43&width=680)
+![image](https://user-images.githubusercontent.com/35942268/167287064-676f0f52-bf6e-4635-87f7-59155c2f3023.png)
 
 ### (2) 时间复杂度
 O(1)
@@ -98,7 +98,7 @@ rename操作耗时为O(1)是不准确的，应该为O(M)+O(1)
 5、add relation ：把(newKey => o)新的键值对信息加到数据库中，让newKey指向一个新的值对象
 6、delete relation ：删除(oldKey => o)旧的键值对信息，让oldKey不再指向之前的值对象
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631444558116-c3c49aec-f646-423f-ba9f-fed5fa043e67.png#clientId=u5c2327d9-187b-4&from=paste&height=514&id=ucaff1663&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1028&originWidth=1540&originalType=binary&ratio=1&size=96491&status=done&style=shadow&taskId=u914c4a03-1e24-40ca-8e0d-0606c614eb1&width=770)
+![image](https://user-images.githubusercontent.com/35942268/167287088-a971c55e-b219-4742-920b-a261252920f3.png)
 
 注 ：key对应的Value抽象为memory内存
 
@@ -108,14 +108,14 @@ rename操作耗时为O(1)是不准确的，应该为O(M)+O(1)
 ## <span id="32">2、rename中的删除操作是同步的吗</span>
 从代码中可以看到是同步还是异步，完全取决于配置的DEL机制，即由`lazyfree-lazy-server-del`配置决定。
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631443686370-f0fccfa0-f35b-4d65-a5cb-2880291f9dae.png#clientId=u3b46003f-c32f-4&from=paste&height=130&id=ud1b3f17f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=260&originWidth=1130&originalType=binary&ratio=1&size=50204&status=done&style=none&taskId=uc7173b80-869d-47c7-9c6b-bc6347b50be&width=565)
+![image](https://user-images.githubusercontent.com/35942268/167287097-9e740d95-c49e-4b6c-9e2b-eddec632b997.png)
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631443807939-b0413c01-58b1-438e-a748-439aaa158f83.png#clientId=u3b46003f-c32f-4&from=paste&height=359&id=u9a3dfd25&margin=%5Bobject%20Object%5D&name=image.png&originHeight=718&originWidth=2456&originalType=binary&ratio=1&size=423300&status=done&style=none&taskId=u1336cd51-4f40-48aa-b5f7-86f78bb2e67&width=1228)
+![image](https://user-images.githubusercontent.com/35942268/167287126-a147e91c-7d11-46d5-8253-dd8ec1d68502.png)
 
 ## <span id="33">3、如何解决rename耗时长的问题</span>
 之前测试中发现rename操作卡了3秒，执行`config get *`命令，发现确实配置的删除方式为同步删除
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/223819/1631443916991-824c6027-627d-4ae3-ad3e-4175c186ed07.png#clientId=u3b46003f-c32f-4&from=paste&height=147&id=uf116f260&margin=%5Bobject%20Object%5D&name=image.png&originHeight=294&originWidth=1712&originalType=binary&ratio=1&size=40880&status=done&style=none&taskId=u413e6610-a44d-4048-9807-9853b402b53&width=856)
+![image](https://user-images.githubusercontent.com/35942268/167287158-43a7f086-feb2-4b64-aa09-956c3192be9f.png)
 
 所以解决方法有两个，要么减少Key的member成员数量，要么配置`lazyfree-lazy-server-del`为`yes`
 
