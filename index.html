@@ -9,6 +9,15 @@ header-img: "/img/logo.png"
     访问量 <span data-hk-site>2.3w</span> 次。
 </div> -->
 
+<div style="color: #888;padding:5px 0;text-align:left;font-size: 14px;">
+<span id="busuanzi_container_site_uv"
+      style="font-size: 15px;color: #666;margin-top: 10px;">UV<span
+        id="busuanzi_value_site_uv"></span><span id="busuanzi_value_site_uv_change"></span>&nbsp;/</span>
+  <span id="busuanzi_container_site_pv"
+        style="font-size: 15px;color: #666;margin-top: 10px;margin-right: 10px;">&nbsp;PV<span
+          id="busuanzi_value_site_pv"></span><span id="busuanzi_value_site_pv_change"></span></span>
+</div>
+
 <!-- 搜索功能 -->
 <!-- 
 Jekyll 静态博客实现搜索功能 https://juejin.im/post/5aa7d9c6f265da23866f918e 
@@ -51,6 +60,21 @@ https://www.jianshu.com/p/064e2422f7c7
 
         padding:5px 0;
     }
+
+
+#busuanzi_value_site_uv, #busuanzi_value_site_pv {
+  padding: 0 2px;
+}
+
+#busuanzi_value_site_pv_change, #busuanzi_value_site_uv_change {
+  color: #08964e;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#busuanzi_value_site_uv_change {
+
+}
 </style>
 
 <div id="search-container">
@@ -70,6 +94,39 @@ SimpleJekyllSearch({
 })
 </script>
 <!-- 搜索功能 -->
+
+<!-- 网站统计功能 -->
+<script>
+
+    // count the changed number compared to the last visit
+    setTimeout(function () {
+
+        let lastPv = parseInt(localStorage.getItem('pv'));
+        let lastUv = parseInt(localStorage.getItem('uv'));
+        if (isNaN(lastPv) || isNaN(lastUv) || lastPv <= 0 || lastUv <= 0) {
+            lastPv = 0;
+            lastUv = 0;
+        }
+
+        let pv = parseInt($("#busuanzi_value_site_pv").text());
+        let uv = parseInt($("#busuanzi_value_site_uv").text());
+        if (isNaN(pv) || isNaN(uv) || pv <= 0 || uv <= 0) {
+            return;
+        }
+        localStorage.setItem('pv', pv);
+        localStorage.setItem('uv', uv);
+
+        let pvChange = pv - lastPv;
+        let uvChange = uv - lastUv;
+        if (pvChange) {
+            $("#busuanzi_value_site_pv_change").text("↑" + pvChange);
+        }
+        if (uvChange) {
+            $("#busuanzi_value_site_uv_change").text("↑" + uvChange);
+        }
+    }, 4000);
+</script>
+<!-- 网站统计功能 -->
 
 {% for post in paginator.posts %}
 <div class="post-preview">
