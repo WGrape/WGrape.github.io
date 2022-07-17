@@ -9,6 +9,9 @@ tags:
 
 > 文章内容更新请以 [WGrape GitHub博客 : parseAOF项目讲解之如何快速解析Redis的AOF文件](https://github.com/WGrape/Blog/issues/11) 为准
 
+### 前言
+本文原创，著作权归[WGrape](https://github.com/WGrape)所有，未经授权，严禁转载
+
 ## 目录
 - [一、项目介绍](#1)
 - [二、架构设计](#2)

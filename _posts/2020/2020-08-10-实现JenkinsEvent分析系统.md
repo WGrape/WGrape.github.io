@@ -5,9 +5,13 @@ header-img: /img/post.png
 catalog: true
 tags:
 - Devops
+- 设计与实现
 ---
 
 > 文章内容更新请以 [WGrape GitHub博客 : 实现Jenkins Event分析系统](https://github.com/WGrape/Blog/issues/222) 为准
+
+### 前言
+本文原创，著作权归[WGrape](https://github.com/WGrape)所有，未经授权，严禁转载
 
 # 一、背景
 系统上线是至关重要的环节，频繁部署回滚系统，都可能引发严重后果。一个质量优秀的系统，不应该只体现在bug率等可量化的指标上，也应该把它涉及部署上线的操作也作为量化指标，用于更全面的质量分析。

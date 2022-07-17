@@ -9,6 +9,8 @@ tags:
 
 > 文章内容更新请以 [WGrape GitHub博客 : Redis源码系列之rename讲解](https://github.com/WGrape/Blog/issues/6) 为准
 
+### 前言
+本文原创，著作权归[WGrape](https://github.com/WGrape)所有，未经授权，严禁转载
 
 ## 目录
 - [一、rename原理](#1)
