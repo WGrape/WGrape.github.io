@@ -20,6 +20,8 @@
     <link rel="apple-touch-icon" href="{{ site.baseurl }}/img/author.png">
     
     <!-- Canonical URL -->
+    <!--<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">-->
+    <!--为了修复使用utterances时的这个重定向bug: https://github.com/utterance/utterances/issues/443-->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
     <!-- Bootstrap Core CSS -->
