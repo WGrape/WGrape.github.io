@@ -125,5 +125,9 @@ friends: [
   {
     title: "wgrape",
     href: "https://wgrape.github.io/"
+  },
+  {
+    title: "page",
+    href: "https://wgrape.github.io/page/"
   }
 ]
