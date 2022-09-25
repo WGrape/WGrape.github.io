@@ -115,19 +115,19 @@ service-worker: true
 # Friends
 friends: [
   {
-    title: "lexer",
+    title: "词法解析工具",
     href: "https://wgrape.github.io/lexer"
   },
   {
-    title: "CIManager",
+    title: "CI管理工具",
     href: "https://wgrape.github.io/CIManager"
   },
   {
-    title: "wgrape",
+    title: "wgrape博客",
     href: "https://wgrape.github.io/"
   },
   {
-    title: "page",
+    title: "个人页面管理工具",
     href: "https://wgrape.github.io/page/"
   }
 ]
