@@ -108,9 +108,11 @@ fmt.Printf("%d : name=%s , address=%s , intro.length=%d", redisUser.Uid, redisUs
 
 经过测试可以得出结论 ：在Redis的String中存储压缩后的字节流数据，不但可以正常解析，还明显节省了大量的内存空间
 
-## <span id="23">3、String与Byte[]的差异</span>
+## <span id="23">3、聊聊String与Byte[]</span>
 
-- Byte[]存储最底层的二进制数据，又称为字节流数据
+### <span id="231">(1) 两种类型的差异</span>
+
+- Byte[]存储最底层的二进制数据，又称为字节流数据，二进制数据
 - String是比Byte[]更高级的类型，是一种在Byte[]之上抽象出来的类型
 
 因为String和Byte[]在最底层的存储是一样的，都是二进制数据，所以在Go语言中我们经常看到String和Byte[]互相转换的情况。
@@ -125,7 +127,10 @@ fmt.Printf("%v", bytes)
 fmt.Printf("%s", bytes)
 ```
 
-正是因为这个原因，我们才能看到在Redis中String类型对字符串和二进制两种编码的支持。
+### <span id="232">(2) 两种数据的写入</span>
+由于String与Byte[]在底层存储并无差异，所以在上面的测试代码中也能发现无论写入String数据还是字节流数据，都能正常写入和读取解析。
+
+也就是说，在Redis中String类型对字符串和二进制两种编码都是支持的，那么它的底层是如何实现的呢 ？我们先留一个悬念。
 
 ## <span id="24">4、C语言中的String</span>
 
@@ -195,9 +200,7 @@ char s[];
 
 ```c
 #define OBJ_ENCODING_RAW 0     /* Raw representation */
-
 #define OBJ_ENCODING_INT 1     /* Encoded as integer */
-
 #define OBJ_ENCODING_EMBSTR 8  /* Embedded sds string encoding */
 ```
 
