@@ -129,18 +129,32 @@ fmt.Printf("%s", bytes)
 
 ## <span id="24">4、C语言中的String</span>
 
-在C语言中是没有字符串```string```类型的，只有使用字符数组```cahr[]```才能实现字符串类型。
+### <span id="241">(1) 编译期固定长度</span>
+
+在C语言中是没有字符串```string```类型的，一般只有使用字符数组```char[]```才能实现字符串类型，如下三种实现字符串的方式所示。虽然后面两种没有在定义时声明长度，但和第一种```char [N]```是等效的，因为它们的长度都是在编译时就已经固定的。
 
 ```c
-// 以下是三种实现字符串的方式
+// 本质都是字符数组
+char s[12] = {'h','e','l','l','o',' ','w','o','r','l','d','\0'};
 char *s = "hello world";
 char s[] = "hello world";
-char s[12] = {'h','e','l','l','o',' ','w','o','r','l','d','\0'};
+```
+
+### <span id="242">(2) 运行期动态扩容</span>
+
+有没有一种不固定长度的字符串实现方法呢？当然！如下所示的这两种写法都是定义了```char *```字符指针，然后在运行期间使用如```malloc()/memcpy()```等内存操作函数动态地扩容。
+
+```c
+// 本质都是字符指针
+char *s;
+char s[];
 ```
 
 ## <span id="25">5、Redis中的String</span>
 
-我们都知道Redis是使用C语言编写的，现在问题来了，Redis中的String是字符数组实现的吗 ？只要我们简单翻看Redis源码，就会知道它在字符数组```char[]```之上封装了一种叫做```SDS```的结构。这样实现的原因是什么呢 ？
+我们都知道Redis是使用C语言编写的，现在问题来了，Redis中的String是字符数组实现的吗 ？肯定不是！Redis不可能会在编译期间就确定所有字符串的长度，所以只能使用字符指针在运行期动态扩容的方式。
+
+但仅仅是字符指针吗？只要我们简单翻看Redis源码，就会知道它在字符指针```char[]```之上又封装了一种叫做```SDS```的结构。这样实现的原因是什么呢 ？
 
 # <span id="3">三、String为什么要这样设计
 
@@ -181,7 +195,9 @@ char s[12] = {'h','e','l','l','o',' ','w','o','r','l','d','\0'};
 
 ```c
 #define OBJ_ENCODING_RAW 0     /* Raw representation */
+
 #define OBJ_ENCODING_INT 1     /* Encoded as integer */
+
 #define OBJ_ENCODING_EMBSTR 8  /* Embedded sds string encoding */
 ```
 
