@@ -4,6 +4,7 @@ title:      《从实践中探究Redis原理》之String是字符数组吗（上
 header-img: /img/post.png
 catalog: true
 tags:
+- Redis
 - 底层研究系列
 - Redis源码系列
 ---
