@@ -131,5 +131,9 @@ friends: [
   {
     title: "个人页面管理工具",
     href: "https://wgrape.github.io/page/"
+  },
+  {
+    title: "如何申请",
+    href: "https://wgrape.github.io/page/"
   }
 ]
