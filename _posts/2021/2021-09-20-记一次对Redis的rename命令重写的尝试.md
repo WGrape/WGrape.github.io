@@ -6,6 +6,7 @@ catalog: true
 tags:
 - 底层研究
 - 经验之谈
+- Redis
 - Redis源码
 - 设计与实现
 ---
@@ -18,7 +19,7 @@ tags:
 ## 一、背景
 随着云上产品的发展愈来愈完善，越来越多的公司开始投入到服务器上云的工作中，可选的云上服务商和产品也非常多。
 
-某某云服务商旗下的XX是基于Redis开发的云上存储产品，基本对Redis可以做到99%兼容，之所以不是100%，是因为对于Redis的一些罕见命令是不支持的，比如R```rename```命令。
+某某云服务商旗下的XX是基于Redis开发的云上存储产品，基本对Redis可以做到99%兼容，之所以不是100%，是因为对于Redis的一些罕见命令是不支持的，比如```rename```命令。
 
 如果公司选择了此产品作为Redis云上产品，不巧的是业务中大量使用了```rename```命令，那么如何保证上云后，业务正常不受影响呢？
 
@@ -99,7 +100,7 @@ function rename($srcKey, $dstKey)
     $isCustomRename = intval($monitorRedis->get('is_custom_rename'));
 
     // 使用dump+restore替代Redis的rename命令
-    if (KTV_STAT_PREFIX == 143 || ENVIRONMENT == 'aliyun' || $isCustomRename) {
+    if (ENVIRONMENT == 'xx_cloud' || $isCustomRename) {
         $lua = <<<LUA
         local data=redis.call('dump',KEYS[1])
         if (data == nil or data == '' or data == false) then
