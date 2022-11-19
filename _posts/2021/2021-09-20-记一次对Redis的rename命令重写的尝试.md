@@ -123,7 +123,7 @@ LUA;
 ```
 
 ## 三、收获
-基于此次经验，除了有如下收获外，总结并写了一篇Redis底层文章[《Redis源码系列之rename讲解》](https://github.com/WGrape/Blog/issues/6) 欢迎查看。
+基于此次经验，除了有如下收获外，总结并写了一篇Redis底层文章[《Redis源码系列之rename讲解》](https://github.com/WGrape/Blog/issues/6) 欢迎阅读。
 
 - Redis中不同的命令会使用不同的秒、毫秒级时间单位，小心使用错误
 - 在使用```phpredis```的时候，很多场景都是直接用```parent```的方法即可，例如```parent::multi()```
