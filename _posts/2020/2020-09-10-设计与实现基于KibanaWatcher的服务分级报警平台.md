@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      设计与实现基于Kibana Wathcer的服务分级报警平台
+title:      设计与实现基于Kibana Watcher的服务分级报警平台
 header-img: /img/post.png
 catalog: true
 tags:
@@ -8,7 +8,7 @@ tags:
 - 设计与实现
 ---
 
-> 文章内容更新请以 [WGrape GitHub博客 : 设计与实现基于Kibana Wathcer的服务分级报警平台](https://github.com/WGrape/Blog/issues/220) 为准
+> 文章内容更新请以 [WGrape GitHub博客 : 设计与实现基于Kibana Watcher的服务分级报警平台](https://github.com/WGrape/Blog/issues/220) 为准
 
 ### 前言
 本文原创，著作权归[WGrape](https://github.com/WGrape)所有，未经授权，严禁转载
