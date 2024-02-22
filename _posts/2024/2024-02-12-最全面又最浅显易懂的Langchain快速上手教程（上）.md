@@ -68,6 +68,8 @@ LangChain Lib从底向上主要包括LangChain-Core/LangChain-Community/LangChai
 
 ### 4. 关于安装
 
+> 可以选择使用一键式多环境管理[sparrow](https://github.com/WGrape/sparrow)服务中已经集成的```Langchain```环境
+
 #### (1) 安装Langchain
 
 使用如下命令即可快速安装Langchain。通过```python -m site```命令查看langchain的安装目录，就会发现它就是上面提到Langchain源码 [langchain-ai/langchain/libs/langchain](https://github.com/langchain-ai/langchain/tree/master/libs/langchain)。
