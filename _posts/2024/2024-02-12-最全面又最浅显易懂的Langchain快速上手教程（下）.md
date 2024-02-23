@@ -472,6 +472,11 @@ chain.invoke({"number": 2})
 
 <img width="518" alt="image" src="https://github.com/WGrape/Blog/assets/35942268/5dbfc098-995b-4d0d-a88d-8d6bb3da5107">
 
+### 3. 模块总结
+根据上述的理解，对LangChain核心模块的总结如下所示
+
+<img width="700" alt="image" src="https://github.com/WGrape/Blog/assets/35942268/388b61dd-28ad-443a-8c0e-2bcb7463a274">
+
 ## 四. 优雅且高效的LCEL
 
 ### 1. 介绍
