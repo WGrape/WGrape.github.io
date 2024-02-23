@@ -399,6 +399,8 @@ print(message)
 
 官方对```Chains```的定义是指Prompt、LLM、Tool等一系列的调用组合，也就是说只要定义完各个模块，我们使用Chain就可以自动把各个模块之间连接起来并运行。我们知道在Langchain Lib整个结构中，从底向上依次是抽象层、具体实现层、以及整合适配层，现在有没有发现些什么呢 ？没错！这个整合适配层的核心实现，就是基于```Chains```链！
 
+在下图所示中，经过3和4的连接，Chain就可以把Prompts和Model这两个模块连接在一起，形成了一个自动执行的序列。
+
 <img width="500" src="https://github.com/WGrape/Blog/assets/35942268/0eacd9f7-3e12-4e6f-8402-890e5dcd239d">
 
 所以只有在[langchain](https://github.com/langchain-ai/langchain/tree/master)/[libs](https://github.com/langchain-ai/langchain/tree/master/libs)/[langchain](https://github.com/langchain-ai/langchain/tree/master/libs/langchain)/langchain/的源码中才有```chains```这个模块，在```Core/Community```中都是没有的，如下图所示。
