@@ -5,6 +5,7 @@ header-img: /img/post.png
 catalog: true
 tags:
 - 人工智能
+- Agent
 - LLM
 - Langchain
 ---
