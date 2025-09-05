@@ -134,6 +134,7 @@ friends: [
   },
   {
     title: "合作申请",
-    href: "https://github.com/WGrape/Blog/issues/272"
+#    href: "https://github.com/WGrape/Blog/issues/272"
+    href: "https://github.com/WGrape/Blog/issues/149"
   }
 ]
