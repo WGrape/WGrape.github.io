@@ -1,34 +1,36 @@
 ---
-title: "标签"
-layout: default
+title: "博客标签"
+layout: page
 description: "分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章"
 header-img: "/img/logo.png"
 ---
 
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading" id="tag-heading">
-                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
-                    <span class="subheading">{{ page.description }}</span>
-                </div>
-            </div>
-        </div>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-bg">
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow"></div>
     </div>
-</header>
+    <div class="hero-content">
+        <h1 class="hero-title">博客标签</h1>
+        <p class="hero-subtitle">Tags</p>
+        <p class="hero-desc">按主题分类浏览所有技术文章</p>
+    </div>
+</section>
 
 <!-- Main Content -->
-<div class="container">
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="container subpage-shell">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 postlist-container">
             <!-- 标签云 -->
-			<div id='tag_cloud' class="tags">
-				{% for tag in site.tags %}
-				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
-				{% endfor %}
-			</div>
+            <div id='tag_cloud' class="tags">
+                {% for tag in site.tags %}
+                <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+                {% endfor %}
+            </div>
 
             <!--<blockquote class="tag-comments">
                 标签命名规范：
@@ -37,34 +39,191 @@ header-img: "/img/logo.png"
             </blockquote>-->
 
             <!-- 标签列表 -->
-			{% for tag in site.tags %}
-			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
+            {% for tag in site.tags %}
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
                     <span class="tag-text">{{ tag[0] }}</span>
                 </span>
-				{% for post in tag[1] %}
-				  <!-- <li class="listing-item">
-				  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-				  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="{{ post.url | prepend: site.baseurl }}">
-				        <h2 class="post-title">
+                {% for post in tag[1] %}
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                    <a href="{{ post.url | prepend: site.baseurl }}">
+                        <h2 class="post-title">
                             {{ post.title }}
-				        </h2>
-				        {% if post.subtitle %}
-				        <h3 class="post-subtitle">
-				            {{ post.subtitle }}
-				        </h3>
-				        {% endif %}
-				    </a>
-				    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-				</div>
-				<hr>
-				{% endfor %}
-			</div>
-			{% endfor %}
+                        </h2>
+                        {% if post.subtitle %}
+                        <h3 class="post-subtitle">
+                            {{ post.subtitle }}
+                        </h3>
+                        {% endif %}
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+            {% endfor %}
 
-		</div>
-	</div>
+        </div>
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
+            <!-- Featured Tags -->
+            {% if site.featured-tags %}
+            <section class="subpage-sidebar-card">
+                <h5><a href="{{'/tags/' | prepend: site.baseurl }}">标签</a></h5>
+                <div class="tags">
+                    {% for tag in site.tags %}
+                        {% if tag[1].size > site.featured-condition-size %}
+                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                        {{ tag[0] }}
+                    </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- Friends Blog -->
+            {% if site.friends %}
+            <section class="subpage-sidebar-card">
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    {% for friend in site.friends %}
+                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {% endif %}
+        </div>
+    </div>
 </div>
+
+<style>
+.tags-page .hero-section {
+    background:
+        radial-gradient(1200px 620px at 50% -10%, rgba(168, 85, 247, 0.2), transparent 55%),
+        radial-gradient(900px 520px at 0% 80%, rgba(56, 189, 248, 0.18), transparent 55%),
+        linear-gradient(170deg, #111315 0%, #1f2937 50%, #101820 100%);
+}
+
+/* 标签页全铺暗色背景 */
+.tags-page,
+.tags-page body,
+.tags-page html {
+    background:
+        radial-gradient(1200px 620px at 50% -10%, rgba(168, 85, 247, 0.2), transparent 55%),
+        radial-gradient(900px 520px at 0% 80%, rgba(56, 189, 248, 0.18), transparent 55%),
+        linear-gradient(170deg, #111315 0%, #1f2937 50%, #101820 100%) !important;
+    color: #e7edf6;
+}
+
+.tags-page .container,
+.tags-page .row,
+.tags-page .col-lg-8,
+.tags-page .col-lg-offset-2,
+.tags-page .col-md-10,
+.tags-page .col-md-offset-1,
+.tags-page .postlist-container,
+.tags-page .sidebar-container {
+    background: transparent !important;
+}
+
+/* 标签云样式 */
+.tags-page #tag_cloud.tags a {
+    background: rgba(255,255,255,0.09);
+    color: #dce7f7;
+    border-color: rgba(255,255,255,0.16);
+}
+
+.tags-page #tag_cloud.tags a:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+
+/* 标签列表 */
+.tags-page .one-tag-list {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 22px 22px 10px;
+    margin-bottom: 24px;
+}
+
+.tags-page .listing-seperator,
+.tags-page .tag-text {
+    color: #f2f6fd;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+}
+
+.tags-page .post-preview {
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.05);
+    border-radius: 18px;
+    padding: 18px 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tags-page .post-preview:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.24);
+    border-color: rgba(56,189,248,0.46);
+}
+
+.tags-page .post-preview .post-title {
+    color: #f5f1e9;
+}
+
+.tags-page .post-preview a {
+    color: #60a5fa;
+}
+
+.tags-page .post-preview a:hover {
+    color: #93c5fd;
+}
+
+.tags-page hr {
+    border-color: rgba(255,255,255,0.12);
+}
+
+/* 侧边栏 */
+.tags-page .subpage-sidebar-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 22px;
+    padding: 22px;
+    margin-bottom: 22px;
+}
+
+.tags-page .subpage-sidebar-card h5,
+.tags-page .subpage-sidebar-card h5 a {
+    color: var(--wg-muted);
+}
+
+.tags-page .sidebar-container .tags a {
+    background: rgba(255,255,255,0.08);
+    color: #d6deea;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.tags-page .sidebar-container .tags a:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+
+.tags-page .list-inline > li > a {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #d6deea;
+}
+
+.tags-page .list-inline > li > a:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+</style>

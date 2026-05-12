@@ -1,0 +1,12 @@
+FROM jekyll/jekyll:4
+
+USER root
+
+RUN gem sources --add http://rubygems.org/ --remove https://rubygems.org/ && \
+    gem install webrick jekyll-paginate jekyll-feed --no-document
+
+WORKDIR /srv/jekyll
+
+EXPOSE 4000
+
+CMD ["jekyll", "serve", "--host", "0.0.0.0", "--incremental"]

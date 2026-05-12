@@ -4,7 +4,7 @@
 {% include head.html %}
 
 <!-- hack iOS CSS :active style -->
-<body ontouchstart="">
+<body ontouchstart="" class="{% if page.url == '/' %}is-home{% endif %} {% if page.url == '/about/' %}about-page{% endif %} {% if page.url == '/blog/' %}blog-page{% endif %} {% if page.url == '/tags/' %}tags-page{% endif %} {% if page.url == '/404.html' %}page-404{% endif %} {% if page.layout == 'post' %}post-page{% endif %}">
 
     {% include nav.html %}
 
@@ -14,8 +14,8 @@
 
 
 <!-- Image to hack wechat -->
-<!-- <img src="/img/apple-touch-icon.png" width="0" height="0" /> -->
-<img src="/img/author.png" width="0" height="0" />
+<!-- <img src="/img/apple-touch-icon.png" width="0" height="0"> -->
+<img src="{{site.sidebar-avatar}}" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
@@ -29,14 +29,14 @@ var _hmt = _hmt || [];
 (function() {
 	var hm = document.createElement("script");
 	hm.src = "https://hm.baidu.com/hm.js?84c07f9b2f6c1f8e04882a781c72718c";
-	var s = document.getElementsByTagName("script")[0]; 
+	var s = document.getElementsByTagName("script")[0];
 	s.parentNode.insertBefore(hm, s);
 })();
 </script>
 <!-- 百度的访问量统计 -->
 
 <script type="text/javascript">
-	
+
 	try{
 
 		var last_refresh_time = Cookies.get("last_refresh_time");
@@ -47,7 +47,7 @@ var _hmt = _hmt || [];
 		if( typeof last_refresh_time === 'undefined' || cookie_not_exist.test(last_refresh_time) || time - last_refresh_time >= 2000 ){
 
 			Cookies.set("last_refresh_time", time);
-			
+
 			var url = (window.location.href.split('?'))[0]
 			// window.location.href = url + "?refresh=" + md5(Math.random());
 		}

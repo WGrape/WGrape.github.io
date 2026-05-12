@@ -1,1 +1,9 @@
 .DS_Store
+node_modules/
+*.min.css
+*.min.js
+.jekyll-metadata
+.workbuddy/
+.jekyll-cache/
+Gemfile.lock
+_site

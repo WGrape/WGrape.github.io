@@ -5,125 +5,97 @@ description: "分享开源项目、后端开发、中间件和架构等计算机
 header-img: "/img/logo.png"
 ---
 
-<!-- Language Selector -->
-<!-- <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
-</select> -->
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-bg">
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow"></div>
+    </div>
+    <div class="hero-content">
+        <img src="{{site.sidebar-avatar}}" alt="Avatar" class="hero-avatar">
+        <h1 class="hero-title">WGrape</h1>
+        <p class="hero-subtitle">分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章</p>
+    </div>
+</section>
 
-<!-- Chinese Version -->
-<div class="zh post-container" style="text-align: justify">
-    <p>本博客分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章，还有丰富的<a href="https://gist.github.com/WGrape/c9b644ccc44fe07805b48c856fbb0420">代码Gists</a>、<a href="https://github.com/WGrape/Blog/blob/main/note.md">日常踩坑小记</a>、<a href="https://github.com/WGrape/Blog/blob/main/algorithm.md">算法天天练</a>，相信它们一定会对你有所帮助。如有疑问请查看<a href="https://github.com/WGrape/Blog/issues/21">博客阅读帮助</a></p>
-    <p></p>
-    <p>本博客全部内容来自于<a href="https://github.com/WGrape/Blog">WGrape/Blog</a>，欢迎star关注！</p>
-</div>
+<!-- Main Content -->
+<div class="container subpage-shell">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 postlist-container">
+            <div class="subpage-card">
+                <h2 class="section-title">关于我</h2>
+                <div class="about-grid">
+                    <div class="about-item">
+                        <div class="about-icon">💻</div>
+                        <h3 class="about-item-title">后端开发</h3>
+                        <p class="about-item-desc">专注于分布式系统、中间件和架构设计</p>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-icon">🚀</div>
+                        <h3 class="about-item-title">开源爱好者</h3>
+                        <p class="about-item-desc">活跃于 GitHub，热爱分享和技术交流</p>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-icon">✍️</div>
+                        <h3 class="about-item-title">技术写作</h3>
+                        <p class="about-item-desc">用清晰的语言讲解复杂的技术概念</p>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-icon">🎯</div>
+                        <h3 class="about-item-title">持续学习</h3>
+                        <p class="about-item-desc">保持好奇心，不断探索新技术</p>
+                    </div>
+                </div>
+            </div>
 
-<!-- English Version -->
-<!-- <div class="en post-container">
-    <blockquote><p>Yet another iOS Developer. <br>
-    Yet another Life-long Student.</p></blockquote>
+            <div class="subpage-card">
+                <h2 class="section-title">关于博客</h2>
+                <div class="post-preview">
+                    <p style="color: var(--wg-text); line-height: 1.9;">本博客分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章，还有丰富的<a href="https://gist.github.com/WGrape/c9b644ccc44fe07805b48c856fbb0420">代码Gists</a>、<a href="https://github.com/WGrape/Blog/blob/main/note.md">日常踩坑小记</a>、<a href="https://github.com/WGrape/Blog/blob/main/algorithm.md">算法天天练</a>，相信它们一定会对你有所帮助。如有疑问请查看<a href="https://github.com/WGrape/Blog/issues/21">博客阅读帮助</a></p>
+                    <p style="color: var(--wg-text); line-height: 1.9;">本博客全部内容来自于<a href="https://github.com/WGrape/Blog">WGrape/Blog</a>，欢迎star关注！</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
+            <!-- Featured Tags -->
+            {% if site.featured-tags %}
+            <section class="subpage-sidebar-card">
+                <h5><a href="{{'/tags/' | prepend: site.baseurl }}">标签</a></h5>
+                <div class="tags">
+                    {% for tag in site.tags %}
+                        {% if tag[1].size > site.featured-condition-size %}
+                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                        {{ tag[0] }}
+                    </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
 
-    <p>Hi, I am <strong>Baiying Qiu</strong>，you can call me <strong>BY</strong>. I am an iOS software engineer and currently working in Xiamen</p>
-
-    <p>This is my personal blog, through making Github Pages and Jekyll.My GitHub  👉 <a href="http://github.com/qiubaiying">Github·BY</a>.</p>
-    
-    <p>I am a sports enthusiast, I like fitness, running and boxing.</p>
-
-    <h5>Talks</h5>
-
-    <ul>
-    <li><a href="https://github.com">GitHub</a></li>
-    <li><a href="http://jekyll.com.cn/">jekyll</a></li>
-    <li><a href="https://pages.github.com/">GitHub Pages</a></li>
-    <li><a href="https://qiubaiying.github.io">BY</a></li>
-    </ul>
-</div> -->
-
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    // get nodes
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
-
-    // bind hashchange event
-    window.addEventListener('hashchange', _render);
-
-    // handle render
-    function _render(){
-        var _hash = window.location.hash;
-        // en
-        if(_hash == "#en"){
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $zh.style.display = "none";
-        // zh by default
-        }else{
-            // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }
-    }
-
-    // handle select change
-    function onLanChange(index){
-        if(index == 0){
-            window.location.hash = "#zh"
-        }else{
-            window.location.hash = "#en"
-        }
-    }
-
-    // init
-    _render();
-</script>
-
-
-<!-- Gitalk 评论 start  -->
-{% if site.gitalk.enable %}
-<!-- Gitalk link  -->
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-    <script type="text/javascript">
-    var gitalk = new Gitalk({
-    clientID: '{{site.gitalk.clientID}}',
-    clientSecret: '{{site.gitalk.clientSecret}}',
-    repo: '{{site.gitalk.repo}}',
-    owner: '{{site.gitalk.owner}}',
-    admin: ['{{site.gitalk.admin}}'],
-    distractionFreeMode: {{site.gitalk.distractionFreeMode}},
-    id: 'about',
-    });
-    gitalk.render('gitalk-container');
-</script>
-{% endif %}
-<!-- Gitalk end -->
-
- <!-- disqus 评论框 start  -->
-{% if site.disqus.enable %}
-
-<div class="comment">
-    <div id="disqus_thread" class="disqus-thread">
+            <!-- Friends Blog -->
+            {% if site.friends %}
+            <section class="subpage-sidebar-card">
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    {% for friend in site.friends %}
+                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {% endif %}
+        </div>
     </div>
 </div>
-<!-- disqus 评论框 end -->
 
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus.username}}";
-    var disqus_identifier = "{{site.disqus.username}}/{{page.url}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-{% endif %}
-
+<style>
+.about-page .hero-section {
+    background:
+        radial-gradient(1200px 620px at 90% -10%, rgba(251, 146, 60, 0.2), transparent 55%),
+        radial-gradient(900px 520px at 0% 10%, rgba(56, 189, 248, 0.18), transparent 55%),
+        linear-gradient(170deg, #111315 0%, #1f2937 50%, #101820 100%);
+}
+</style>

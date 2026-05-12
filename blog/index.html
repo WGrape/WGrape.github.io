@@ -1,0 +1,71 @@
+---
+layout: page
+title: 博客
+description: "WGrape 的技术文章"
+header-img: "/img/logo.png"
+permalink: /blog/
+---
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-bg">
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow"></div>
+    </div>
+    <div class="hero-content">
+        <h1 class="hero-title">博客</h1>
+        <p class="hero-subtitle">WGrape 的技术文章</p>
+        <p class="hero-desc">分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章</p>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container subpage-shell">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 postlist-container">
+            <span id="blog-section"></span>
+            {% include blog_content.html %}
+        </div>
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
+            <!-- Featured Tags -->
+            {% if site.featured-tags %}
+            <section class="subpage-sidebar-card">
+                <h5><a href="{{'/tags/' | prepend: site.baseurl }}">标签</a></h5>
+                <div class="tags">
+                    {% for tag in site.tags %}
+                        {% if tag[1].size > site.featured-condition-size %}
+                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                        {{ tag[0] }}
+                    </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- Friends Blog -->
+            {% if site.friends %}
+            <section class="subpage-sidebar-card">
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    {% for friend in site.friends %}
+                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.blog-page .hero-section {
+    background:
+        radial-gradient(1200px 620px at 10% -10%, rgba(56, 189, 248, 0.2), transparent 55%),
+        radial-gradient(900px 520px at 90% 10%, rgba(251, 146, 60, 0.18), transparent 55%),
+        linear-gradient(170deg, #111315 0%, #1f2937 50%, #101820 100%);
+}
+</style>

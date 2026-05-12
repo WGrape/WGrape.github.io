@@ -1,4 +1,47 @@
 <!-- Navigation -->
+<style>
+body.is-home .navbar.navbar-custom {
+    display: none;
+}
+
+.navbar.navbar-custom {
+    background: rgba(14, 22, 36, 0.68);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+}
+
+.navbar-custom .navbar-brand {
+    color: #f6f1e8;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus {
+    color: #ffffff;
+}
+
+.navbar-custom .nav li a.urlChangeNav {
+    color: rgba(237, 242, 252, 0.92);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.navbar-custom .nav li a.urlChangeNav:hover,
+.navbar-custom .nav li a.urlChangeNav:focus {
+    color: #ffffff;
+    opacity: 1;
+}
+
+@media (max-width: 767px) {
+    .navbar-custom .nav li a.urlChangeNav {
+        font-size: 13px;
+        letter-spacing: 0.02em;
+    }
+}
+</style>
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -19,10 +62,7 @@
                     <li>
                         <a class="urlChangeNav" href="{{ site.baseurl }}/">主页</a>
                     </li>
-                    <li>
-                        <a class="urlChangeNav" href="https://wgrape.github.io/visuals/" target="_blank">Visuals</a>
-                    </li>
-                    {% for page in site.pages %}{% if page.title %}
+                    {% for page in site.pages %}{% if page.title and page.url != '/' %}
                     <li>
                         <a class="urlChangeNav" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
@@ -35,11 +75,7 @@
     <!-- /.container -->
 </nav>
 <script>
-
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
+    var $body = document.body;
     var $toggle = document.querySelector('.navbar-toggle');
     var $navbar = document.querySelector('#huxblog_navbar');
     var $collapse = document.querySelector('.navbar-collapse');
@@ -47,9 +83,7 @@
     var __HuxNav__ = {
         close: function(){
             $navbar.className = " ";
-            // wait until animation end.
             setTimeout(function(){
-                // prevent frequently toggle
                 if($navbar.className.indexOf('in') < 0) {
                     $collapse.style.height = "0px"
                 }
@@ -59,31 +93,19 @@
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
-    }
+    };
 
-    // Bind Event
     $toggle.addEventListener('click', function(e){
         if ($navbar.className.indexOf('in') > 0) {
             __HuxNav__.close()
-        }else{
+        } else {
             __HuxNav__.open()
         }
-    })
+    });
 
-    /**
-     * Since Fastclick is used to delegate 'touchstart' globally
-     * to hack 300ms delay in iOS by performing a fake 'click',
-     * Using 'e.stopPropagation' to stop 'touchstart' event from 
-     * $toggle/$collapse will break global delegation.
-     * 
-     * Instead, we use a 'e.target' filter to prevent handler
-     * added to document close HuxNav.  
-     *
-     * Also, we use 'click' instead of 'touchstart' as compromise
-     */
     document.addEventListener('click', function(e){
         if(e.target == $toggle) return;
         if(e.target.className == 'icon-bar') return;
         __HuxNav__.close();
-    })
+    });
 </script>

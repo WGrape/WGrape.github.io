@@ -13,8 +13,8 @@
 
 
 # Site settings
-title: WGrape的网站
-SEOTitle: WGrape的博客 | WGrape的网站 | WGrape
+title: WGrape.github.io
+SEOTitle: WGrape.github.io | WGrape的博客 | WGrape的网站 | WGrape
 header-img:
 email:
 description: "分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章"
@@ -22,7 +22,7 @@ keyword: "WGrape, 博客, 后端, 计算机, 编程, 前端, 程序员, golang, 
 #url: "https://WGrape.github.io"    # your host, for absolute URL
 url: "" # 解决使用utterances评论功能时，登录重定向错误地址问题: https://github.com/utterance/utterances/issues/511
 #baseurl: "https://wgrape.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
-baseurl: "https://wgrape.github.io"
+baseurl: ""
 github_repo: "https://github.com/WGrape/Blog" # you code repository
 
 # Sidebar settings
@@ -50,7 +50,7 @@ juejin_username: 1434188826023111
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+exclude: ["node_modules", "README.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
@@ -126,11 +126,11 @@ friends: [
   },
   {
     title: "wgrape博客",
-    href: "https://wgrape.github.io/"
+    href: "/"
   },
   {
     title: "个人页面管理工具",
-    href: "https://wgrape.github.io/page/"
+    href: "/page/"
   },
   {
     title: "合作申请",

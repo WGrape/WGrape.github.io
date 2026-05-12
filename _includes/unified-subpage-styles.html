@@ -1,0 +1,956 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+:root {
+    --wg-ink: #f5f1e9;
+    --wg-panel: rgba(255, 255, 255, 0.08);
+    --wg-line: rgba(255, 255, 255, 0.2);
+    --wg-accent: #fb923c;
+    --wg-accent-2: #38bdf8;
+    --wg-paper: #101820;
+    --wg-text: #e7edf6;
+    --wg-muted: #aab8cb;
+}
+
+body {
+    background:
+        radial-gradient(1200px 620px at 90% -10%, rgba(251, 146, 60, 0.2), transparent 55%),
+        radial-gradient(900px 520px at 0% 10%, rgba(56, 189, 248, 0.18), transparent 55%),
+        linear-gradient(170deg, #111315 0%, #1f2937 50%, #101820 100%);
+    color: #e7edf6;
+}
+
+/* 覆盖 Bootstrap 白色背景 */
+.container,
+.row,
+.col-lg-8, .col-lg-offset-2, .col-md-10, .col-md-offset-1,
+.col-lg-7, .col-lg-offset-1, .col-md-7, .col-md-offset-1,
+.col-sm-12, .col-xs-12 {
+    background: transparent !important;
+}
+
+/* ===== 文章详情页全铺暗色背景 ===== */
+.post-page,
+.post-page body,
+.post-page article,
+.post-page .post-container,
+.post-page .container,
+.post-page .row,
+.post-page .col-lg-8,
+.post-page .col-lg-offset-2,
+.post-page .col-md-10,
+.post-page .col-md-offset-1,
+.post-page .col-lg-2,
+.post-page .visible-lg-block,
+.post-page .sidebar-container,
+.post-page .catalog-container {
+    background: transparent !important;
+}
+
+/* 文章页 body 和 html 全铺背景 - 使用固定定位伪元素实现 */
+.post-page,
+.post-page body,
+.post-page html {
+    background: #111315 !important;
+    color: #e7edf6;
+    position: relative;
+}
+
+.post-page body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background:
+        radial-gradient(1200px 620px at 85% -20%, rgba(251, 146, 60, 0.22), transparent 60%),
+        radial-gradient(900px 480px at -10% 10%, rgba(56, 189, 248, 0.18), transparent 60%),
+        linear-gradient(165deg, #111315 0%, #1f2937 50%, #101820 100%);
+    pointer-events: none;
+}
+
+/* 文章头部区域 */
+.post-page header.intro-header {
+    background: transparent !important;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+}
+
+.post-page header.intro-header:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg width="160" height="160" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="p" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>');
+    opacity: 0.45;
+}
+
+.post-page header.intro-header .container {
+    position: relative;
+    z-index: 1;
+}
+
+.post-page .post-heading h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: 48px;
+    color: #f5f1e9 !important;
+    margin-bottom: 12px;
+}
+
+.post-page .post-heading .subheading {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 18px;
+    color: rgba(247, 241, 232, 0.84) !important;
+}
+
+.post-page .post-heading .meta {
+    font-family: "Space Grotesk", sans-serif;
+    color: rgba(247, 241, 232, 0.78) !important;
+    margin-top: 16px;
+}
+
+/* 文章内容区域 */
+.post-page article {
+    background: transparent !important;
+    padding-bottom: 40px;
+}
+
+.post-page .post-container {
+    background: transparent !important;
+}
+
+.post-page .post-container p,
+.post-page .post-container li,
+.post-page .post-container h1,
+.post-page .post-container h2,
+.post-page .post-container h3,
+.post-page .post-container h4,
+.post-page .post-container h5,
+.post-page .post-container h6 {
+    color: var(--wg-text);
+}
+
+/* 覆盖 hux-blog.css 中可能设置白色背景的规则 */
+.post-page .post-container,
+.post-page .sidebar-container,
+.post-page .catalog-container {
+    background: transparent !important;
+}
+
+/* 覆盖 Bootstrap 和 hux-blog.css 中设置白色背景的元素 */
+.post-page .post-container,
+.post-page .sidebar-container,
+.post-page .catalog-container,
+.post-page .container,
+.post-page .row,
+.post-page .col-lg-8,
+.post-page .col-lg-offset-2,
+.post-page .col-md-10,
+.post-page .col-md-offset-1,
+.post-page .col-lg-2,
+.post-page .visible-lg-block {
+    background: transparent !important;
+}
+
+/* 保留代码块和特殊元素的背景 */
+.post-page pre,
+.post-page code,
+.post-page .highlight {
+    background: rgba(0, 0, 0, 0.35) !important;
+}
+
+.post-page blockquote {
+    border-left-color: rgba(56, 189, 248, 0.5);
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--wg-muted);
+}
+
+.post-page blockquote p {
+    color: var(--wg-muted) !important;
+}
+
+/* 代码块暗色 */
+.post-page pre,
+.post-page code,
+.post-page .highlight {
+    background: rgba(0, 0, 0, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.post-page pre code {
+    background: transparent !important;
+    border: none;
+}
+
+/* 文章中的链接 */
+.post-page .post-container a {
+    color: #60a5fa;
+}
+
+.post-page .post-container a:hover {
+    color: #93c5fd;
+}
+
+/* 目录样式 */
+.post-page .side-catalog {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+}
+
+.post-page .side-catalog .catalog-body li a {
+    color: var(--wg-muted);
+}
+
+.post-page .side-catalog .catalog-body .active {
+    background: rgba(56, 189, 248, 0.15) !important;
+    border-radius: 4px;
+}
+
+.post-page .side-catalog .catalog-body .active a {
+    color: #38bdf8 !important;
+}
+
+/* 分页按钮 */
+.post-page .pager li > a,
+.post-page .pager li > span {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #e8eef8 !important;
+    border-radius: 16px;
+}
+
+.post-page .pager li > a:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+}
+
+/* ===== 页脚暗色适配 ===== */
+footer {
+    background: rgba(16, 24, 32, 0.85) !important;
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--wg-muted);
+}
+
+footer .copyright {
+    color: var(--wg-muted) !important;
+}
+
+footer .copyright a {
+    color: #60a5fa !important;
+}
+
+footer .copyright a:hover,
+footer .copyright a:focus {
+    color: #93c5fd !important;
+}
+
+footer .fa-stack .fa-circle {
+    color: rgba(255, 255, 255, 0.15) !important;
+}
+
+footer .fa-stack .fa-inverse {
+    color: var(--wg-muted) !important;
+}
+
+footer .fa-stack:hover .fa-circle {
+    color: rgba(56, 189, 248, 0.35) !important;
+}
+
+footer .fa-stack:hover .fa-inverse {
+    color: #fff !important;
+}
+
+/* 强制所有子页面内容区域透明 */
+.postlist-container,
+.sidebar-container,
+.post-container,
+.catalog-container {
+    background: transparent !important;
+}
+
+/* 覆盖 hux-blog.css 中的白色背景 */
+.pager li > a,
+.pager li > span {
+    background-color: rgba(255,255,255,0.08) !important;
+    color: #e8eef8 !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: rgba(255,255,255,0.8) !important;
+}
+
+header.intro-header,
+.subpage-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(1200px 620px at 85% -20%, rgba(251, 146, 60, 0.22), transparent 60%),
+        radial-gradient(900px 480px at -10% 10%, rgba(56, 189, 248, 0.18), transparent 60%),
+        linear-gradient(165deg, #111315 0%, #1f2937 50%, #101820 100%);
+    color: #f7f1e8;
+    padding-top: 118px;
+    padding-bottom: 68px;
+    margin-bottom: 0;
+}
+
+header.intro-header:before,
+.subpage-hero:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg width="160" height="160" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="p" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>');
+    opacity: 0.45;
+}
+
+header.intro-header .container,
+.subpage-hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.site-heading,
+.post-heading,
+.subpage-heading {
+    text-align: center;
+}
+
+.site-heading h1,
+.post-heading h1,
+.subpage-heading h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+    color: #f5f1e9 !important;
+}
+
+.site-heading .subheading,
+.post-heading .subheading,
+.subpage-heading .subheading {
+    display: inline-block;
+    max-width: 760px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(247, 241, 232, 0.84) !important;
+    margin-top: 6px;
+}
+
+.post-heading .meta {
+    display: block;
+    font-family: "Space Grotesk", sans-serif;
+    color: rgba(247, 241, 232, 0.78) !important;
+    margin-top: 16px;
+    letter-spacing: 0.2px;
+}
+
+.post-heading .tags {
+    margin-bottom: 18px;
+}
+
+.post-heading .tags .tag,
+.subpage-chip,
+.tags a {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 6px 12px;
+    margin: 0 8px 10px 0;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #f7f1e8 !important;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.post-heading .tags .tag:hover,
+.subpage-chip:hover,
+.tags a:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.subpage-shell {
+    margin-top: -12px;
+    position: relative;
+    z-index: 2;
+    padding-bottom: 40px;
+}
+
+.subpage-card {
+    background: var(--wg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 36px;
+    color: var(--wg-text);
+}
+
+.subpage-card p,
+.subpage-card li,
+.post-container p,
+.post-container li {
+    color: var(--wg-text);
+    font-size: 16px;
+    line-height: 1.95;
+}
+
+/* 强制覆盖所有段落文字颜色 */
+.subpage-shell p,
+.subpage-shell li,
+.postlist-container p,
+.postlist-container li,
+.sidebar-container p,
+.sidebar-container li {
+    color: var(--wg-text);
+}
+
+/* 覆盖 hux-blog.css 中可能覆盖链接颜色的规则 */
+.post-preview a {
+    color: #60a5fa;
+}
+
+.post-preview a:hover {
+    color: #93c5fd;
+}
+
+.post-preview .post-title {
+    color: #f5f1e9;
+}
+
+/* 但保留标签云和链接的颜色 */
+.subpage-shell .tags a,
+.postlist-container .tags a,
+.sidebar-container .tags a {
+    color: #dce7f7;
+}
+
+.subpage-shell a,
+.postlist-container a,
+.sidebar-container a {
+    color: #60a5fa;
+}
+
+.subpage-shell a:hover,
+.postlist-container a:hover,
+.sidebar-container a:hover {
+    color: #93c5fd;
+}
+
+.subpage-card a,
+.post-container a,
+.post-preview a {
+    color: #60a5fa;
+}
+
+.subpage-card a:hover,
+.post-container a:hover,
+.post-preview a:hover {
+    color: #93c5fd;
+}
+
+.post-preview .post-title {
+    color: #f5f1e9;
+}
+
+.subpage-sidebar-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 16px 46px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(10px);
+    border-radius: 22px;
+    padding: 22px;
+    margin-bottom: 22px;
+}
+
+.subpage-sidebar-card h5,
+.subpage-sidebar-card h5 a,
+.sidebar-container h5,
+.sidebar-container h5 a {
+    font-family: "Space Grotesk", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    color: var(--wg-muted);
+}
+
+.subpage-sidebar-card h5 a:hover,
+.sidebar-container h5 a:hover {
+    color: #93c5fd;
+}
+
+.post-container,
+.postlist-container,
+.sidebar-container,
+.catalog-container {
+    margin-top: 0;
+}
+
+.post-preview {
+    border: 1px solid var(--wg-line);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 18px 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.post-preview:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
+    border-color: rgba(56, 189, 248, 0.46);
+}
+
+.post-preview .post-title {
+    font-family: "Space Grotesk", sans-serif;
+    color: #f5f1e9;
+}
+
+.post-preview .post-subtitle,
+.post-content-preview,
+.post-meta {
+    color: var(--wg-muted) !important;
+}
+
+/* 标签云在暗色背景下的样式 */
+#tag_cloud.tags a {
+    background: rgba(255,255,255,0.09);
+    color: #dce7f7;
+    border-color: rgba(255,255,255,0.16);
+}
+
+#tag_cloud.tags a:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+
+/* 标签列表标题 */
+.listing-seperator,
+.tag-text {
+    color: #f2f6fd;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+}
+
+.post-preview + hr,
+.one-tag-list hr,
+.sidebar-container hr,
+.post-container hr {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.short-about img {
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.short-about p {
+    color: var(--wg-muted) !important;
+}
+
+.list-inline > li {
+    margin-bottom: 10px;
+}
+
+.list-inline > li > a {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--wg-line);
+    color: #d6deea;
+}
+
+.pager li > a,
+.pager li > span {
+    border-radius: 16px;
+    border: 1px solid var(--wg-line);
+    background: rgba(255,255,255,0.08);
+    color: #e8eef8;
+}
+
+.pager li > a:hover {
+    background: rgba(255,255,255,0.18);
+}
+
+.tag-index-card {
+    margin-bottom: 26px;
+}
+
+.tag-section-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--wg-ink);
+    margin-bottom: 18px;
+}
+
+.one-tag-list {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--wg-line);
+    border-radius: 20px;
+    padding: 22px 22px 10px;
+    margin-bottom: 24px;
+}
+
+.listing-seperator,
+.tag-text {
+    color: #f2f6fd;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+}
+
+#tag_cloud.tags a {
+    background: rgba(255,255,255,0.09);
+    color: #dce7f7;
+    border-color: rgba(255,255,255,0.16);
+}
+
+#tag_cloud.tags a:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+
+/* 侧边栏标签云 */
+.sidebar-container .tags a {
+    background: rgba(255,255,255,0.08);
+    color: #d6deea;
+    border: 1px solid var(--wg-line);
+}
+
+.sidebar-container .tags a:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+
+/* 覆盖 hux-blog.css 中侧边栏链接颜色 */
+.sidebar-container a {
+    color: #d6deea !important;
+}
+.sidebar-container a:hover,
+.sidebar-container a:active {
+    color: #93c5fd !important;
+}
+.sidebar-container .tags a {
+    border-color: rgba(255,255,255,0.2) !important;
+}
+.sidebar-container .tags a:hover,
+.sidebar-container .tags a:active {
+    border-color: rgba(147, 197, 253, 0.5) !important;
+}
+
+/* 覆盖 hux-blog.css 中可能覆盖链接颜色的规则 */
+.post-preview a {
+    color: #60a5fa;
+}
+
+.post-preview a:hover {
+    color: #93c5fd;
+}
+
+.post-preview .post-title {
+    color: #f5f1e9;
+}
+
+.catalog-container .side-catalog {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 16px 46px rgba(0, 0, 0, 0.24);
+}
+
+.hero-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 60px;
+    margin: -80px -30px 40px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 24px 24px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.hero-orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    animation: rotate 60s linear infinite;
+}
+
+.hero-orbit:nth-child(1) {
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-direction: reverse;
+}
+
+.hero-orbit:nth-child(2) {
+    width: 450px;
+    height: 450px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 40s;
+}
+
+.hero-orbit:nth-child(3) {
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 25s;
+    animation-direction: reverse;
+}
+
+.hero-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+    top: 30%;
+    left: 20%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.hero-glow:nth-child(5) {
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.12) 0%, transparent 70%);
+    top: 60%;
+    left: 70%;
+    animation-duration: 10s;
+    animation-delay: -3s;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+}
+
+.hero-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 24px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 72px;
+    line-height: 1.02;
+    margin: 0 0 16px;
+    letter-spacing: 0.6px;
+    animation: fadeInUp 0.8s ease;
+    background: linear-gradient(135deg, #f5f1e9 0%, #fb923c 50%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 24px;
+    opacity: 0.9;
+    margin-bottom: 28px;
+    animation: fadeInUp 0.8s ease 0.2s both;
+    color: #f5f1e9;
+}
+
+.hero-desc {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 32px;
+    color: #f5f1e9;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+.btn-pill {
+    font-family: "Space Grotesk", sans-serif;
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: #101820;
+    background: #f5f1e9;
+    font-weight: 700;
+    font-size: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(245, 241, 233, 0.25);
+    color: #101820;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: #f5f1e9;
+    border: 2px solid rgba(245, 241, 233, 0.45);
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(245, 241, 233, 0.7);
+}
+
+.stats {
+    margin-top: 28px;
+    display: flex;
+    gap: 24px;
+    font-family: "Space Grotesk", sans-serif;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease 0.8s both;
+}
+
+.stats b {
+    display: block;
+    font-size: 20px;
+    color: #f5f1e9;
+}
+
+.stats span {
+    text-align: center;
+    color: rgba(245, 241, 233, 0.8);
+}
+
+.content-section {
+    padding: 40px 0;
+}
+
+.content-card {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 36px;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 36px;
+    color: #f5f1e9 !important;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.about-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.about-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.about-item-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #f5f1e9 !important;
+    margin-bottom: 8px;
+}
+
+.about-item-desc {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 15px;
+    color: var(--wg-muted) !important;
+    line-height: 1.6;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(15px); }
+}
+
+@keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@media (max-width: 991px) {
+    .site-heading h1,
+    .post-heading h1,
+    .subpage-heading h1 {
+        font-size: 46px;
+    }
+
+    .subpage-shell {
+        margin-top: 0;
+    }
+
+    .subpage-card {
+        padding: 26px 22px 20px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        margin: -80px -20px 40px;
+        min-height: 60vh;
+        padding: 100px 20px 40px;
+    }
+    .hero-title {
+        font-size: 48px;
+    }
+    .hero-subtitle {
+        font-size: 20px;
+    }
+}
+</style>

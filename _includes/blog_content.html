@@ -1,0 +1,179 @@
+<!-- 博客内容 -->
+<div style="color: #aab8cb;padding:5px 0;text-align:left;font-size: 14px;">
+<span id="busuanzi_container_site_uv"
+      style="font-size: 15px;color: #aab8cb;margin-top: 10px;">UV<span
+        id="busuanzi_value_site_uv"></span><span id="busuanzi_value_site_uv_change"></span>&nbsp;/</span>
+  <span id="busuanzi_container_site_pv"
+        style="font-size: 15px;color: #aab8cb;margin-top: 10px;margin-right: 10px;">&nbsp;PV<span
+          id="busuanzi_value_site_pv"></span><span id="busuanzi_value_site_pv_change"></span></span>
+</div>
+
+<!-- 搜索功能 -->
+<style>
+#search-container{
+    margin-top: 17px;
+}
+#search-input {
+    width: 90%;
+    height: 35px;
+    color: #e7edf6;
+    background-color: rgba(255,255,255,0.08);
+    line-height: 35px;
+    padding:0px 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 14px;
+    border-radius: 17px;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.3);
+}
+#search-input:focus {
+    outline: none;
+    border-color: rgb(102, 175, 233);
+    background-color: rgba(255,255,255,0.12);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #007fff;
+}
+
+#results-container{
+    background: rgba(16, 24, 32, 0.6);
+    font-size:15px;
+    color:#aab8cb;
+    width: 90%;
+    margin-top: 30px;
+    border-radius: 12px;
+    padding: 10px;
+}
+#results-container li{
+    padding:5px 0;
+}
+
+#busuanzi_value_site_uv, #busuanzi_value_site_pv {
+    padding: 0 2px;
+}
+
+#busuanzi_value_site_pv_change, #busuanzi_value_site_uv_change {
+    color: #08964e;
+    font-size: 13px;
+    font-weight: bold;
+}
+</style>
+
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="快速搜索 ...">
+  <ul id="results-container"></ul>
+</div>
+<script src="https://cdn.bootcss.com/simple-jekyll-search/1119c1a/jekyll-search.js"></script>
+<script>
+SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json',
+    searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>',
+    noResultsText: '没有搜索到文章',
+    limit: 20,
+    fuzzy: false
+})
+</script>
+
+<!-- 网站统计功能 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    setTimeout(function () {
+        let lastPv = parseInt(localStorage.getItem('pv'));
+        let lastUv = parseInt(localStorage.getItem('uv'));
+        if (isNaN(lastPv) || isNaN(lastUv) || lastPv <= 0 || lastUv <= 0) {
+            lastPv = 0;
+            lastUv = 0;
+        }
+        let pv = parseInt($("#busuanzi_value_site_pv").text());
+        let uv = parseInt($("#busuanzi_value_site_uv").text());
+        if (isNaN(pv) || isNaN(uv) || pv <= 0 || uv <= 0) {
+            return;
+        }
+        localStorage.setItem('pv', pv);
+        localStorage.setItem('uv', uv);
+        let pvChange = pv - lastPv;
+        let uvChange = uv - lastUv;
+        if (pvChange) {
+            $("#busuanzi_value_site_pv_change").text("↑" + pvChange);
+        }
+        if (uvChange) {
+            $("#busuanzi_value_site_uv_change").text("↑" + uvChange);
+        }
+    }, 4000);
+</script>
+
+{% assign display_posts = site.posts %}
+{% for post in display_posts %}
+<div class="blog-item">
+    <div class="post-preview">
+        <a href="{{ post.url | prepend: site.baseurl }}">
+            <h2 class="post-title">
+                {{ post.title }}
+            </h2>
+            {% if post.subtitle %}
+            <h3 class="post-subtitle">
+                {{ post.subtitle }}
+            </h3>
+            {% endif %}
+            <div class="post-content-preview">
+                {{ post.content | strip_html | truncate:200 }}
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+        </p>
+    </div>
+    <hr>
+</div>
+{% endfor %}
+
+<ul class="pager" id="blog-client-pager"></ul>
+
+<script>
+(function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.blog-item'));
+    if (!items || items.length === 0) return;
+
+    var perPage = 10;
+    var totalPages = Math.ceil(items.length / perPage);
+    if (totalPages <= 1) {
+        var pager = document.getElementById('blog-client-pager');
+        if (pager) pager.style.display = 'none';
+        return;
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var current = parseInt(params.get('page') || '1', 10);
+    if (isNaN(current) || current < 1) current = 1;
+    if (current > totalPages) current = totalPages;
+
+    items.forEach(function (el, i) {
+        var pageNo = Math.floor(i / perPage) + 1;
+        el.style.display = pageNo === current ? '' : 'none';
+    });
+
+    var pagerEl = document.getElementById('blog-client-pager');
+    if (!pagerEl) return;
+
+    function buildHref(page) {
+        var p = new URLSearchParams(window.location.search);
+        if (page <= 1) {
+            p.delete('page');
+        } else {
+            p.set('page', String(page));
+        }
+        var query = p.toString();
+        return window.location.pathname + (query ? ('?' + query) : '');
+    }
+
+    var html = '';
+    if (current > 1) {
+        html += '<li class="previous"><a href="' + buildHref(current - 1) + '">&larr; Newer Posts</a></li>';
+    }
+    if (current < totalPages) {
+        html += '<li class="next"><a href="' + buildHref(current + 1) + '">Older Posts &rarr;</a></li>';
+    }
+    pagerEl.innerHTML = html;
+})();
+</script>

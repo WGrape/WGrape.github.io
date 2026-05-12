@@ -1,193 +1,289 @@
 ---
 layout: page
-description: "分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章"
+title: WGrape
+description: "WGrape 的个人主页"
 header-img: "/img/logo.png"
 ---
 
-<style>
-/* 首页 Hero 区域 */
-.hero-section {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    color: #fff;
-    padding: 100px 0 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    margin: -80px -30px 40px;
-    border-radius: 0 0 20px 20px;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-    opacity: 0.5;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.hero-title {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    animation: fadeInUp 0.8s ease;
-}
-
-.hero-subtitle {
-    font-size: 18px;
-    opacity: 0.9;
-    margin-bottom: 30px;
-    animation: fadeInUp 0.8s ease 0.2s both;
-}
-
-.hero-modules {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    animation: fadeInUp 0.8s ease 0.4s both;
-}
-
-.module-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 24px 30px;
-    text-decoration: none;
-    color: #fff;
-    transition: transform 0.3s ease, background 0.3s ease;
-    min-width: 200px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.module-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.18);
-    color: #fff;
-}
-
-.module-icon {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.module-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.module-desc {
-    font-size: 14px;
-    opacity: 0.8;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-section {
-        margin: -80px -20px 40px;
-        padding: 80px 0 50px;
-    }
-
-    .hero-title {
-        font-size: 32px;
-    }
-
-    .hero-subtitle {
-        font-size: 16px;
-    }
-
-    .module-card {
-        min-width: 160px;
-        padding: 20px;
-    }
-}
-</style>
-
-<!-- Hero 区域 -->
+<!-- Hero Section -->
 <section class="hero-section">
+    <div class="hero-bg">
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow"></div>
+    </div>
     <div class="hero-content">
-        <h1 class="hero-title">WGrape</h1>
-        <p class="hero-subtitle">分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章</p>
-        <div class="hero-modules">
-            <a href="#blog-section" class="module-card">
-                <div class="module-icon">📝</div>
-                <div class="module-title">博客</div>
-                <div class="module-desc">技术文章分享</div>
-            </a>
-            <a href="https://wgrape.github.io/visuals/" target="_blank" class="module-card">
-                <div class="module-icon">🎨</div>
-                <div class="module-title">Visuals</div>
-                <div class="module-desc">动态可视化理解计算机科学</div>
-            </a>
+        <h1 class="hero-title">WGrape<br>Tech Garden</h1>
+        <p class="hero-subtitle">WGrape.github.io</p>
+        <div class="action-row">
+            <a href="/blog/" class="btn-pill">进入博客</a>
+            <a href="/about/" class="btn-pill btn-ghost">关于我</a>
         </div>
     </div>
 </section>
 
-<!-- 博客区域锚点 -->
-<span id="blog-section"></span>
+<!-- Blog Section -->
+<section class="home-blog-section">
+    <div class="section-header">
+        <h2 class="section-title">博客</h2>
+        <p class="section-subtitle">这里是我的数字工作室：探索后端、架构、AI技术，讲清楚复杂系统是怎么运转的。</p>
+        <div class="home-blog-stats">
+            <div class="home-stat-item">
+                <span class="home-stat-num">{{ site.posts | size }}</span>
+                <span class="home-stat-label">篇文章</span>
+            </div>
+            <div class="home-stat-divider"></div>
+            <div class="home-stat-item">
+                <span class="home-stat-num">2019</span>
+                <span class="home-stat-label">持续更新</span>
+            </div>
+            <div class="home-stat-divider"></div>
+            <div class="home-stat-item">
+                <span class="home-stat-num">Backend</span>
+                <span class="home-stat-label">重度偏好</span>
+            </div>
+        </div>
+        <div class="home-blog-enter">
+            <a href="/blog/" class="btn-pill">进入博客</a>
+        </div>
+    </div>
 
-<!-- 原来的博客内容 -->
-<div style="color: #888;padding:5px 0;text-align:left;font-size: 14px;">
-<span id="busuanzi_container_site_uv"
-      style="font-size: 15px;color: #666;margin-top: 10px;">UV<span
-        id="busuanzi_value_site_uv"></span><span id="busuanzi_value_site_uv_change"></span>&nbsp;/</span>
-  <span id="busuanzi_container_site_pv"
-        style="font-size: 15px;color: #666;margin-top: 10px;margin-right: 10px;">&nbsp;PV<span
-          id="busuanzi_value_site_pv"></span><span id="busuanzi_value_site_pv_change"></span></span>
-</div>
+    <div class="home-posts-grid">
+        {% for post in site.posts limit:6 %}
+        <article class="home-post-card">
+            <a href="{{ post.url }}" class="home-post-link">
+                <div class="home-post-meta">
+                    <span class="home-post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+                    {% if post.tags.size > 0 %}
+                    <span class="home-post-tag">{{ post.tags[0] }}</span>
+                    {% endif %}
+                </div>
+                <h3 class="home-post-title">{{ post.title }}</h3>
+                {% if post.subtitle %}
+                <p class="home-post-subtitle">{{ post.subtitle }}</p>
+                {% endif %}
+                <p class="home-post-excerpt">{{ post.content | strip_html | truncate:120 }}</p>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
 
-<!-- 搜索功能 -->
+    <div class="home-blog-actions">
+        <a href="/blog/" class="btn-pill">查看全部文章</a>
+    </div>
+</section>
+
+<!-- 后续可以在这里添加其他板块，如开源项目、工具等 -->
+
 <style>
+/* ===== 首页博客板块 ===== */
+.home-blog-section {
+    padding: 60px 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home-blog-section .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* 博客板块统计信息 */
+.home-blog-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 24px 0 20px;
+    flex-wrap: wrap;
+}
+
+.home-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 28px;
+}
+
+.home-stat-num {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f5f1e9;
+    line-height: 1.2;
+}
+
+.home-stat-label {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 13px;
+    color: var(--wg-muted);
+    margin-top: 4px;
+}
+
+.home-stat-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.home-blog-enter {
+    margin-top: 8px;
+}
+
+.home-blog-enter .btn-pill {
+    padding: 10px 28px;
+    font-size: 14px;
+}
+
+.home-blog-section .section-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 42px;
+    color: #f5f1e9;
+    margin-bottom: 8px;
+}
+
+.home-blog-section .section-subtitle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 16px;
+    color: var(--wg-muted);
+    opacity: 0.8;
+}
+
+.home-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.home-post-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 24px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    backdrop-filter: blur(8px);
+}
+
+.home-post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.home-post-link {
+    text-decoration: none;
+    display: block;
+}
+
+.home-post-link:hover {
+    text-decoration: none;
+}
+
+.home-post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.home-post-date {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    color: var(--wg-muted);
+    letter-spacing: 0.05em;
+}
+
+.home-post-tag {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.home-post-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #f5f1e9;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.home-post-subtitle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px;
+    color: var(--wg-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.home-post-excerpt {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px;
+    color: var(--wg-muted);
+    line-height: 1.7;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.home-blog-actions {
+    text-align: center;
+    padding: 20px 0 40px;
+}
+
+@media (max-width: 768px) {
+    .home-posts-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .home-blog-section .section-title {
+        font-size: 32px;
+    }
+    .home-post-card {
+        padding: 18px;
+    }
+}
+
 #search-container{
     margin-top: 17px;
 }
 #search-input {
     width: 90%;
     height: 35px;
-    color: #333;
-    background-color: rgba(227,231,236,.2);
+    color: #e7edf6;
+    background-color: rgba(255,255,255,0.08);
     line-height: 35px;
     padding:0px 16px;
-    border: 1px solid #c0c0c0;
+    border: 1px solid rgba(255,255,255,0.2);
     font-size: 14px;
     border-radius: 17px;
     outline: none;
     box-sizing: border-box;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-    color: #a3a3a3;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.3);
 }
 #search-input:focus {
     outline: none;
     border-color: rgb(102, 175, 233);
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.12);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #007fff;
 }
 
 #results-container{
-    background:#FAFAFA;
+    background: rgba(16, 24, 32, 0.6);
     font-size:15px;
-    color:#a3a3a3;
+    color:#aab8cb;
     width: 90%;
+    border-radius: 12px;
+    padding: 10px;
 }
 #results-container li{
     padding:5px 0;
@@ -203,86 +299,3 @@ header-img: "/img/logo.png"
     font-weight: bold;
 }
 </style>
-
-<div id="search-container">
-  <input type="text" id="search-input" placeholder="快速搜索 ...">
-  <ul id="results-container"></ul>
-</div>
-<script src="https://cdn.bootcss.com/simple-jekyll-search/1119c1a/jekyll-search.js"></script>
-<script>
-SimpleJekyllSearch({
-    searchInput: document.getElementById('search-input'),
-    resultsContainer: document.getElementById('results-container'),
-    json: '/search.json',
-    searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>',
-    noResultsText: '没有搜索到文章',
-    limit: 20,
-    fuzzy: false
-})
-</script>
-
-<!-- 网站统计功能 -->
-<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script>
-    setTimeout(function () {
-        let lastPv = parseInt(localStorage.getItem('pv'));
-        let lastUv = parseInt(localStorage.getItem('uv'));
-        if (isNaN(lastPv) || isNaN(lastUv) || lastPv <= 0 || lastUv <= 0) {
-            lastPv = 0;
-            lastUv = 0;
-        }
-        let pv = parseInt($("#busuanzi_value_site_pv").text());
-        let uv = parseInt($("#busuanzi_value_site_uv").text());
-        if (isNaN(pv) || isNaN(uv) || pv <= 0 || uv <= 0) {
-            return;
-        }
-        localStorage.setItem('pv', pv);
-        localStorage.setItem('uv', uv);
-        let pvChange = pv - lastPv;
-        let uvChange = uv - lastUv;
-        if (pvChange) {
-            $("#busuanzi_value_site_pv_change").text("↑" + pvChange);
-        }
-        if (uvChange) {
-            $("#busuanzi_value_site_uv_change").text("↑" + uvChange);
-        }
-    }, 4000);
-</script>
-
-{% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">
-            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-        <div class="post-content-preview">
-            {{ post.content | strip_html | truncate:200 }}
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
-</div>
-<hr>
-{% endfor %}
-
-{% if paginator.total_pages > 1 %}
-<ul class="pager">
-    {% if paginator.previous_page %}
-    <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl}}">&larr; Newer Posts</a>
-    </li>
-    {% endif %}
-    {% if paginator.next_page %}
-    <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl}}">Older Posts &rarr;</a>
-    </li>
-    {% endif %}
-</ul>
-{% endif %}
-

@@ -1,24 +1,32 @@
 ---
-layout: default
+layout: page
 description: "你来到了没有知识的荒原"
-header-img: ""
 permalink: /404.html
 ---
 
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-bg">
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow"></div>
+    </div>
+    <div class="hero-content">
+        <h1 class="hero-title">404</h1>
+        <p class="hero-subtitle">你来到了没有知识的荒原</p>
+    </div>
+</section>
 
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<div class="site-heading" id="tag-heading">
-					<h1>404</h1>
-					<span class="subheading">{{ page.description }}</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</header>
+<style>
+.page-404 .hero-section {
+    background:
+        radial-gradient(1200px 620px at 20% -10%, rgba(239, 68, 68, 0.2), transparent 55%),
+        radial-gradient(900px 520px at 80% 80%, rgba(251, 146, 60, 0.18), transparent 55%),
+        linear-gradient(170deg, #111315 0%, #1f2937 50%, #101820 100%);
+}
+</style>
 
 <script>
 	document.body.classList.add('page-fullscreen');
