@@ -19,14 +19,14 @@
                     <li>
                         <a class="urlChangeNav" href="{{ site.baseurl }}/">主页</a>
                     </li>
+                    <li>
+                        <a class="urlChangeNav" href="https://wgrape.github.io/visuals/" target="_blank">Visuals</a>
+                    </li>
                     {% for page in site.pages %}{% if page.title %}
                     <li>
                         <a class="urlChangeNav" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
                     {% endif %}{% endfor %}
-                    <!--<li>-->
-                        <!--<a class="urlChangeNav" href="https://WGrape.github.io/CSTheory/">技术博客</a>-->
-                    <!--</li>-->
                 </ul>
             </div>
         </div>

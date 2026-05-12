@@ -4,11 +4,149 @@ description: "分享开源项目、后端开发、中间件和架构等计算机
 header-img: "/img/logo.png"
 ---
 
+<style>
+/* 首页 Hero 区域 */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff;
+    padding: 100px 0 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: -80px -30px 40px;
+    border-radius: 0 0 20px 20px;
+}
 
-<!-- <div style="color: #888;padding:5px 0;text-align:left;font-size: 14px;">
-    访问量 <span data-hk-site>2.3w</span> 次。
-</div> -->
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.5;
+}
 
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 30px;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-modules {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.module-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px 30px;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.3s ease, background 0.3s ease;
+    min-width: 200px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+.module-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.module-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.module-desc {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        margin: -80px -20px 40px;
+        padding: 80px 0 50px;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .module-card {
+        min-width: 160px;
+        padding: 20px;
+    }
+}
+</style>
+
+<!-- Hero 区域 -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">WGrape</h1>
+        <p class="hero-subtitle">分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章</p>
+        <div class="hero-modules">
+            <a href="#blog-section" class="module-card">
+                <div class="module-icon">📝</div>
+                <div class="module-title">博客</div>
+                <div class="module-desc">技术文章分享</div>
+            </a>
+            <a href="https://wgrape.github.io/visuals/" target="_blank" class="module-card">
+                <div class="module-icon">🎨</div>
+                <div class="module-title">Visuals</div>
+                <div class="module-desc">动态可视化理解计算机科学</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 博客区域锚点 -->
+<span id="blog-section"></span>
+
+<!-- 原来的博客内容 -->
 <div style="color: #888;padding:5px 0;text-align:left;font-size: 14px;">
 <span id="busuanzi_container_site_uv"
       style="font-size: 15px;color: #666;margin-top: 10px;">UV<span
@@ -19,10 +157,6 @@ header-img: "/img/logo.png"
 </div>
 
 <!-- 搜索功能 -->
-<!-- 
-Jekyll 静态博客实现搜索功能 https://juejin.im/post/5aa7d9c6f265da23866f918e 
-https://www.jianshu.com/p/064e2422f7c7
--->
 <style>
 #search-container{
     margin-top: 17px;
@@ -50,30 +184,23 @@ https://www.jianshu.com/p/064e2422f7c7
 }
 
 #results-container{
-
     background:#FAFAFA;
     font-size:15px;
     color:#a3a3a3;
     width: 90%;
 }
-    #results-container li{
-
-        padding:5px 0;
-    }
-
+#results-container li{
+    padding:5px 0;
+}
 
 #busuanzi_value_site_uv, #busuanzi_value_site_pv {
-  padding: 0 2px;
+    padding: 0 2px;
 }
 
 #busuanzi_value_site_pv_change, #busuanzi_value_site_uv_change {
-  color: #08964e;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-#busuanzi_value_site_uv_change {
-
+    color: #08964e;
+    font-size: 13px;
+    font-weight: bold;
 }
 </style>
 
@@ -87,28 +214,23 @@ SimpleJekyllSearch({
     searchInput: document.getElementById('search-input'),
     resultsContainer: document.getElementById('results-container'),
     json: '/search.json',
-    searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>', // 文章列表模板
-    noResultsText: '没有搜索到文章', // 无搜索数据提示语
-    limit: 20, // 返回最大文章数
-    fuzzy: false // 是否模糊匹配
+    searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>',
+    noResultsText: '没有搜索到文章',
+    limit: 20,
+    fuzzy: false
 })
 </script>
-<!-- 搜索功能 -->
 
 <!-- 网站统计功能 -->
 <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script>
-
-    // count the changed number compared to the last visit
     setTimeout(function () {
-
         let lastPv = parseInt(localStorage.getItem('pv'));
         let lastUv = parseInt(localStorage.getItem('uv'));
         if (isNaN(lastPv) || isNaN(lastUv) || lastPv <= 0 || lastUv <= 0) {
             lastPv = 0;
             lastUv = 0;
         }
-
         let pv = parseInt($("#busuanzi_value_site_pv").text());
         let uv = parseInt($("#busuanzi_value_site_uv").text());
         if (isNaN(pv) || isNaN(uv) || pv <= 0 || uv <= 0) {
@@ -116,7 +238,6 @@ SimpleJekyllSearch({
         }
         localStorage.setItem('pv', pv);
         localStorage.setItem('uv', uv);
-
         let pvChange = pv - lastPv;
         let uvChange = uv - lastUv;
         if (pvChange) {
@@ -127,7 +248,6 @@ SimpleJekyllSearch({
         }
     }, 4000);
 </script>
-<!-- 网站统计功能 -->
 
 {% for post in paginator.posts %}
 <div class="post-preview">
@@ -151,19 +271,16 @@ SimpleJekyllSearch({
 <hr>
 {% endfor %}
 
-<!-- Pager -->
 {% if paginator.total_pages > 1 %}
 <ul class="pager">
     {% if paginator.previous_page %}
     <li class="previous">
         <a href="{{ paginator.previous_page_path | prepend: site.baseurl}}">&larr; Newer Posts</a>
-        <!--<a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>-->
-   </li>
-   {% endif %}
-   {% if paginator.next_page %}
-   <li class="next">
-       <a href="{{ paginator.next_page_path | prepend: site.baseurl}}">Older Posts &rarr;</a>
-       <!--<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>-->
+    </li>
+    {% endif %}
+    {% if paginator.next_page %}
+    <li class="next">
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl}}">Older Posts &rarr;</a>
     </li>
     {% endif %}
 </ul>
