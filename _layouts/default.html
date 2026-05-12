@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    {% include nav.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/apple-touch-icon.png" width="0" height="0" /> -->
+<img src="/img/author.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<script src="https://cdn.bootcss.com/js-cookie/latest/js.cookie.js"></script>
+
+<!-- 百度的访问量统计 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?84c07f9b2f6c1f8e04882a781c72718c";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!-- 百度的访问量统计 -->
+
+<script type="text/javascript">
+	
+	try{
+
+		var last_refresh_time = Cookies.get("last_refresh_time");
+
+		var time = new Date().getTime();
+
+		var cookie_not_exist = /^\s*$/;
+		if( typeof last_refresh_time === 'undefined' || cookie_not_exist.test(last_refresh_time) || time - last_refresh_time >= 2000 ){
+
+			Cookies.set("last_refresh_time", time);
+			
+			var url = (window.location.href.split('?'))[0]
+			// window.location.href = url + "?refresh=" + md5(Math.random());
+		}
+
+	}catch(e){
+
+		console.log("URL changing with a error !");
+	}
+
+</script>
+
+</html>

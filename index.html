@@ -1,0 +1,171 @@
+---
+layout: page
+description: "分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章"
+header-img: "/img/logo.png"
+---
+
+
+<!-- <div style="color: #888;padding:5px 0;text-align:left;font-size: 14px;">
+    访问量 <span data-hk-site>2.3w</span> 次。
+</div> -->
+
+<div style="color: #888;padding:5px 0;text-align:left;font-size: 14px;">
+<span id="busuanzi_container_site_uv"
+      style="font-size: 15px;color: #666;margin-top: 10px;">UV<span
+        id="busuanzi_value_site_uv"></span><span id="busuanzi_value_site_uv_change"></span>&nbsp;/</span>
+  <span id="busuanzi_container_site_pv"
+        style="font-size: 15px;color: #666;margin-top: 10px;margin-right: 10px;">&nbsp;PV<span
+          id="busuanzi_value_site_pv"></span><span id="busuanzi_value_site_pv_change"></span></span>
+</div>
+
+<!-- 搜索功能 -->
+<!-- 
+Jekyll 静态博客实现搜索功能 https://juejin.im/post/5aa7d9c6f265da23866f918e 
+https://www.jianshu.com/p/064e2422f7c7
+-->
+<style>
+#search-container{
+    margin-top: 17px;
+}
+#search-input {
+    width: 90%;
+    height: 35px;
+    color: #333;
+    background-color: rgba(227,231,236,.2);
+    line-height: 35px;
+    padding:0px 16px;
+    border: 1px solid #c0c0c0;
+    font-size: 14px;
+    border-radius: 17px;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+    color: #a3a3a3;
+}
+#search-input:focus {
+    outline: none;
+    border-color: rgb(102, 175, 233);
+    background-color: #fff;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #007fff;
+}
+
+#results-container{
+
+    background:#FAFAFA;
+    font-size:15px;
+    color:#a3a3a3;
+    width: 90%;
+}
+    #results-container li{
+
+        padding:5px 0;
+    }
+
+
+#busuanzi_value_site_uv, #busuanzi_value_site_pv {
+  padding: 0 2px;
+}
+
+#busuanzi_value_site_pv_change, #busuanzi_value_site_uv_change {
+  color: #08964e;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#busuanzi_value_site_uv_change {
+
+}
+</style>
+
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="快速搜索 ...">
+  <ul id="results-container"></ul>
+</div>
+<script src="https://cdn.bootcss.com/simple-jekyll-search/1119c1a/jekyll-search.js"></script>
+<script>
+SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json',
+    searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>', // 文章列表模板
+    noResultsText: '没有搜索到文章', // 无搜索数据提示语
+    limit: 20, // 返回最大文章数
+    fuzzy: false // 是否模糊匹配
+})
+</script>
+<!-- 搜索功能 -->
+
+<!-- 网站统计功能 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+
+    // count the changed number compared to the last visit
+    setTimeout(function () {
+
+        let lastPv = parseInt(localStorage.getItem('pv'));
+        let lastUv = parseInt(localStorage.getItem('uv'));
+        if (isNaN(lastPv) || isNaN(lastUv) || lastPv <= 0 || lastUv <= 0) {
+            lastPv = 0;
+            lastUv = 0;
+        }
+
+        let pv = parseInt($("#busuanzi_value_site_pv").text());
+        let uv = parseInt($("#busuanzi_value_site_uv").text());
+        if (isNaN(pv) || isNaN(uv) || pv <= 0 || uv <= 0) {
+            return;
+        }
+        localStorage.setItem('pv', pv);
+        localStorage.setItem('uv', uv);
+
+        let pvChange = pv - lastPv;
+        let uvChange = uv - lastUv;
+        if (pvChange) {
+            $("#busuanzi_value_site_pv_change").text("↑" + pvChange);
+        }
+        if (uvChange) {
+            $("#busuanzi_value_site_uv_change").text("↑" + uvChange);
+        }
+    }, 4000);
+</script>
+<!-- 网站统计功能 -->
+
+{% for post in paginator.posts %}
+<div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+        <h2 class="post-title">
+            {{ post.title }}
+        </h2>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">
+            {{ post.subtitle }}
+        </h3>
+        {% endif %}
+        <div class="post-content-preview">
+            {{ post.content | strip_html | truncate:200 }}
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+    </p>
+</div>
+<hr>
+{% endfor %}
+
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+<ul class="pager">
+    {% if paginator.previous_page %}
+    <li class="previous">
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl}}">&larr; Newer Posts</a>
+        <!--<a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>-->
+   </li>
+   {% endif %}
+   {% if paginator.next_page %}
+   <li class="next">
+       <a href="{{ paginator.next_page_path | prepend: site.baseurl}}">Older Posts &rarr;</a>
+       <!--<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>-->
+    </li>
+    {% endif %}
+</ul>
+{% endif %}
+
