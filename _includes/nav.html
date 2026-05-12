@@ -62,11 +62,11 @@ body.is-home .navbar.navbar-custom {
                     <li>
                         <a class="urlChangeNav" href="{{ site.baseurl }}/">主页</a>
                     </li>
-                    {% for page in site.pages %}{% unless page.nav_exclude %}
+                    {% for page in site.pages %}{% if page.title and page.title != '' %}{% unless page.nav_exclude %}
                     <li>
                         <a class="urlChangeNav" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
-                    {% endunless %}{% endfor %}
+                    {% endunless %}{% endif %}{% endfor %}
                 </ul>
             </div>
         </div>
