@@ -26,8 +26,15 @@ nav_exclude: true
     </div>
 </section>
 
+<!-- Binary Ticker -->
+<div class="binary-ticker" aria-hidden="true">
+    <div class="binary-ticker-track">
+        <span class="binary-ticker-content"></span>
+        <span class="binary-ticker-content"></span>
+    </div>
+</div>
 
-<!-- 可视化学习板块 -->
+
 <section class="home-visuals-section" style="padding: 0;border-bottom: 1px solid rgb(85 168 178 / 20%);">
     <div class="section-header">
         <h2 class="section-title">可视化学习</h2>
@@ -375,6 +382,48 @@ nav_exclude: true
     }
 }
 
+/* ===== Binary Ticker ===== */
+.binary-ticker {
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+    padding: 10px 0;
+    position: relative;
+    margin-top: -3%;
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.binary-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: binaryScroll 28s linear infinite;
+}
+
+.binary-ticker-content {
+    white-space: nowrap;
+    font-family: "Space Mono", "Courier New", monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    padding-right: 60px;
+    color: transparent;
+    background: linear-gradient(90deg, #007289, #38bdf8, #a855f7, #007289);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: binaryGradient 6s linear infinite;
+}
+
+@keyframes binaryScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes binaryGradient {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
 #search-container{
     margin-top: 17px;
 }
@@ -421,3 +470,19 @@ nav_exclude: true
     font-weight: bold;
 }
 </style>
+
+<script>
+(function() {
+    var words = ['01', '10', '001', '110', '0101', '1010', '0011', '1100', '0110', '1001', '10110', '01001', '11010', '00101'];
+    function buildLine() {
+        var result = '';
+        for (var i = 0; i < 120; i++) {
+            result += words[Math.floor(Math.random() * words.length)] + ' ';
+        }
+        return result;
+    }
+    document.querySelectorAll('.binary-ticker-content').forEach(function(el) {
+        el.textContent = buildLine();
+    });
+})();
+</script>
