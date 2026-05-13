@@ -1,8 +1,8 @@
 ---
 title: "博客标签"
 layout: page
-description: "分享开源项目、后端开发、中间件和架构等计算机领域的原创技术文章"
 header-img: 
+nav_exclude: true
 ---
 
 <!-- Hero Section -->
@@ -17,7 +17,7 @@ header-img:
     <div class="hero-content">
         <h1 class="hero-title">博客标签</h1>
         <p class="hero-subtitle">Tags</p>
-        <p class="hero-desc">按主题分类浏览所有技术文章</p>
+        <p class="hero-desc">按主题分类阅读所有技术文章</p>
     </div>
 </section>
 
@@ -28,7 +28,7 @@ header-img:
             <!-- 标签云 -->
             <div id='tag_cloud' class="tags">
                 {% for tag in site.tags %}
-                <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+                <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}"># {{ tag[0] }}</a>
                 {% endfor %}
             </div>
 
@@ -41,7 +41,8 @@ header-img:
             <!-- 标签列表 -->
             {% for tag in site.tags %}
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
+                <span class="listing-seperator" id="{{ tag[0] }}">
+                    <span class="tag-hash">#</span>
                     <span class="tag-text">{{ tag[0] }}</span>
                 </span>
                 {% for post in tag[1] %}
@@ -72,11 +73,11 @@ header-img:
             <!-- Featured Tags -->
             {% if site.featured-tags %}
             <section class="subpage-sidebar-card">
-                <h5><a href="{{'/tags/' | prepend: site.baseurl }}">标签</a></h5>
+                <h5><a href="{{'/blog/tags/' | prepend: site.baseurl }}">标签</a></h5>
                 <div class="tags">
                     {% for tag in site.tags %}
                         {% if tag[1].size > site.featured-condition-size %}
-                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                    <a href="{{ site.baseurl }}/blog/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
                         {{ tag[0] }}
                     </a>
                         {% endif %}

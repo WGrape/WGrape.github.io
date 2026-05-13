@@ -4,7 +4,7 @@
 {% include head.html %}
 
 <!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="{% if page.url == '/' %}is-home{% endif %} {% if page.url == '/about/' %}about-page{% endif %} {% if page.url == '/blog/' %}blog-page{% endif %} {% if page.url == '/tags/' %}tags-page{% endif %} {% if page.url == '/404.html' %}page-404{% endif %} {% if page.layout == 'post' %}post-page{% endif %}">
+<body ontouchstart="" class="{% if page.url == '/' %}is-home{% endif %} {% if page.url == '/about/' %}about-page{% endif %} {% if page.url == '/blog/' %}blog-page{% endif %} {% if page.url == '/tags/' %}tags-page{% endif %} {% if page.url == '/blog/tags/' %}tags-page{% endif %} {% if page.url == '/404.html' %}page-404{% endif %} {% if page.layout == 'post' %}post-page{% endif %}">
 
     {% include nav.html %}
 
