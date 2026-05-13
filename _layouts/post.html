@@ -37,7 +37,7 @@ header-img:
             <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
-                post-container">
+                post-container" style="padding-right: 20px;">
 
 				{{ content }}
 
@@ -103,10 +103,10 @@ header-img:
                 col-lg-2 col-lg-offset-0
                 visible-lg-block
                 sidebar-container
-                catalog-container">
+                catalog-container" style="margin-top: 20px;">
                 <div class="side-catalog">
                     <hr class="hidden-sm hidden-xs">
-                    <h5>
+                    <h5 style="text-indent: 10px;">
                         <a class="catalog-toggle" href="#">目录</a>
                     </h5>
                     <ul class="catalog-body"></ul>
@@ -147,6 +147,17 @@ header-img:
                     {% endfor %}
                 </ul>
                 {% endif %}
+
+                <!--这个评论工具官网https://utteranc.es/-->
+                <hr>
+                <h5>互动交流</h5>
+                <script src="https://utteranc.es/client.js"
+                    repo="wgrape/WGrape.github.io"
+                    issue-term="title"
+                    theme="github-dark"
+                    crossorigin="anonymous"
+                    async>
+                </script>
             </div>
         </div>
     </div>
@@ -196,14 +207,6 @@ header-img:
     })
 </script>
 
-<!--这个评论工具官网https://utteranc.es/-->
-<script src="https://utteranc.es/client.js"
-        repo="wgrape/WGrape.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
 <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {

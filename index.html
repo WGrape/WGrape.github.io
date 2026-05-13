@@ -19,8 +19,27 @@ nav_exclude: true
         <h1 class="hero-title">WGrape<br>Tech Garden</h1>
         <p class="hero-subtitle">WGrape.github.io</p>
         <div class="action-row">
+            <a href="https://wgrape.github.io/visuals/" class="btn-pill btn-ghost">可视化学习</a>
             <a href="/blog/" class="btn-pill">进入博客</a>
             <a href="/about/" class="btn-pill btn-ghost">关于我</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- 可视化学习板块 -->
+<section class="home-visuals-section">
+    <div class="section-header">
+        <h2 class="section-title">可视化学习</h2>
+        <p class="section-subtitle">通过直观的交互式可视化，理解复杂技术概念的本质。</p>
+        <div class="home-visuals-enter">
+            <a href="https://wgrape.github.io/visuals/" class="stat-enter-link">
+                <span class="stat-enter-text">进入可视化学习</span>
+                <svg class="stat-enter-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
         </div>
     </div>
 </section>
@@ -88,6 +107,43 @@ nav_exclude: true
 <!-- 后续可以在这里添加其他板块，如开源项目、工具等 -->
 
 <style>
+/* ===== 调整首页hero高度 ===== */
+.hero-section {
+    min-height: 70vh;
+    padding: 120px 20px 40px;
+    margin-bottom: 20px;
+}
+
+/* ===== 首页可视化学习板块 ===== */
+.home-visuals-section {
+    padding: 40px 20px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home-visuals-section .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.home-visuals-section .section-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 42px;
+    color: #f5f1e9;
+    margin-bottom: 8px;
+}
+
+.home-visuals-section .section-subtitle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 16px;
+    color: var(--wg-muted);
+    opacity: 0.8;
+}
+
+.home-visuals-enter {
+    margin-top: 32px;
+}
+
 /* ===== 首页博客板块 ===== */
 .home-blog-section {
     padding: 60px 20px 40px;
@@ -308,6 +364,9 @@ nav_exclude: true
         gap: 16px;
     }
     .home-blog-section .section-title {
+        font-size: 32px;
+    }
+    .home-visuals-section .section-title {
         font-size: 32px;
     }
     .home-post-card {

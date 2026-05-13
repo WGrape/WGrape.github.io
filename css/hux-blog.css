@@ -1,12 +1,14 @@
 @media (min-width: 1200px) {
   .post-container,
   .sidebar-container {
-    padding-right: 5%;
+    /* padding-right: 5%; */
+    padding-right: 0;
   }
 }
 @media (min-width: 768px) {
   .post-container {
-    padding-right: 5%;
+    /* padding-right: 5%; */
+    padding-right: 0;
   }
 }
 .sidebar-container {
@@ -1083,4 +1085,13 @@ img::-moz-selection {
 }
 .page-fullscreen footer .copyright a:hover {
   color: #ddd;
+}
+
+/* Utterances 评论区样式 */
+.utterances-container {
+  padding: 10px 0 40px 0;
+}
+
+.utterances-container .utterances {
+  max-width: 100% !important;
 }
