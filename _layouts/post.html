@@ -125,7 +125,7 @@ header-img:
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">标签</a></h5>
-                    <div class="tags">
+                    <div class="tags" style="text-align: justify; padding-right: 20px;">
         				{% for tag in site.tags %}
                             {% if tag[1].size > {{site.featured-condition-size}} %}
                 				<a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
@@ -151,13 +151,15 @@ header-img:
                 <!--这个评论工具官网https://utteranc.es/-->
                 <hr>
                 <h5>互动交流</h5>
-                <script src="https://utteranc.es/client.js"
-                    repo="wgrape/WGrape.github.io"
-                    issue-term="title"
-                    theme="github-dark"
-                    crossorigin="anonymous"
-                    async>
-                </script>
+                <div class="utterances" style="height: 269px;margin-right: 30px;">
+                    <script src="https://utteranc.es/client.js"
+                        repo="wgrape/WGrape.github.io"
+                        issue-term="title"
+                        theme="github-dark"
+                        crossorigin="anonymous"
+                        async>
+                    </script>
+                </div>
             </div>
         </div>
     </div>

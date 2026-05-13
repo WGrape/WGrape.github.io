@@ -1088,10 +1088,11 @@ img::-moz-selection {
 }
 
 /* Utterances 评论区样式 */
-.utterances-container {
-  padding: 10px 0 40px 0;
-}
-
-.utterances-container .utterances {
-  max-width: 100% !important;
+.utterances {
+    position: relative;
+    box-sizing: border-box;
+    width: 95%;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
 }
