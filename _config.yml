@@ -17,8 +17,8 @@ title: WGrape.github.io
 SEOTitle: WGrape.github.io | WGrape的博客 | WGrape的网站 | WGrape
 header-img:
 email:
-description: "WGrape官方网站，主要包括计算机科学知识的动态可视化学习，用于分享开源项目、后端开发、中间件和架构等计算机领域的个人原创博客，还有其他一些个人项目和工具。"
-keyword: "WGrape, 博客, 后端, 计算机, 编程, 前端, 程序员, golang, php, 编译器原理, 计算机网络"
+description: "WGrape官方网站，主要包括计算机科学知识的动态可视化学习，用于分享开源项目、后端工程及架构、AI大模型与Agent工程架构、AI应用落地等计算机领域的个人原创博客，还有其他一些个人项目和工具。"
+keyword: "WGrape, 博客, 后端, 计算机, 编程, 前端, 程序员, golang, php, 编译器原理, 计算机网络，人工智能，大模型，Agent，AI应用落地，开源项目"
 #url: "https://WGrape.github.io"    # your host, for absolute URL
 url: "" # 解决使用utterances评论功能时，登录重定向错误地址问题: https://github.com/utterance/utterances/issues/511
 #baseurl: "https://wgrape.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
@@ -27,7 +27,7 @@ github_repo: "https://github.com/WGrape/Blog" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "WGrape官方网站，主要包括计算机科学知识的动态可视化学习，用于分享开源项目、后端开发、中间件和架构等计算机领域的个人原创博客，还有其他一些个人项目和工具。"
+sidebar-about-description: "WGrape官方网站，主要包括计算机科学知识的动态可视化学习，用于分享开源项目、后端工程及架构、AI大模型与Agent工程架构、AI应用落地等计算机领域的个人原创博客，还有其他一些个人项目和工具。"
 sidebar-avatar: /img/author.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
