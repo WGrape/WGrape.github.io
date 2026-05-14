@@ -17,7 +17,12 @@ nav_exclude: true
     </div>
     <div class="hero-content">
         <h1 class="hero-title">WGrape<br>Tech Garden</h1>
-        <p class="hero-subtitle">WGrape.github.io</p>
+        <!-- <p class="hero-subtitle">WGrape.github.io</p> -->
+        <p class="hero-subtitle">WGrape.github.io<span class="hero-visitor-label">累计PV</span><span class="hero-visitor-num" id="hero-visitor-num">0</span><span class="hero-visitor-unit">次</span></p>
+        <!-- busuanzi 隐藏容器，仅用于获取真实 PV 值 -->
+        <span id="busuanzi_container_site_pv" style="display:none;">
+            <span id="busuanzi_value_site_pv" style="display:none;"></span>
+        </span>
         <div class="action-row">
             <a href="https://wgrape.github.io/visuals/" class="btn-pill btn-ghost">可视化学习</a>
             <a href="/blog/" class="btn-pill">进入博客</a>
@@ -125,6 +130,56 @@ nav_exclude: true
     min-height: 50vh;
     padding: 120px 20px 40px;
     margin-bottom: 20px;
+}
+
+/* ===== Hero 访客计数器 ===== */
+.hero-visitor-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px auto 0;
+    padding: 10px 24px;
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+.hero-visitor-icon {
+    font-size: 16px;
+}
+
+.hero-visitor-label {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px;
+    color: rgba(170, 184, 203, 0.85);
+    margin-left: 3px;
+}
+
+.hero-visitor-num {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 64px;
+    text-align: center;
+    background: linear-gradient(110deg, #38bdf8 0%, #a78bfa 50%, #38bdf8 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: visitorNumGlow 3s linear infinite;
+    margin: 0 3px;
+}
+
+.hero-visitor-unit {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px;
+    color: rgba(170, 184, 203, 0.85);
+}
+
+@keyframes visitorNumGlow {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
 }
 
 /* ===== 首页可视化学习板块 ===== */
@@ -509,6 +564,7 @@ nav_exclude: true
 }
 </style>
 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script>
 (function() {
     var words = ['01', '10', '001', '110', '0101', '1010', '0011', '1100', '0110', '1001', '10110', '01001', '11010', '00101'];
@@ -521,6 +577,48 @@ nav_exclude: true
     }
     document.querySelectorAll('.binary-ticker-content').forEach(function(el) {
         el.textContent = buildLine();
+    });
+})();
+
+// Visitor counter roll-up animation
+(function () {
+    var el = document.getElementById('hero-visitor-num');
+    if (!el) return;
+
+    // 初始显示 0
+    el.textContent = '0';
+
+    function rollTo(target) {
+        var start = 0;
+        var duration = 2200;
+        var startTime = null;
+
+        function easeOutExpo(t) {
+            return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        }
+
+        function step(ts) {
+            if (!startTime) startTime = ts;
+            var elapsed = ts - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var current = Math.floor(start + easeOutExpo(progress) * (target - start));
+            el.textContent = current.toLocaleString();
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = target.toLocaleString();
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // 延迟等待 busuanzi 加载，取 PV 值作为滚动目标
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            var pvEl = document.getElementById('busuanzi_value_site_pv');
+            var val = pvEl ? parseInt(pvEl.textContent) : NaN;
+            rollTo(!isNaN(val) && val > 0 ? val : 1);
+        }, 2000);
     });
 })();
 </script>
