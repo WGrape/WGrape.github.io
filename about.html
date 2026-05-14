@@ -51,7 +51,7 @@ nav_exclude: true
                 </div>
             </div>
 
-            <div class="subpage-card">
+            <div class="subpage-card" style="margin: 30px 0 20px 0;">
                 <h2 class="section-title">关于博客</h2>
                 <div class="post-preview">
                     <p style="color: var(--wg-text); line-height: 1.9;">本博客全部内容来自于<a href="https://github.com/WGrape/Blog">WGrape/Blog</a>，欢迎star关注！</p>
@@ -59,8 +59,10 @@ nav_exclude: true
             </div>
         </div>
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
+            
             <!-- Featured Tags -->
-            {% if site.featured-tags %}
+            <!-- 不展示标签列表 -->
+            <!-- {% if site.featured-tags %}
             <section class="subpage-sidebar-card">
                 <h5><a href="{{'/tags/' | prepend: site.baseurl }}">标签</a></h5>
                 <div class="tags">
@@ -73,7 +75,7 @@ nav_exclude: true
                     {% endfor %}
                 </div>
             </section>
-            {% endif %}
+            {% endif %} -->
 
             <!-- Friends Blog -->
             {% if site.friends %}
