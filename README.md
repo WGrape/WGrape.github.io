@@ -1,6 +1,8 @@
 # WGrape.github.io
 WGrape的个人网站，托管于github.io
 
+<img width="2559" height="1351" alt="Image" src="https://github.com/user-attachments/assets/5935b1e3-0047-4bf1-8905-8856ec984083" />
+
 ## 本地运行
 
 使用 Docker 启动本地预览（推荐）：
