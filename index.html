@@ -46,7 +46,15 @@ nav_exclude: true
         <p class="section-subtitle">每日一句、计算机领域英文、AI+单词、AI+长句子翻译，每一次学习都让英文输入更轻盈一点。</p>
     </div>
 
-    <article class="english-card" id="daily-english-card">
+    <article
+        class="english-card english-click-card"
+        id="daily-english-card"
+        data-href="https://wgrape.github.io/visuals/"
+        data-target="_blank"
+        tabindex="0"
+        role="link"
+        aria-label="打开金山词霸每日一句"
+    >
         <div class="english-card-glow english-card-glow-left"></div>
         <div class="english-card-glow english-card-glow-right"></div>
         <div class="english-media">
@@ -79,7 +87,14 @@ nav_exclude: true
     </article>
 
     <div class="english-mini-grid">
-        <article class="english-mini-card english-mini-card-tech">
+        <article
+            class="english-mini-card english-mini-card-tech english-click-card"
+            data-href="https://wgrape.github.io/visuals/"
+            data-target="_blank"
+            tabindex="0"
+            role="link"
+            aria-label="查看相关内容"
+        >
             <div class="english-mini-meta">
                 <span class="english-mini-badge">计算机领域英文</span>
                 <span class="english-mini-tag">Core Term</span>
@@ -89,7 +104,14 @@ nav_exclude: true
             <p class="english-mini-zh">幂等性：一个操作即使被重复执行多次，最终结果仍保持一致。</p>
         </article>
 
-        <article class="english-mini-card english-mini-card-ai-word">
+        <article
+            class="english-mini-card english-mini-card-ai-word english-click-card"
+            data-href="https://wgrape.github.io/visuals/"
+            data-target="_blank"
+            tabindex="0"
+            role="link"
+            aria-label="查看相关内容"
+        >
             <div class="english-mini-meta">
                 <span class="english-mini-badge">AI+单词</span>
                 <span class="english-mini-tag">Vocabulary</span>
@@ -99,7 +121,14 @@ nav_exclude: true
             <p class="english-mini-zh">对齐：让 AI 系统的行为尽可能符合人类目标、价值和预期。</p>
         </article>
 
-        <article class="english-mini-card english-mini-card-ai-sentence">
+        <article
+            class="english-mini-card english-mini-card-ai-sentence english-click-card"
+            data-href="https://wgrape.github.io/visuals/"
+            data-target="_blank"
+            tabindex="0"
+            role="link"
+            aria-label="查看相关内容"
+        >
             <div class="english-mini-meta">
                 <span class="english-mini-badge">AI+长句子翻译</span>
                 <span class="english-mini-tag">Sentence</span>
@@ -283,6 +312,7 @@ nav_exclude: true
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
     backdrop-filter: blur(14px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .english-card-glow {
@@ -448,6 +478,39 @@ nav_exclude: true
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
     overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.english-click-card {
+    cursor: pointer;
+    outline: none;
+}
+
+.english-click-card:hover,
+.english-click-card:focus-visible {
+    transform: translateY(-6px);
+    border-color: rgba(56, 189, 248, 0.42);
+    box-shadow: 0 22px 52px rgba(56, 189, 248, 0.12), 0 18px 48px rgba(0, 0, 0, 0.24);
+}
+
+.english-click-card:hover .english-mini-title,
+.english-click-card:focus-visible .english-mini-title,
+.english-click-card:hover .english-quote,
+.english-click-card:focus-visible .english-quote {
+    color: #ffffff;
+}
+
+.english-click-card:hover .english-mini-badge,
+.english-click-card:focus-visible .english-mini-badge,
+.english-click-card:hover .english-badge,
+.english-click-card:focus-visible .english-badge {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: rgba(56, 189, 248, 0.38);
+}
+
+.english-click-card:hover .english-card-glow,
+.english-click-card:focus-visible .english-card-glow {
+    opacity: 0.28;
 }
 
 .english-mini-card:before {
@@ -1094,6 +1157,37 @@ nav_exclude: true
     });
 })();
 
+(function () {
+    document.querySelectorAll('.english-click-card[data-href]').forEach(function (card) {
+        function openCard(event) {
+            if (event.target.closest('a')) {
+                return;
+            }
+
+            var href = card.getAttribute('data-href');
+            var target = card.getAttribute('data-target') || '_self';
+
+            if (!href) {
+                return;
+            }
+
+            if (target === '_blank') {
+                window.open(href, '_blank', 'noopener,noreferrer');
+            } else {
+                window.location.href = href;
+            }
+        }
+
+        card.addEventListener('click', openCard);
+        card.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openCard(event);
+            }
+        });
+    });
+})();
+
 // Visitor counter roll-up animation
 (function () {
     function rollTo(el, target) {
@@ -1139,9 +1233,23 @@ nav_exclude: true
     var dateEl = document.getElementById('daily-english-date');
     var captionEl = document.getElementById('daily-english-caption');
     var imageEl = document.getElementById('daily-english-image');
+    var storageKey = 'wgrape-daily-english-cache-v1';
+    var callbackName = '__icibaDailySentence__';
+    var cache = null;
 
     if (!contentEl || !noteEl || !dateEl || !captionEl || !imageEl) {
         return;
+    }
+
+    function getTodayDate() {
+        var now = new Date();
+        var month = String(now.getMonth() + 1).padStart(2, '0');
+        var day = String(now.getDate()).padStart(2, '0');
+        return now.getFullYear() + '-' + month + '-' + day;
+    }
+
+    function isValidSentence(data) {
+        return !!(data && typeof data.content === 'string' && data.content && typeof data.note === 'string' && data.note);
     }
 
     function setFallback() {
@@ -1152,7 +1260,7 @@ nav_exclude: true
     }
 
     function applySentence(data) {
-        if (!data || !data.content || !data.note) {
+        if (!isValidSentence(data)) {
             setFallback();
             return;
         }
@@ -1169,35 +1277,55 @@ nav_exclude: true
         }
     }
 
-    var callbackName = '__icibaDailySentence__' + Date.now();
-    var script = document.createElement('script');
-    var timer = window.setTimeout(function () {
-        cleanup();
-        setFallback();
-    }, 8000);
-
-    function cleanup() {
-        window.clearTimeout(timer);
-        try {
-            delete window[callbackName];
-        } catch (e) {
-            window[callbackName] = undefined;
-        }
-        if (script.parentNode) {
-            script.parentNode.removeChild(script);
-        }
+    try {
+        cache = JSON.parse(window.localStorage.getItem(storageKey) || 'null');
+    } catch (e) {
+        cache = null;
     }
 
+    if (isValidSentence(cache) && cache.dateline === getTodayDate()) {
+        applySentence(cache);
+        return;
+    }
+
+    var script = document.createElement('script');
+
     window[callbackName] = function (data) {
-        cleanup();
-        applySentence(data);
+        if (isValidSentence(data)) {
+            cache = {
+                content: data.content,
+                note: data.note,
+                dateline: data.dateline || getTodayDate(),
+                caption: data.caption || '词霸每日一句',
+                picture: data.picture || '',
+                picture2: data.picture2 || '',
+                picture3: data.picture3 || '',
+                fenxiang_img: data.fenxiang_img || ''
+            };
+
+            try {
+                window.localStorage.setItem(storageKey, JSON.stringify(cache));
+            } catch (e) {}
+
+            applySentence(cache);
+            return;
+        }
+
+        if (isValidSentence(cache)) {
+            applySentence(cache);
+        } else {
+            setFallback();
+        }
     };
 
     script.src = 'https://open.iciba.com/dsapi/?callback=' + callbackName;
     script.async = true;
     script.onerror = function () {
-        cleanup();
-        setFallback();
+        if (isValidSentence(cache)) {
+            applySentence(cache);
+        } else {
+            setFallback();
+        }
     };
 
     document.body.appendChild(script);
