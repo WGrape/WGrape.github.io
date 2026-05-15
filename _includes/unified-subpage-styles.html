@@ -747,24 +747,29 @@ header.intro-header .container,
     background: #f5f1e9;
     font-weight: 700;
     font-size: 15px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
 .btn-pill:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(245, 241, 233, 0.25);
+    transform: translateY(-3px);
+    background: #ffffff;
     color: #101820;
+    box-shadow: 0 8px 28px rgba(245, 241, 233, 0.35);
+    text-decoration: none;
 }
 
 .btn-ghost {
     background: transparent;
     color: #f5f1e9;
-    border: 2px solid rgba(245, 241, 233, 0.45);
+    border: 1.5px solid rgba(245, 241, 233, 0.35);
 }
 
 .btn-ghost:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(245, 241, 233, 0.7);
+    background: rgba(245, 241, 233, 0.1);
+    border-color: rgba(245, 241, 233, 0.75);
+    color: #f5f1e9;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
 }
 
 .stats {

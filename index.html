@@ -17,10 +17,18 @@ nav_exclude: true
     </div>
     <div class="hero-content">
         <h1 class="hero-title">WGrape<br>Tech Garden</h1>
-        <!-- <p class="hero-subtitle">WGrape.github.io</p> -->
-        <p class="hero-subtitle">WGrape.github.io<span class="hero-visitor-label">累计PV</span><span class="hero-visitor-num" id="hero-visitor-num">0</span><span class="hero-visitor-unit">次</span></p>
-        <!-- busuanzi 隐藏容器，仅用于获取真实 PV 值 -->
-        <span id="busuanzi_container_site_pv" style="display:none;">
+        <p class="hero-subtitle">WGrape.github.io</p>
+        <!-- <p class="hero-subtitle">WGrape.github.io<span class="hero-visitor-label">累计PV</span><span class="hero-visitor-num" id="hero-visitor-num">0</span><span class="hero-visitor-unit">次</span></p> -->
+        <p class="">
+            <span style="color: #b9b9b9;">UV</span><span class="hero-visitor-num" id="hero-uv-num">0</span>
+            <span class="hero-visitor-label" style="color: #FFF;">/</span>
+            <span style="color: #b9b9b9;">PV</span><span class="hero-visitor-num" id="hero-pv-num">0</span>
+        </p>
+        <!-- busuanzi 隐藏容器，仅用于获取真实 UV/PV 值 -->
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv" style="display:none;"></span>
+        </span>
+        <span id="busuanzi_container_site_pv">
             <span id="busuanzi_value_site_pv" style="display:none;"></span>
         </span>
         <div class="action-row">
@@ -154,6 +162,7 @@ nav_exclude: true
     font-size: 14px;
     color: rgba(170, 184, 203, 0.85);
     margin-left: 3px;
+    margin-right: 3px;
 }
 
 .hero-visitor-num {
@@ -582,13 +591,7 @@ nav_exclude: true
 
 // Visitor counter roll-up animation
 (function () {
-    var el = document.getElementById('hero-visitor-num');
-    if (!el) return;
-
-    // 初始显示 0
-    el.textContent = '0';
-
-    function rollTo(target) {
+    function rollTo(el, target) {
         var start = 0;
         var duration = 2200;
         var startTime = null;
@@ -612,13 +615,16 @@ nav_exclude: true
         requestAnimationFrame(step);
     }
 
-    // 延迟等待 busuanzi 加载，取 PV 值作为滚动目标
+    // 延迟等待 busuanzi 加载，分别取 UV/PV 值滚动
     window.addEventListener('load', function () {
         setTimeout(function () {
-            var pvEl = document.getElementById('busuanzi_value_site_pv');
-            var val = pvEl ? parseInt(pvEl.textContent) : NaN;
-            rollTo(!isNaN(val) && val > 0 ? val : 1);
-        }, 2000);
+            var uvEl = document.getElementById('hero-uv-num');
+            var pvEl = document.getElementById('hero-pv-num');
+            var uvVal = parseInt((document.getElementById('busuanzi_value_site_uv') || {}).textContent);
+            var pvVal = parseInt((document.getElementById('busuanzi_value_site_pv') || {}).textContent);
+            if (uvEl) rollTo(uvEl, !isNaN(uvVal) && uvVal > 0 ? uvVal : 1);
+            if (pvEl) rollTo(pvEl, !isNaN(pvVal) && pvVal > 0 ? pvVal : 1);
+        }, 1000);
     });
 })();
 </script>
