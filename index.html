@@ -132,12 +132,108 @@ nav_exclude: true
 
 <!-- 后续可以在这里添加其他板块，如开源项目、工具等 -->
 
+<!-- 友情链接板块 -->
+<section class="home-friends-section">
+    <div class="section-header">
+        <h2 class="section-title">友情链接</h2>
+        <p class="section-subtitle">工具、项目与合作</p>
+    </div>
+    <div class="home-friends-grid">
+        {% for link in site.friends %}
+        <a href="{{ link.href }}" target="_blank" class="friend-card">
+            <span class="friend-card-title">{{ link.title }}</span>
+            <svg class="friend-card-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
 <style>
 /* ===== 调整首页hero高度 ===== */
 .hero-section {
     min-height: 50vh;
     padding: 120px 20px 40px;
     margin-bottom: 20px;
+}
+
+/* ===== 友情链接板块 ===== */
+.home-friends-section {
+    padding: 40px 20px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(85, 168, 178, 0.15);
+}
+
+.home-friends-section .section-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.home-friends-section .section-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 36px;
+    color: #f5f1e9;
+    margin-bottom: 6px;
+}
+
+.home-friends-section .section-subtitle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 15px;
+    color: var(--wg-muted);
+    opacity: 0.75;
+}
+
+.home-friends-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.friend-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.friend-card-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #c8d8e8;
+    transition: color 0.25s ease;
+}
+
+.friend-card-arrow {
+    color: rgba(170, 184, 203, 0.5);
+    flex-shrink: 0;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.friend-card:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.12);
+    text-decoration: none;
+}
+
+.friend-card:hover .friend-card-title {
+    color: #7dd3fc;
+}
+
+.friend-card:hover .friend-card-arrow {
+    color: #38bdf8;
+    transform: translate(2px, -2px);
 }
 
 /* ===== Hero 访客计数器 ===== */
