@@ -1,0 +1,52 @@
+---
+layout: page
+title: "英文学习"
+header-img:
+permalink: /english-visuals/
+---
+
+<style>
+/* Page  clears fixed navbar */wrapper 
+.ev-page { padding-top: 80px; }
+
+/* Page hero */
+.ev-hero {
+    text-align: center;
+    padding: 48px 20px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.ev-hero-title {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(32px, 5vw, 52px);
+    color: #f5f1e9;
+    margin: 0 0 12px;
+    line-height: 1.15;
+}
+.ev-hero-sub {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 16px;
+    color: var(--wg-muted, #aab8cb);
+    opacity: 0.85;
+    margin: 0;
+}
+
+/* Section separator */
+/* Section separator (anchor target for mini-card links) */
+.ev-sep {
+    max-width: 940px;
+    margin: 20px auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(56,189,248,.22), rgba(168,85,247,.15), transparent);
+}
+</style>
+
+<div class="ev-page">
+
+    <div style="margin-top: 50px;"></div>
+
+    <!-- Daily quote + mini overview (shared include) -->
+    {% include english-section.html show_enter_link="false" page_mode="true" %}
+
+</div>
+

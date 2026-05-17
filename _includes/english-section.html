@@ -1,0 +1,1259 @@
+{% comment %}
+  Shared English learning section.
+  Parameters:
+    include.show_enter_link  – "false" hides the "进入英文学习" button  (default: show)
+    include.page_mode        – "true" sets mini-card hrefs to in-page anchors (for english-visuals page)
+{% endcomment %}
+
+<script src="/js/english-visuals-config.js"></script>
+
+<style>
+/* ===== 英文学习板块 – shared styles (included on homepage and english-visuals) ===== */
+.home-english-section {
+    padding: 8px 20px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    overflow: visible;
+}
+
+.home-english-section .section-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.home-english-section .section-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 38px;
+    color: #f5f1e9;
+    margin-bottom: 8px;
+}
+
+.home-english-section .section-subtitle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 15px;
+    color: var(--wg-muted);
+    opacity: 0.82;
+}
+
+.english-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+    gap: 22px;
+    align-items: center;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 26px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.16), transparent 36%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(10, 20, 28, 0.88));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.english-card-glow {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.18;
+    pointer-events: none;
+}
+
+.english-card-glow-left {
+    top: -100px;
+    left: -80px;
+    background: #38bdf8;
+}
+
+.english-card-glow-right {
+    right: -90px;
+    bottom: -120px;
+    background: #a855f7;
+}
+
+.english-media,
+.english-content {
+    position: relative;
+    z-index: 1;
+}
+
+.english-media-frame {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 5 / 6;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.english-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.english-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.english-badge,
+.english-date,
+.english-translation-label,
+.english-caption,
+.english-source {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.english-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7dd3fc;
+    background: rgba(56, 189, 248, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.english-date {
+    font-size: 13px;
+    color: rgba(170, 184, 203, 0.82);
+}
+
+.english-quote {
+    margin: 0;
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(24px, 2.4vw, 34px);
+    line-height: 1.28;
+    color: #f8f4ec;
+    letter-spacing: 0.01em;
+}
+
+.english-divider {
+    width: 72px;
+    height: 1px;
+    margin: 20px 0 16px;
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.7), rgba(168, 85, 247, 0.18));
+}
+
+.english-translation-block {
+    max-width: 680px;
+}
+
+.english-translation-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(125, 211, 252, 0.88);
+}
+
+.english-note {
+    margin: 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #d8e4f2;
+}
+
+.english-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.english-caption {
+    font-size: 13px;
+    color: rgba(170, 184, 203, 0.78);
+}
+
+.english-source {
+    font-size: 13px;
+    color: rgba(170, 184, 203, 0.78);
+}
+
+.english-source a {
+    color: #7dd3fc;
+    text-decoration: none;
+}
+
+.english-source a:hover {
+    color: #bae6fd;
+    text-decoration: none;
+}
+
+.english-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 940px;
+    margin: 24px auto 0;
+}
+
+/* subpage uses single-column layout */
+.english-mini-grid-single {
+    grid-template-columns: 1fr;
+}
+
+.english-mini-card {
+    position: relative;
+    padding: 24px 28px 22px;
+    border-radius: 26px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.english-click-card {
+    cursor: pointer;
+    outline: none;
+}
+
+.english-click-card:hover,
+.english-click-card:focus-visible {
+    transform: translateY(-6px);
+    border-color: rgba(56, 189, 248, 0.42);
+    box-shadow: 0 22px 52px rgba(56, 189, 248, 0.12), 0 18px 48px rgba(0, 0, 0, 0.24);
+}
+
+.english-click-card:hover .english-mini-title,
+.english-click-card:focus-visible .english-mini-title,
+.english-click-card:hover .english-quote,
+.english-click-card:focus-visible .english-quote {
+    color: #ffffff;
+}
+
+.english-click-card:hover .english-mini-badge,
+.english-click-card:focus-visible .english-mini-badge,
+.english-click-card:hover .english-badge,
+.english-click-card:focus-visible .english-badge {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: rgba(56, 189, 248, 0.38);
+}
+
+.english-click-card:hover .english-card-glow,
+.english-click-card:focus-visible .english-card-glow {
+    opacity: 0.28;
+}
+
+.english-mini-card:before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(125, 211, 252, 0.55), rgba(168, 85, 247, 0.2), transparent);
+}
+
+.english-mini-card-tech {
+    background:
+        radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.1), transparent 36%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(10, 20, 28, 0.88));
+}
+
+.english-mini-card-ai-word {
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.16), transparent 36%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(10, 20, 28, 0.88));
+}
+
+.english-mini-card-ai-sentence {
+    background:
+        radial-gradient(circle at top left, rgba(168, 85, 247, 0.18), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(52, 211, 153, 0.12), transparent 36%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(10, 20, 28, 0.88));
+}
+
+.english-mini-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.english-mini-badge,
+.english-mini-tag,
+.english-mini-en,
+.english-mini-zh {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.english-mini-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: #8fe7ff;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.22);
+}
+
+.english-mini-tag {
+    font-size: 11px;
+    color: rgba(170, 184, 203, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.english-mini-title {
+    margin: 0 0 14px;
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(22px, 2.2vw, 30px);
+    font-weight: 400;
+    line-height: 1.28;
+    color: #f8f4ec;
+    letter-spacing: 0.01em;
+}
+
+.english-mini-divider {
+    width: 72px;
+    height: 1px;
+    margin: 18px 0 14px;
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.7), rgba(168, 85, 247, 0.18));
+}
+
+.english-mini-en {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #d8e4f2;
+}
+
+.english-mini-zh {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(170, 184, 203, 0.9);
+}
+
+.home-english-enter {
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ── Homepage-only: compact card heights with text clamping ── */
+.home-english-section:not(.english-page-mode) .english-card {
+    align-items: start;
+}
+.home-english-section:not(.english-page-mode) .english-media-frame {
+    aspect-ratio: 4 / 3;
+}
+.home-english-section:not(.english-page-mode) .english-quote {
+    font-size: clamp(16px, 1.6vw, 22px);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.home-english-section:not(.english-page-mode) .english-note {
+    font-size: 14px;
+    line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.home-english-section:not(.english-page-mode) .english-mini-title {
+    font-size: clamp(16px, 1.6vw, 20px);
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.home-english-section:not(.english-page-mode) .english-mini-en {
+    font-size: 13px;
+    line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.home-english-section:not(.english-page-mode) .english-mini-zh {
+    font-size: 12px;
+    line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.home-english-section:not(.english-page-mode) .english-mini-card {
+    padding: 18px 22px 16px;
+}
+.home-english-section:not(.english-page-mode) .english-mini-divider {
+    margin: 12px 0 10px;
+}
+
+@media (max-width: 768px) {
+    .home-english-section .section-title { font-size: 32px; }
+    .english-card {
+        grid-template-columns: 1fr;
+        padding: 18px;
+        gap: 16px;
+        border-radius: 24px;
+    }
+    .english-media-frame { aspect-ratio: 16 / 10; }
+    .english-quote { font-size: 26px; }
+    .english-note { font-size: 15px; }
+    .english-mini-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 16px;
+    }
+    .english-mini-card { padding: 20px 18px; border-radius: 22px; }
+    .english-mini-title { font-size: 22px; }
+}
+
+/* ── Expandable cards (sub-page / page_mode only) ── */
+.ev-expandable-card {
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.ev-expandable-card:hover,
+.ev-expandable-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(56, 189, 248, 0.36);
+    box-shadow: 0 22px 52px rgba(56, 189, 248, 0.1), 0 18px 48px rgba(0, 0, 0, 0.24);
+}
+.ev-expandable-card .ev-card-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    color: rgba(125, 211, 252, 0.65);
+    pointer-events: none;
+}
+.ev-expandable-card .ev-card-toggle svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+.ev-expandable-card[aria-expanded="true"] .ev-card-toggle svg {
+    transform: rotate(180deg);
+}
+.ev-expandable-card[aria-expanded="true"] .ev-card-toggle-label::before {
+    content: "收起列表";
+}
+.ev-expandable-card[aria-expanded="false"] .ev-card-toggle-label::before {
+    content: "展开全部";
+}
+.ev-inline-list {
+    display: none;
+    margin-top: 4px;
+}
+.ev-expandable-card[aria-expanded="true"] .ev-inline-list {
+    display: block;
+    animation: evListIn 0.28s ease;
+}
+@keyframes evListIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.ev-inline-item {
+    padding: 16px 0 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.ev-inline-item:last-child {
+    border-bottom: none;
+    padding-bottom: 4px;
+}
+.ev-inline-top {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.ev-inline-word {
+    font-family: "DM Serif Display", serif;
+    font-size: 18px;
+    color: #f8f4ec;
+    margin: 0;
+    line-height: 1.25;
+}
+.ev-inline-phonetic {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    color: rgba(125, 211, 252, 0.6);
+}
+.ev-inline-tag {
+    margin-left: auto;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(170, 184, 203, 0.45);
+    white-space: nowrap;
+}
+.ev-inline-en {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #d8e4f2;
+    margin: 0 0 6px;
+}
+.ev-inline-zh {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(170, 184, 203, 0.78);
+    margin: 0 0 10px;
+}
+.ev-inline-footer {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.ev-speak-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    color: #7dd3fc;
+    background: rgba(56, 189, 248, 0.09);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    outline: none;
+}
+.ev-speak-btn:hover,
+.ev-speak-btn:focus-visible {
+    background: rgba(56, 189, 248, 0.18);
+    border-color: rgba(56, 189, 248, 0.38);
+    color: #bae6fd;
+}
+
+/* ── A-Z filter bar ── */
+.ev-az-wrapper {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.ev-az-search {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 13px;
+    color: #d8e4f2;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+    transition: border-color 0.18s ease, background 0.18s ease;
+}
+.ev-az-search::placeholder {
+    color: rgba(170, 184, 203, 0.4);
+}
+.ev-az-search:focus {
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(56, 189, 248, 0.06);
+}
+.ev-az-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+.ev-az-btn {
+    min-width: 28px;
+    padding: 3px 7px;
+    border-radius: 6px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(170, 184, 203, 0.6);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    outline: none;
+    text-align: center;
+}
+.ev-az-btn:hover {
+    color: #7dd3fc;
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.22);
+}
+.ev-az-btn.ev-az-active {
+    color: #bae6fd;
+    background: rgba(56, 189, 248, 0.18);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+.ev-az-scroll {
+    max-height: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56, 189, 248, 0.25) transparent;
+    padding-right: 4px;
+}
+.ev-az-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+.ev-az-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+.ev-az-scroll::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.25);
+    border-radius: 4px;
+}
+.ev-az-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 189, 248, 0.45);
+}
+.ev-az-group {
+    display: none;
+}
+.ev-az-group.ev-az-visible {
+    display: block;
+}
+
+/* ── Grammar role highlights (AI sentence card) ── */
+.ev-gram {
+    border-radius: 3px;
+    padding: 1px 3px;
+    margin: 0 1px;
+    display: inline;
+    transition: background 0.2s, color 0.2s;
+}
+.ev-gram[data-role="subject"]         { background: rgba(56,189,248,0.18);  color: #7dd3fc; }
+.ev-gram[data-role="predicate"]       { background: rgba(74,222,128,0.16);  color: #86efac; }
+.ev-gram[data-role="object"]          { background: rgba(251,191,36,0.16);  color: #fcd34d; }
+.ev-gram[data-role="complement"]      { background: rgba(167,139,250,0.18); color: #c4b5fd; }
+.ev-gram[data-role="relative-clause"] { background: rgba(251,146,60,0.16);  color: #fdba74; }
+.ev-gram[data-role="adverbial-clause"]{ background: rgba(251,113,133,0.16); color: #fda4af; }
+.ev-gram[data-role="adverbial"]       { background: rgba(45,212,191,0.14);  color: #5eead4; }
+.ev-gram[data-role="noun-clause"]     { background: rgba(192,132,252,0.16); color: #d8b4fe; }
+.ev-gram[data-role="appositive"]      { background: rgba(129,140,248,0.16); color: #a5b4fc; }
+.ev-gram[data-role="participial"]     { background: rgba(163,230,53,0.13);  color: #bef264; }
+.ev-gram[data-role="normal"]          { background: transparent; color: inherit; }
+
+/* When filtering: dim unselected, keep selected bright */
+.ev-gram-filter-active .ev-gram { background: transparent !important; color: rgba(170,184,203,0.35) !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="subject"]         { background: rgba(56,189,248,0.22)  !important; color: #38bdf8 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="predicate"]       { background: rgba(74,222,128,0.2)   !important; color: #4ade80 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="object"]          { background: rgba(251,191,36,0.2)   !important; color: #fbbf24 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="complement"]      { background: rgba(167,139,250,0.22) !important; color: #a78bfa !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="relative-clause"] { background: rgba(251,146,60,0.2)   !important; color: #fb923c !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="adverbial-clause"]{ background: rgba(251,113,133,0.2)  !important; color: #fb7185 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="adverbial"]       { background: rgba(45,212,191,0.18)  !important; color: #2dd4bf !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="noun-clause"]     { background: rgba(192,132,252,0.2)  !important; color: #c084fc !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="appositive"]      { background: rgba(129,140,248,0.2)  !important; color: #818cf8 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="participial"]     { background: rgba(163,230,53,0.16)  !important; color: #a3e635 !important; }
+
+/* Grammar filter bar */
+.ev-gram-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 12px;
+    padding: 12px 0 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+}
+.ev-gram-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    color: rgba(170,184,203,0.6);
+    transition: all 0.15s ease;
+    outline: none;
+}
+.ev-gram-filter-btn:hover { border-color: rgba(255,255,255,0.18); color: #d8e4f2; }
+.ev-gram-filter-btn .ev-gram-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ev-gram-filter-btn.ev-gram-btn-active { border-color: rgba(255,255,255,0.22); color: #f0f4fa; background: rgba(255,255,255,0.09); }
+
+/* Sentence scroll area */
+.ev-sent-scroll {
+    max-height: 480px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56,189,248,0.25) transparent;
+    padding-right: 4px;
+}
+.ev-sent-scroll::-webkit-scrollbar { width: 4px; }
+.ev-sent-scroll::-webkit-scrollbar-track { background: transparent; }
+.ev-sent-scroll::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.25); border-radius: 4px; }
+.ev-sent-scroll::-webkit-scrollbar-thumb:hover { background: rgba(56,189,248,0.45); }
+</style>
+
+<section class="home-english-section{% if include.page_mode == 'true' %} english-page-mode{% endif %}">
+    <div class="section-header">
+        <h2 class="section-title">英文学习</h2>
+        <p class="section-subtitle">每日一句、计算机领域英文、AI+单词、AI+长句子翻译，每一次学习都让英文输入更轻盈一点。</p>
+    </div>
+
+    <article
+        class="english-card{% unless include.page_mode == 'true' %} english-click-card{% endunless %}"
+        id="daily-english-card"
+        {% unless include.page_mode == 'true' %}data-href="/english-visuals/" data-target="_self" tabindex="0" role="link" aria-label="打开英文学习页"{% endunless %}
+    >
+        <div class="english-card-glow english-card-glow-left"></div>
+        <div class="english-card-glow english-card-glow-right"></div>
+        <div class="english-media">
+            <div class="english-media-frame">
+                <img
+                    id="daily-english-image"
+                    class="english-image"
+                    src="https://staticedu-wps-cache.iciba.com/image/7ebb804f07ac10ff3f3c76d519520b75.png"
+                    alt="每日一句配图"
+                    loading="lazy"
+                >
+            </div>
+        </div>
+        <div class="english-content">
+            <div class="english-meta">
+                <span class="english-badge">每日一句</span>
+                <span class="english-date" id="daily-english-date">正在加载</span>
+            </div>
+            <p class="english-quote" id="daily-english-content">正在获取今日英文句子...</p>
+            <div class="english-divider"></div>
+            <div class="english-translation-block">
+                <span class="english-translation-label">中文翻译</span>
+                <p class="english-note" id="daily-english-note">稍候片刻，马上呈现。</p>
+            </div>
+            <div class="english-footer">
+                <span class="english-caption" id="daily-english-caption">词霸每日一句</span>
+                <span class="english-source">版权来源：<a href="https://www.iciba.com/" target="_blank" rel="noreferrer">金山词霸</a></span>
+            </div>
+        </div>
+    </article>
+
+    {% unless include.page_mode == 'true' %}<div class="english-mini-grid">{% else %}<div class="english-mini-grid english-mini-grid-single">{% endunless %}
+
+        <article
+            class="english-mini-card english-mini-card-tech{% unless include.page_mode == 'true' %} english-click-card{% else %} ev-expandable-card{% endunless %}"
+            {% unless include.page_mode == 'true' %}data-href="/english-visuals/#cs" data-target="_self" role="link" aria-label="查看计算机领域英文"{% else %}data-expand-key="cs" role="button" aria-expanded="false" aria-label="展开计算机领域英文列表"{% endunless %}
+            tabindex="0"
+        >
+            <div class="english-mini-meta">
+                <span class="english-mini-badge">计算机领域英文</span>
+                <span class="english-mini-tag">Core Term</span>
+            </div>
+            <h3 class="english-mini-title" id="mini-cs-title">Idempotency</h3>
+            <p class="english-mini-en" id="mini-cs-en">An idempotent operation produces the same result even if it is executed multiple times.</p>
+            <div class="english-mini-divider"></div>
+            <p class="english-mini-zh" id="mini-cs-zh">幂等性：一个操作即使被重复执行多次，最终结果仍保持一致。</p>
+            {% if include.page_mode == 'true' %}<div class="ev-inline-list" id="ev-inline-cs"></div>{% endif %}
+        </article>
+
+        <article
+            class="english-mini-card english-mini-card-ai-word{% unless include.page_mode == 'true' %} english-click-card{% else %} ev-expandable-card{% endunless %}"
+            {% unless include.page_mode == 'true' %}data-href="/english-visuals/#ai-word" data-target="_self" role="link" aria-label="查看AI+单词"{% else %}data-expand-key="aiWord" role="button" aria-expanded="false" aria-label="展开AI+单词列表"{% endunless %}
+            tabindex="0"
+        >
+            <div class="english-mini-meta">
+                <span class="english-mini-badge">AI+单词</span>
+                <span class="english-mini-tag">Vocabulary</span>
+            </div>
+            <h3 class="english-mini-title" id="mini-aiword-title">Alignment</h3>
+            <p class="english-mini-en" id="mini-aiword-en">Alignment describes making an AI system behave in ways that match human goals, values, and expectations.</p>
+            <div class="english-mini-divider"></div>
+            <p class="english-mini-zh" id="mini-aiword-zh">对齐：让 AI 系统的行为尽可能符合人类目标、价值和预期。</p>
+            {% if include.page_mode == 'true' %}<div class="ev-inline-list" id="ev-inline-aiword"></div>{% endif %}
+        </article>
+
+        <article
+            class="english-mini-card english-mini-card-ai-sentence{% unless include.page_mode == 'true' %} english-click-card{% else %} ev-expandable-card{% endunless %}"
+            {% unless include.page_mode == 'true' %}data-href="/english-visuals/#ai-sentence" data-target="_self" role="link" aria-label="查看AI+长句子翻译"{% else %}data-expand-key="aiSentence" role="button" aria-expanded="false" aria-label="展开AI+长句子翻译列表"{% endunless %}
+            tabindex="0"
+        >
+            <div class="english-mini-meta">
+                <span class="english-mini-badge">AI+长句子翻译</span>
+                <span class="english-mini-tag">Sentence</span>
+            </div>
+            <h3 class="english-mini-title" id="mini-aisent-title">Reliable AI products are systems, not just models.</h3>
+            <p class="english-mini-en" id="mini-aisent-en">A strong AI product is not just a smart model, but a reliable system that can retrieve context, use tools, and return answers in a form users can act on.</p>
+            <div class="english-mini-divider"></div>
+            <p class="english-mini-zh" id="mini-aisent-zh">一个优秀的 AI 产品不只是聪明的模型，更是一个可靠的系统：它能获取上下文、调用工具，并以用户可直接采取行动的形式返回答案。</p>
+            {% if include.page_mode == 'true' %}<div class="ev-inline-list" id="ev-inline-aisentence"></div>{% endif %}
+        </article>
+
+    </div>
+
+    {% unless include.show_enter_link == "false" %}
+    <div class="home-english-enter">
+        <a href="/english-visuals/" class="stat-enter-link">
+            <span class="stat-enter-text">进入英文学习</span>
+            <svg class="stat-enter-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+    {% endunless %}
+</section>
+
+<script>
+// Populate mini-cards from config
+(function () {
+    if (typeof EV_CONFIG === 'undefined') return;
+    var el;
+    var cs = EV_CONFIG.cs && EV_CONFIG.cs.items && EV_CONFIG.cs.items[0];
+    if (cs) {
+        el = document.getElementById('mini-cs-title'); if (el) el.textContent = cs.word;
+        el = document.getElementById('mini-cs-en');    if (el) el.textContent = cs.en;
+        el = document.getElementById('mini-cs-zh');    if (el) el.textContent = cs.zh;
+    }
+    var aw = EV_CONFIG.aiWord && EV_CONFIG.aiWord.items && EV_CONFIG.aiWord.items[0];
+    if (aw) {
+        el = document.getElementById('mini-aiword-title'); if (el) el.textContent = aw.word;
+        el = document.getElementById('mini-aiword-en');    if (el) el.textContent = aw.en;
+        el = document.getElementById('mini-aiword-zh');    if (el) el.textContent = aw.zh;
+    }
+    var as = EV_CONFIG.aiSentence && EV_CONFIG.aiSentence.items && EV_CONFIG.aiSentence.items[0];
+    if (as) {
+        el = document.getElementById('mini-aisent-title'); if (el) el.textContent = as.title || as.en.substring(0, 60) + '…';
+        el = document.getElementById('mini-aisent-en');    if (el) el.textContent = as.en;
+        el = document.getElementById('mini-aisent-zh');    if (el) el.textContent = as.zh;
+    }
+})();
+
+// Click-to-navigate handler for english-click-cards
+(function () {
+    document.querySelectorAll('.english-click-card[data-href]').forEach(function (card) {
+        function openCard(event) {
+            if (event.target.closest('a')) return;
+            var href = card.getAttribute('data-href');
+            var target = card.getAttribute('data-target') || '_self';
+            if (!href) return;
+            if (target === '_blank') {
+                window.open(href, '_blank', 'noopener,noreferrer');
+            } else {
+                window.location.href = href;
+            }
+        }
+        card.addEventListener('click', openCard);
+        card.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openCard(event);
+            }
+        });
+    });
+})();
+
+// Daily quote via JSONP (iciba)
+(function () {
+    var contentEl = document.getElementById('daily-english-content');
+    var noteEl    = document.getElementById('daily-english-note');
+    var dateEl    = document.getElementById('daily-english-date');
+    var captionEl = document.getElementById('daily-english-caption');
+    var imageEl   = document.getElementById('daily-english-image');
+    var storageKey   = 'wgrape-daily-english-cache-v1';
+    var callbackName = '__icibaDailySentence__';
+    var cache = null;
+
+    if (!contentEl || !noteEl || !dateEl || !captionEl || !imageEl) return;
+
+    function getTodayDate() {
+        var now = new Date();
+        var month = String(now.getMonth() + 1).padStart(2, '0');
+        var day   = String(now.getDate()).padStart(2, '0');
+        return now.getFullYear() + '-' + month + '-' + day;
+    }
+
+    function isValidSentence(data) {
+        return !!(data && typeof data.content === 'string' && data.content && typeof data.note === 'string' && data.note);
+    }
+
+    function setFallback() {
+        contentEl.textContent = 'Every day is a fresh page. Keep learning, and keep turning it.';
+        noteEl.textContent    = '每一天都是崭新的一页。保持学习，也保持翻页。';
+        dateEl.textContent    = 'Daily English';
+        captionEl.textContent = '词霸每日一句';
+    }
+
+    function applySentence(data) {
+        if (!isValidSentence(data)) { setFallback(); return; }
+        contentEl.textContent = data.content;
+        noteEl.textContent    = data.note;
+        dateEl.textContent    = data.dateline || 'Daily English';
+        captionEl.textContent = data.caption  || '词霸每日一句';
+        var imageUrl = data.picture2 || data.picture || data.picture3 || data.fenxiang_img;
+        if (imageUrl) { imageEl.src = imageUrl; imageEl.alt = data.content; }
+    }
+
+    try { cache = JSON.parse(window.localStorage.getItem(storageKey) || 'null'); } catch (e) { cache = null; }
+
+    if (isValidSentence(cache) && cache.dateline === getTodayDate()) {
+        applySentence(cache);
+        return;
+    }
+
+    var script = document.createElement('script');
+    window[callbackName] = function (data) {
+        if (isValidSentence(data)) {
+            cache = {
+                content: data.content, note: data.note,
+                dateline: data.dateline || getTodayDate(),
+                caption: data.caption || '词霸每日一句',
+                picture: data.picture || '', picture2: data.picture2 || '',
+                picture3: data.picture3 || '', fenxiang_img: data.fenxiang_img || ''
+            };
+            try { window.localStorage.setItem(storageKey, JSON.stringify(cache)); } catch (e) {}
+            applySentence(cache);
+            return;
+        }
+        if (isValidSentence(cache)) { applySentence(cache); } else { setFallback(); }
+    };
+    script.src   = 'https://open.iciba.com/dsapi/?callback=' + callbackName;
+    script.async = true;
+    script.onerror = function () {
+        if (isValidSentence(cache)) { applySentence(cache); } else { setFallback(); }
+    };
+    document.body.appendChild(script);
+})();
+</script>
+
+{% if include.page_mode == 'true' %}
+<script>
+// ── Expandable inline lists for english-visuals sub-page ──────────────
+(function () {
+    if (typeof EV_CONFIG === 'undefined') return;
+
+    var spk = EV_CONFIG.speak || {};
+
+    function evSpeak(text) {
+        if (!window.speechSynthesis) return;
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang  = spk.lang  || 'en-US';
+        u.rate  = spk.rate  || 0.85;
+        u.pitch = spk.pitch || 1.0;
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(u);
+    }
+
+    var speakerIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+    var chevronIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+
+    function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function speakBtn(text, label) {
+        return '<button class="ev-speak-btn" data-speak-text="' + esc(text) + '">' + speakerIcon + ' ' + label + '</button>';
+    }
+
+    function renderWordItems(items, listId) {
+        // Group by first letter
+        var groups = {};
+        var order  = [];
+        items.forEach(function (item) {
+            var letter = (item.word || '').charAt(0).toUpperCase();
+            if (!groups[letter]) { groups[letter] = []; order.push(letter); }
+            groups[letter].push(item);
+        });
+        order.sort();
+
+        // Search input
+        var searchHtml = '<input class="ev-az-search" type="text" placeholder="搜索单词…" data-az-search="' + listId + '" autocomplete="off">';
+
+        // A-Z tab bar
+        var barHtml = '<div class="ev-az-bar" data-az-list="' + listId + '">';
+        order.forEach(function (letter, i) {
+            barHtml += '<button class="ev-az-btn' + (i === 0 ? ' ev-az-active' : '') + '" data-az-letter="' + letter + '">' + letter + '</button>';
+        });
+        barHtml += '</div>';
+
+        // Groups
+        var groupsHtml = '<div class="ev-az-scroll" id="ev-az-scroll-' + listId + '">';
+        order.forEach(function (letter, i) {
+            groupsHtml += '<div class="ev-az-group' + (i === 0 ? ' ev-az-visible' : '') + '" data-az-group="' + letter + '">';
+            groups[letter].forEach(function (item) {
+                groupsHtml += '<div class="ev-inline-item">' +
+                    '<div class="ev-inline-top">' +
+                        '<h4 class="ev-inline-word">' + esc(item.word) + '</h4>' +
+                        (item.phonetic ? '<span class="ev-inline-phonetic">' + esc(item.phonetic) + '</span>' : '') +
+                        (item.tag ? '<span class="ev-inline-tag">' + esc(item.tag) + '</span>' : '') +
+                    '</div>' +
+                    '<p class="ev-inline-en">' + esc(item.en) + '</p>' +
+                    '<p class="ev-inline-zh">' + esc(item.zh) + '</p>' +
+                    '<div class="ev-inline-footer">' +
+                        speakBtn(item.word, '朗读单词') +
+                        speakBtn(item.en, '朗读例句') +
+                    '</div>' +
+                '</div>';
+            });
+            groupsHtml += '</div>';
+        });
+        groupsHtml += '</div>';
+
+        return '<div class="ev-az-wrapper">' + searchHtml + barHtml + groupsHtml + '</div>';
+    }
+
+    var GRAM_META = {
+        'subject':          { zh: '主语',     dot: '#38bdf8' },
+        'predicate':        { zh: '谓语',     dot: '#4ade80' },
+        'object':           { zh: '宾语',     dot: '#fbbf24' },
+        'complement':       { zh: '表语',     dot: '#a78bfa' },
+        'relative-clause':  { zh: '定语从句', dot: '#fb923c' },
+        'adverbial-clause': { zh: '状语从句', dot: '#fb7185' },
+        'adverbial':        { zh: '状语',     dot: '#2dd4bf' },
+        'noun-clause':      { zh: '名词性从句',dot: '#c084fc' },
+        'appositive':       { zh: '同位语',   dot: '#818cf8' },
+        'participial':      { zh: '分词短语', dot: '#a3e635' },
+    };
+
+    function renderHighlightedEn(parts) {
+        if (!parts || !parts.length) return '';
+        return parts.map(function (p) {
+            if (!p.role || p.role === 'normal') return esc(p.text);
+            return '<span class="ev-gram" data-role="' + p.role + '">' + esc(p.text) + '</span>';
+        }).join('');
+    }
+
+    function renderSentenceItems(items) {
+        // Collect all roles present across all items
+        var rolesPresent = {};
+        items.forEach(function (item) {
+            (item.parts || []).forEach(function (p) {
+                if (p.role && p.role !== 'normal') rolesPresent[p.role] = true;
+            });
+        });
+
+        // Build grammar filter bar
+        var barHtml = '<div class="ev-gram-bar" id="ev-gram-bar-sent">';
+        barHtml += '<button class="ev-gram-filter-btn ev-gram-btn-active" data-gram-role="all">全部</button>';
+        Object.keys(GRAM_META).forEach(function (role) {
+            if (!rolesPresent[role]) return;
+            var meta = GRAM_META[role];
+            barHtml += '<button class="ev-gram-filter-btn" data-gram-role="' + role + '">' +
+                '<span class="ev-gram-dot" style="background:' + meta.dot + '"></span>' + meta.zh +
+            '</button>';
+        });
+        barHtml += '</div>';
+
+        // Build sentence list
+        var listHtml = '<div class="ev-sent-scroll" id="ev-sent-scroll">';
+        items.forEach(function (item) {
+            var roles = (item.parts || []).map(function (p) { return p.role; }).filter(function (r) { return r && r !== 'normal'; });
+            var uniqueRoles = roles.filter(function (r, i) { return roles.indexOf(r) === i; });
+            var enHtml = item.parts ? renderHighlightedEn(item.parts) : esc(item.en);
+
+            listHtml += '<div class="ev-inline-item" data-roles="' + uniqueRoles.join(',') + '">' +
+                '<div class="ev-inline-top">' +
+                    '<h4 class="ev-inline-word">' + esc(item.title) + '</h4>' +
+                    (item.source ? '<span class="ev-inline-tag">' + esc(item.source) + '</span>' : '') +
+                '</div>' +
+                '<p class="ev-inline-en ev-gram-en">' + enHtml + '</p>' +
+                '<p class="ev-inline-zh">' + esc(item.zh) + '</p>' +
+                '<div class="ev-inline-footer">' +
+                    speakBtn(item.en, '朗读英文') +
+                '</div>' +
+            '</div>';
+        });
+        listHtml += '</div>';
+
+        return '<div class="ev-az-wrapper" id="ev-sent-wrapper">' + barHtml + listHtml + '</div>';
+    }
+
+    var configMap = {
+        cs:          { items: EV_CONFIG.cs         && EV_CONFIG.cs.items,         isSentence: false, listId: 'ev-inline-cs' },
+        aiWord:      { items: EV_CONFIG.aiWord     && EV_CONFIG.aiWord.items,     isSentence: false, listId: 'ev-inline-aiword' },
+        aiSentence:  { items: EV_CONFIG.aiSentence && EV_CONFIG.aiSentence.items, isSentence: true,  listId: 'ev-inline-aisentence' },
+    };
+
+    // Inject toggle footer & render hidden list into each expandable card
+    document.querySelectorAll('.ev-expandable-card[data-expand-key]').forEach(function (card) {
+        var key     = card.getAttribute('data-expand-key');
+        var config  = configMap[key];
+        if (!config || !config.items || !config.items.length) return;
+
+        // Inject toggle bar
+        var toggle = document.createElement('div');
+        toggle.className = 'ev-card-toggle';
+        toggle.innerHTML = '<span class="ev-card-toggle-label"></span>' + chevronIcon;
+        card.appendChild(toggle);
+
+        // Render list
+        var listEl = document.getElementById(config.listId);
+        if (listEl) {
+            listEl.innerHTML = config.isSentence
+                ? renderSentenceItems(config.items)
+                : renderWordItems(config.items, config.listId);
+        }
+
+        // Click handler — ignore interactive child elements
+        function handleToggle(e) {
+            if (e.target.closest('.ev-speak-btn'))      return;
+            if (e.target.closest('.ev-az-btn'))         return;
+            if (e.target.closest('.ev-az-search'))      return;
+            if (e.target.closest('.ev-gram-filter-btn')) return;
+            var expanded = card.getAttribute('aria-expanded') === 'true';
+            card.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        }
+        card.addEventListener('click', handleToggle);
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle(e); }
+        });
+    });
+
+    // Speak button delegation
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.ev-speak-btn');
+        if (!btn) return;
+        e.stopPropagation();
+        var text = btn.getAttribute('data-speak-text');
+        if (text) evSpeak(text);
+    });
+
+    // A-Z tab delegation
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.ev-az-btn');
+        if (!btn) return;
+        e.stopPropagation();
+        var letter  = btn.getAttribute('data-az-letter');
+        var listId  = btn.closest('.ev-az-bar').getAttribute('data-az-list');
+        var listEl  = document.getElementById(listId);
+        if (!listEl) return;
+
+        // Clear search input if any
+        var searchEl = listEl.querySelector('.ev-az-search');
+        if (searchEl) searchEl.value = '';
+
+        // Update active tab
+        btn.closest('.ev-az-bar').querySelectorAll('.ev-az-btn').forEach(function (b) {
+            b.classList.toggle('ev-az-active', b === btn);
+        });
+
+        // Show matching group, hide others; restore all items in group
+        listEl.querySelectorAll('.ev-az-group').forEach(function (g) {
+            var show = g.getAttribute('data-az-group') === letter;
+            g.classList.toggle('ev-az-visible', show);
+            if (show) {
+                g.querySelectorAll('.ev-inline-item').forEach(function (it) { it.style.display = ''; });
+            }
+        });
+
+        // Scroll to top
+        var scrollEl = listEl.querySelector('.ev-az-scroll');
+        if (scrollEl) scrollEl.scrollTop = 0;
+    });
+
+    // Search delegation
+    document.addEventListener('input', function (e) {
+        var input = e.target.closest('.ev-az-search');
+        if (!input) return;
+        e.stopPropagation();
+        var listId  = input.getAttribute('data-az-search');
+        var listEl  = document.getElementById(listId);
+        if (!listEl) return;
+        var q = input.value.trim().toLowerCase();
+
+        if (!q) {
+            // Restore: show only the active letter group
+            var activeLetter = null;
+            var activeBtn = listEl.closest('.ev-expandable-card').querySelector('.ev-az-btn.ev-az-active');
+            if (activeBtn) activeLetter = activeBtn.getAttribute('data-az-letter');
+            listEl.querySelectorAll('.ev-az-group').forEach(function (g) {
+                var show = !activeLetter || g.getAttribute('data-az-group') === activeLetter;
+                g.classList.toggle('ev-az-visible', show);
+                g.querySelectorAll('.ev-inline-item').forEach(function (it) { it.style.display = ''; });
+            });
+            return;
+        }
+
+        // Show all groups, filter by search
+        listEl.querySelectorAll('.ev-az-group').forEach(function (g) {
+            g.classList.add('ev-az-visible');
+            var anyVisible = false;
+            g.querySelectorAll('.ev-inline-item').forEach(function (it) {
+                var word  = (it.querySelector('.ev-inline-word')  || {}).textContent || '';
+                var en    = (it.querySelector('.ev-inline-en')    || {}).textContent || '';
+                var zh    = (it.querySelector('.ev-inline-zh')    || {}).textContent || '';
+                var match = (word + ' ' + en + ' ' + zh).toLowerCase().indexOf(q) !== -1;
+                it.style.display = match ? '' : 'none';
+                if (match) anyVisible = true;
+            });
+            g.classList.toggle('ev-az-visible', anyVisible);
+        });
+    });
+
+    // Grammar filter button delegation
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.ev-gram-filter-btn');
+        if (!btn) return;
+        e.stopPropagation();
+        var role    = btn.getAttribute('data-gram-role');
+        var bar     = btn.closest('.ev-gram-bar');
+        var wrapper = btn.closest('.ev-az-wrapper');
+        var scroll  = wrapper && wrapper.querySelector('.ev-sent-scroll');
+        if (!bar || !scroll) return;
+
+        // Update active button
+        bar.querySelectorAll('.ev-gram-filter-btn').forEach(function (b) {
+            b.classList.toggle('ev-gram-btn-active', b === btn);
+        });
+
+        if (role === 'all') {
+            scroll.classList.remove('ev-gram-filter-active');
+            scroll.querySelectorAll('.ev-gram').forEach(function (s) { s.classList.remove('ev-gram-sel'); });
+            scroll.querySelectorAll('.ev-inline-item').forEach(function (it) { it.style.display = ''; });
+        } else {
+            scroll.classList.add('ev-gram-filter-active');
+            scroll.querySelectorAll('.ev-gram').forEach(function (s) {
+                s.classList.toggle('ev-gram-sel', s.getAttribute('data-role') === role);
+            });
+            scroll.querySelectorAll('.ev-inline-item').forEach(function (it) {
+                var roles = (it.getAttribute('data-roles') || '').split(',');
+                it.style.display = roles.indexOf(role) !== -1 ? '' : 'none';
+            });
+        }
+
+        scroll.scrollTop = 0;
+    });
+})();
+</script>
+{% endif %}
