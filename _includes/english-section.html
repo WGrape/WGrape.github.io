@@ -723,6 +723,21 @@
 .ev-gram[data-role="appositive"]      { background: rgba(129,140,248,0.16); color: #a5b4fc; }
 .ev-gram[data-role="participial"]     { background: rgba(163,230,53,0.13);  color: #bef264; }
 .ev-gram[data-role="normal"]          { background: transparent; color: inherit; }
+/* word-level roles */
+.ev-gram[data-role="verb"]            { background: rgba(52,211,153,0.16);  color: #6ee7b7; }
+.ev-gram[data-role="noun"]            { background: rgba(252,211,77,0.16);  color: #fde68a; }
+.ev-gram[data-role="adjective"]       { background: rgba(244,114,182,0.16); color: #f9a8d4; }
+.ev-gram[data-role="adverb"]          { background: rgba(45,212,191,0.14);  color: #5eead4; }
+.ev-gram[data-role="article"]         { background: rgba(148,163,184,0.14); color: #cbd5e1; }
+.ev-gram[data-role="preposition"]     { background: rgba(251,146,60,0.16);  color: #fdba74; }
+.ev-gram[data-role="conjunction"]     { background: rgba(192,132,252,0.16); color: #d8b4fe; }
+.ev-gram[data-role="auxiliary"]       { background: rgba(110,231,183,0.16); color: #6ee7b7; }
+.ev-gram[data-role="pronoun"]         { background: rgba(96,165,250,0.16);  color: #93c5fd; }
+.ev-gram[data-role="determiner"]      { background: rgba(156,163,175,0.16); color: #d1d5db; }
+.ev-gram[data-role="infinitive"]      { background: rgba(253,211,77,0.14);  color: #fde68a; }
+.ev-gram[data-role="gerund"]          { background: rgba(163,230,53,0.14);  color: #bef264; }
+.ev-gram[data-role="participle"]      { background: rgba(134,239,172,0.14); color: #86efac; }
+.ev-gram[data-role="interjection"]    { background: rgba(248,113,113,0.16); color: #fca5a5; }
 
 /* When filtering: dim unselected, keep selected bright */
 .ev-gram-filter-active .ev-gram { background: transparent !important; color: rgba(170,184,203,0.35) !important; }
@@ -736,6 +751,71 @@
 .ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="noun-clause"]     { background: rgba(192,132,252,0.2)  !important; color: #c084fc !important; }
 .ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="appositive"]      { background: rgba(129,140,248,0.2)  !important; color: #818cf8 !important; }
 .ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="participial"]     { background: rgba(163,230,53,0.16)  !important; color: #a3e635 !important; }
+/* word-level filter-active */
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="verb"]            { background: rgba(52,211,153,0.2)   !important; color: #34d399 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="noun"]            { background: rgba(252,211,77,0.2)   !important; color: #fcd34d !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="adjective"]       { background: rgba(244,114,182,0.2)  !important; color: #f472b6 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="adverb"]          { background: rgba(45,212,191,0.18)  !important; color: #2dd4bf !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="article"]         { background: rgba(148,163,184,0.18) !important; color: #94a3b8 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="preposition"]     { background: rgba(251,146,60,0.2)   !important; color: #fb923c !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="conjunction"]     { background: rgba(192,132,252,0.2)  !important; color: #c084fc !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="auxiliary"]       { background: rgba(110,231,183,0.2)  !important; color: #6ee7b7 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="pronoun"]         { background: rgba(96,165,250,0.2)   !important; color: #60a5fa !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="determiner"]      { background: rgba(156,163,175,0.2)  !important; color: #9ca3af !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="infinitive"]      { background: rgba(253,211,77,0.18)  !important; color: #fcd34d !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="gerund"]          { background: rgba(163,230,53,0.18)  !important; color: #a3e635 !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="participle"]      { background: rgba(134,239,172,0.18) !important; color: #86efac !important; }
+.ev-gram-filter-active .ev-gram.ev-gram-sel[data-role="interjection"]    { background: rgba(248,113,113,0.2)  !important; color: #f87171 !important; }
+
+/* Grammar tooltip — rendered at body level via JS to escape overflow clipping */
+.ev-gram { cursor: default; }
+#ev-gram-tooltip {
+    position: fixed;
+    display: none;
+    background: #0f172a;
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 8px;
+    padding: 7px 11px;
+    min-width: 140px;
+    max-width: 210px;
+    z-index: 9999;
+    pointer-events: none;
+    white-space: normal;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    line-height: 1.4;
+}
+#ev-gram-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(255,255,255,0.13);
+}
+#ev-gram-tooltip::before {
+    content: '';
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #0f172a;
+    z-index: 1;
+}
+.ev-gram-tip-role {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    display: block;
+    margin-bottom: 3px;
+}
+.ev-gram-tip-desc {
+    font-size: 11px;
+    color: rgba(200,215,230,0.75);
+    display: block;
+}
 
 /* Grammar filter bar */
 .ev-gram-bar {
@@ -921,18 +1001,29 @@
 <script>
 // ── Global speak helper (used on all pages) ───────────────
 (function () {
+    // Preload voices so they are available on first click
+    if (window.speechSynthesis) window.speechSynthesis.getVoices();
+
     function evSpeakGlobal(text) {
         if (!window.speechSynthesis) return;
         var spk = (typeof EV_CONFIG !== 'undefined' && EV_CONFIG.speak) || {};
+        var lang = spk.lang || 'en-US';
         var u = new SpeechSynthesisUtterance(text);
-        u.lang  = spk.lang  || 'en-US';
+        u.lang  = lang;
         u.rate  = spk.rate  || 0.85;
         u.pitch = spk.pitch || 1.0;
-        // Resume if paused (Chrome bug), then cancel & speak synchronously
-        // Must stay synchronous inside the click handler (browser gesture requirement)
+        // Pick an explicit English voice to avoid silent fallback failures
+        var voices = window.speechSynthesis.getVoices();
+        if (voices.length) {
+            var voice = voices.find(function (v) { return v.lang === lang; }) ||
+                        voices.find(function (v) { return v.lang.startsWith('en'); });
+            if (voice) u.voice = voice;
+        }
         if (window.speechSynthesis.paused) window.speechSynthesis.resume();
         window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(u);
+        // Chrome silently drops speak() called right after cancel(); a short
+        // setTimeout lets the cancellation complete before the new utterance starts.
+        setTimeout(function () { window.speechSynthesis.speak(u); }, 50);
     }
     window._evSpeakGlobal = evSpeakGlobal;
 
@@ -1096,13 +1187,20 @@
 
     function evSpeak(text) {
         if (!window.speechSynthesis) return;
+        var lang = spk.lang || 'en-US';
         var u = new SpeechSynthesisUtterance(text);
-        u.lang  = spk.lang  || 'en-US';
+        u.lang  = lang;
         u.rate  = spk.rate  || 0.85;
         u.pitch = spk.pitch || 1.0;
+        var voices = window.speechSynthesis.getVoices();
+        if (voices.length) {
+            var voice = voices.find(function (v) { return v.lang === lang; }) ||
+                        voices.find(function (v) { return v.lang.startsWith('en'); });
+            if (voice) u.voice = voice;
+        }
         if (window.speechSynthesis.paused) window.speechSynthesis.resume();
         window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(u);
+        setTimeout(function () { window.speechSynthesis.speak(u); }, 50);
     }
 
     var speakerIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
@@ -1190,11 +1288,46 @@
         'participial':      { zh: '分词短语',   dot: '#a3e635' },
     };
 
+    var GRAM_DESC = {
+        'subject':          '句子中执行动作或被描述的主体',
+        'predicate':        '描述主语动作或状态的部分',
+        'verb':             '表示动作、状态或变化的词',
+        'object':           '动作所指向的人或事物',
+        'complement':       '补充说明主语或宾语特征的成分',
+        'noun':             '表示人、地点、事物或概念的词',
+        'adjective':        '修饰名词，描述其性质或特征',
+        'adverb':           '修饰动词或形容词，表示方式、程度等',
+        'article':          '限定名词，表特指或泛指（the / a / an）',
+        'preposition':      '表示名词与其他词的关系（in / on / from…）',
+        'conjunction':      '连接词、短语或从句（and / but / because…）',
+        'auxiliary':        '协助动词构成时态或语气（can / must / will…）',
+        'pronoun':          '代替名词的词（he / she / it / they…）',
+        'determiner':       '置于名词前限定范围（every / some / this…）',
+        'infinitive':       '动词原形，常与 to 连用，表目的或动作',
+        'gerund':           '动词 + -ing，用作名词（Collecting data…）',
+        'participle':       '动词分词形式，用作形容词或构成时态',
+        'interjection':     '表达情感的感叹词（Wow / Oh / Hey…）',
+        'relative-clause':  '由关系代词引导，修饰先行名词的从句',
+        'adverbial-clause': '表示时间、原因、条件等的状语从句',
+        'adverbial':        '修饰谓语，表示时间、地点、方式等',
+        'noun-clause':      '充当主语、宾语或表语的名词性从句',
+        'appositive':       '紧跟名词后，对其补充解释的同位语',
+        'participial':      '由分词构成的短语，修饰主句主语',
+    };
+
     function renderHighlightedEn(parts) {
         if (!parts || !parts.length) return '';
         return parts.map(function (p) {
             if (!p.role || p.role === 'normal') return esc(p.text);
-            return '<span class="ev-gram" data-role="' + p.role + '">' + esc(p.text) + '</span>';
+            var meta = GRAM_META[p.role];
+            var tipRole = meta ? meta.zh : p.role;
+            var tipColor = meta ? meta.dot : '#aaa';
+            var tipDesc = GRAM_DESC[p.role] || '';
+            return '<span class="ev-gram" data-role="' + p.role + '"' +
+                ' data-tip-role="' + esc(tipRole) + '"' +
+                ' data-tip-color="' + esc(tipColor) + '"' +
+                ' data-tip-desc="' + esc(tipDesc) + '">' +
+                esc(p.text) + '</span>';
         }).join('');
     }
 
@@ -1430,6 +1563,51 @@
         });
         scroll.scrollTop = 0;
     });
+
+    // ── Grammar tooltip singleton (fixed position, escapes overflow clipping) ──
+    (function () {
+        var tip = document.createElement('div');
+        tip.id = 'ev-gram-tooltip';
+        tip.innerHTML = '<span class="ev-gram-tip-role" id="ev-gtip-role"></span>' +
+                        '<span class="ev-gram-tip-desc" id="ev-gtip-desc"></span>';
+        document.body.appendChild(tip);
+
+        var hideTimer;
+        function showTip(el) {
+            clearTimeout(hideTimer);
+            var role  = el.getAttribute('data-tip-role') || '';
+            var color = el.getAttribute('data-tip-color') || '#aaa';
+            var desc  = el.getAttribute('data-tip-desc') || '';
+            if (!role) return;
+            document.getElementById('ev-gtip-role').textContent = role;
+            document.getElementById('ev-gtip-role').style.color = color;
+            document.getElementById('ev-gtip-desc').textContent = desc;
+
+            tip.style.display = 'block';
+            var rect = el.getBoundingClientRect();
+            var tipW = tip.offsetWidth;
+            var tipH = tip.offsetHeight;
+            // Center horizontally over word, keep within viewport
+            var left = rect.left + rect.width / 2 - tipW / 2;
+            left = Math.max(6, Math.min(left, window.innerWidth - tipW - 6));
+            var top = rect.top - tipH - 10;
+            if (top < 6) top = rect.bottom + 10; // flip below if not enough space above
+            tip.style.left = left + 'px';
+            tip.style.top  = top  + 'px';
+        }
+        function hideTip() {
+            hideTimer = setTimeout(function () { tip.style.display = 'none'; }, 80);
+        }
+
+        document.addEventListener('mouseover', function (e) {
+            var el = e.target.closest('.ev-gram[data-tip-role]');
+            if (el) showTip(el);
+        });
+        document.addEventListener('mouseout', function (e) {
+            if (e.target.closest('.ev-gram[data-tip-role]')) hideTip();
+        });
+        document.addEventListener('scroll', function () { tip.style.display = 'none'; }, true);
+    })();
 })();
 </script>
 {% endif %}
