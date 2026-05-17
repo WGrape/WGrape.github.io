@@ -416,6 +416,59 @@
     margin: 12px 0 10px;
 }
 
+/* ── Speak row in mini-cards ── */
+.english-mini-speak-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: flex-start;
+}
+
+/* ── Speak icon styles (unused layout classes cleaned) ── */
+
+/* ── Total stat badge ── */
+.ev-total-stat {
+    font-size: 11px;
+    color: rgba(170, 184, 203, 0.65);
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+}
+
+/* ── Word-count filter bar ── */
+.ev-wc-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 6px 0 8px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ev-wc-btn {
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    color: rgba(170,184,203,0.8);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: "Space Grotesk", sans-serif;
+    line-height: 1.6;
+}
+.ev-wc-btn:hover { border-color: rgba(56,189,248,0.3); color: #38bdf8; }
+.ev-wc-btn.ev-wc-active {
+    background: rgba(56,189,248,0.15);
+    border-color: rgba(56,189,248,0.4);
+    color: #38bdf8;
+}
+
 @media (max-width: 768px) {
     .home-english-section .section-title { font-size: 32px; }
     .english-card {
@@ -764,6 +817,10 @@
                 <p class="english-note" id="daily-english-note">稍候片刻，马上呈现。</p>
             </div>
             <div class="english-footer">
+                <button class="ev-speak-btn" id="daily-english-speak" data-speak-text="" style="display:none">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    朗读
+                </button>
                 <span class="english-caption" id="daily-english-caption">词霸每日一句</span>
                 <span class="english-source">版权来源：<a href="https://www.iciba.com/" target="_blank" rel="noreferrer">金山词霸</a></span>
             </div>
@@ -785,6 +842,16 @@
             <p class="english-mini-en" id="mini-cs-en">An idempotent operation produces the same result even if it is executed multiple times.</p>
             <div class="english-mini-divider"></div>
             <p class="english-mini-zh" id="mini-cs-zh">幂等性：一个操作即使被重复执行多次，最终结果仍保持一致。</p>
+            <div class="english-mini-speak-row">
+                <button class="ev-speak-btn" id="mini-cs-speak-word" data-speak-text="Idempotency">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    朗读单词
+                </button>
+                <button class="ev-speak-btn" id="mini-cs-speak-en" data-speak-text="An idempotent operation produces the same result even if it is executed multiple times.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    朗读例句
+                </button>
+            </div>
             {% if include.page_mode == 'true' %}<div class="ev-inline-list" id="ev-inline-cs"></div>{% endif %}
         </article>
 
@@ -801,6 +868,16 @@
             <p class="english-mini-en" id="mini-aiword-en">Alignment describes making an AI system behave in ways that match human goals, values, and expectations.</p>
             <div class="english-mini-divider"></div>
             <p class="english-mini-zh" id="mini-aiword-zh">对齐：让 AI 系统的行为尽可能符合人类目标、价值和预期。</p>
+            <div class="english-mini-speak-row">
+                <button class="ev-speak-btn" id="mini-aiword-speak-word" data-speak-text="Alignment">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    朗读单词
+                </button>
+                <button class="ev-speak-btn" id="mini-aiword-speak-en" data-speak-text="Alignment describes making an AI system behave in ways that match human goals, values, and expectations.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    朗读例句
+                </button>
+            </div>
             {% if include.page_mode == 'true' %}<div class="ev-inline-list" id="ev-inline-aiword"></div>{% endif %}
         </article>
 
@@ -817,6 +894,12 @@
             <p class="english-mini-en" id="mini-aisent-en">A strong AI product is not just a smart model, but a reliable system that can retrieve context, use tools, and return answers in a form users can act on.</p>
             <div class="english-mini-divider"></div>
             <p class="english-mini-zh" id="mini-aisent-zh">一个优秀的 AI 产品不只是聪明的模型，更是一个可靠的系统：它能获取上下文、调用工具，并以用户可直接采取行动的形式返回答案。</p>
+            <div class="english-mini-speak-row">
+                <button class="ev-speak-btn" id="mini-aisent-speak-en" data-speak-text="A strong AI product is not just a smart model, but a reliable system that can retrieve context, use tools, and return answers in a form users can act on.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    朗读句子
+                </button>
+            </div>
             {% if include.page_mode == 'true' %}<div class="ev-inline-list" id="ev-inline-aisentence"></div>{% endif %}
         </article>
 
@@ -836,6 +919,35 @@
 </section>
 
 <script>
+// ── Global speak helper (used on all pages) ───────────────
+(function () {
+    function evSpeakGlobal(text) {
+        if (!window.speechSynthesis) return;
+        var spk = (typeof EV_CONFIG !== 'undefined' && EV_CONFIG.speak) || {};
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang  = spk.lang  || 'en-US';
+        u.rate  = spk.rate  || 0.85;
+        u.pitch = spk.pitch || 1.0;
+        // Resume if paused (Chrome bug), then cancel & speak synchronously
+        // Must stay synchronous inside the click handler (browser gesture requirement)
+        if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(u);
+    }
+    window._evSpeakGlobal = evSpeakGlobal;
+
+    // Click delegation for all .ev-speak-btn — use capture phase to run before
+    // any child stopPropagation can interfere
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.ev-speak-btn');
+        if (!btn) return;
+        e.stopPropagation();
+        e.preventDefault();
+        var text = btn.getAttribute('data-speak-text');
+        if (text) evSpeakGlobal(text);
+    }, true);
+})();
+
 // Populate mini-cards from config
 (function () {
     if (typeof EV_CONFIG === 'undefined') return;
@@ -845,18 +957,23 @@
         el = document.getElementById('mini-cs-title'); if (el) el.textContent = cs.word;
         el = document.getElementById('mini-cs-en');    if (el) el.textContent = cs.en;
         el = document.getElementById('mini-cs-zh');    if (el) el.textContent = cs.zh;
+        el = document.getElementById('mini-cs-speak-word'); if (el) el.setAttribute('data-speak-text', cs.word);
+        el = document.getElementById('mini-cs-speak-en');   if (el) el.setAttribute('data-speak-text', cs.en);
     }
     var aw = EV_CONFIG.aiWord && EV_CONFIG.aiWord.items && EV_CONFIG.aiWord.items[0];
     if (aw) {
         el = document.getElementById('mini-aiword-title'); if (el) el.textContent = aw.word;
         el = document.getElementById('mini-aiword-en');    if (el) el.textContent = aw.en;
         el = document.getElementById('mini-aiword-zh');    if (el) el.textContent = aw.zh;
+        el = document.getElementById('mini-aiword-speak-word'); if (el) el.setAttribute('data-speak-text', aw.word);
+        el = document.getElementById('mini-aiword-speak-en');   if (el) el.setAttribute('data-speak-text', aw.en);
     }
     var as = EV_CONFIG.aiSentence && EV_CONFIG.aiSentence.items && EV_CONFIG.aiSentence.items[0];
     if (as) {
         el = document.getElementById('mini-aisent-title'); if (el) el.textContent = as.title || as.en.substring(0, 60) + '…';
         el = document.getElementById('mini-aisent-en');    if (el) el.textContent = as.en;
         el = document.getElementById('mini-aisent-zh');    if (el) el.textContent = as.zh;
+        el = document.getElementById('mini-aisent-speak-en'); if (el) el.setAttribute('data-speak-text', as.en);
     }
 })();
 
@@ -865,6 +982,7 @@
     document.querySelectorAll('.english-click-card[data-href]').forEach(function (card) {
         function openCard(event) {
             if (event.target.closest('a')) return;
+            if (event.target.closest('.ev-speak-btn')) return;
             var href = card.getAttribute('data-href');
             var target = card.getAttribute('data-target') || '_self';
             if (!href) return;
@@ -914,6 +1032,11 @@
         noteEl.textContent    = fb.zh || '每一天都是崭新的一页。保持学习，也保持翻页。';
         dateEl.textContent    = 'Daily English';
         captionEl.textContent = '词霸每日一句';
+        var speakBtn = document.getElementById('daily-english-speak');
+        if (speakBtn) {
+            speakBtn.setAttribute('data-speak-text', contentEl.textContent);
+            speakBtn.style.display = '';
+        }
     }
 
     function applySentence(data) {
@@ -924,6 +1047,11 @@
         captionEl.textContent = data.caption  || '词霸每日一句';
         var imageUrl = data.picture2 || data.picture || data.picture3 || data.fenxiang_img;
         if (imageUrl) { imageEl.src = imageUrl; imageEl.alt = data.content; }
+        var speakBtn = document.getElementById('daily-english-speak');
+        if (speakBtn) {
+            speakBtn.setAttribute('data-speak-text', data.content);
+            speakBtn.style.display = '';
+        }
     }
 
     try { cache = JSON.parse(window.localStorage.getItem(storageKey) || 'null'); } catch (e) { cache = null; }
@@ -972,6 +1100,7 @@
         u.lang  = spk.lang  || 'en-US';
         u.rate  = spk.rate  || 0.85;
         u.pitch = spk.pitch || 1.0;
+        if (window.speechSynthesis.paused) window.speechSynthesis.resume();
         window.speechSynthesis.cancel();
         window.speechSynthesis.speak(u);
     }
@@ -1031,20 +1160,34 @@
         });
         groupsHtml += '</div>';
 
-        return '<div class="ev-az-wrapper">' + searchHtml + barHtml + groupsHtml + '</div>';
+        return '<div class="ev-az-wrapper"><div class="ev-total-stat">共 ' + items.length + ' 个单词</div>' + searchHtml + barHtml + groupsHtml + '</div>';
     }
 
     var GRAM_META = {
-        'subject':          { zh: '主语',     dot: '#38bdf8' },
-        'predicate':        { zh: '谓语',     dot: '#4ade80' },
-        'object':           { zh: '宾语',     dot: '#fbbf24' },
-        'complement':       { zh: '表语',     dot: '#a78bfa' },
-        'relative-clause':  { zh: '定语从句', dot: '#fb923c' },
-        'adverbial-clause': { zh: '状语从句', dot: '#fb7185' },
-        'adverbial':        { zh: '状语',     dot: '#2dd4bf' },
-        'noun-clause':      { zh: '名词性从句',dot: '#c084fc' },
-        'appositive':       { zh: '同位语',   dot: '#818cf8' },
-        'participial':      { zh: '分词短语', dot: '#a3e635' },
+        'subject':          { zh: '主语',       dot: '#38bdf8' },
+        'predicate':        { zh: '谓语',       dot: '#4ade80' },
+        'verb':             { zh: '动词',       dot: '#34d399' },
+        'object':           { zh: '宾语',       dot: '#fbbf24' },
+        'complement':       { zh: '表语/补语',   dot: '#a78bfa' },
+        'noun':             { zh: '名词',       dot: '#fcd34d' },
+        'adjective':        { zh: '形容词',     dot: '#f472b6' },
+        'adverb':           { zh: '副词',       dot: '#2dd4bf' },
+        'article':          { zh: '冠词',       dot: '#94a3b8' },
+        'preposition':      { zh: '介词',       dot: '#fb923c' },
+        'conjunction':      { zh: '连词',       dot: '#c084fc' },
+        'auxiliary':        { zh: '助动词',     dot: '#6ee7b7' },
+        'pronoun':          { zh: '代词',       dot: '#60a5fa' },
+        'determiner':       { zh: '限定词',     dot: '#9ca3af' },
+        'infinitive':       { zh: '不定式',     dot: '#fcd34d' },
+        'gerund':           { zh: '动名词',     dot: '#a3e635' },
+        'participle':       { zh: '分词',       dot: '#86efac' },
+        'interjection':     { zh: '感叹词',     dot: '#f87171' },
+        'relative-clause':  { zh: '定语从句',   dot: '#fb923c' },
+        'adverbial-clause': { zh: '状语从句',   dot: '#fb7185' },
+        'adverbial':        { zh: '状语',       dot: '#22d3ee' },
+        'noun-clause':      { zh: '名词性从句', dot: '#c084fc' },
+        'appositive':       { zh: '同位语',     dot: '#818cf8' },
+        'participial':      { zh: '分词短语',   dot: '#a3e635' },
     };
 
     function renderHighlightedEn(parts) {
@@ -1056,6 +1199,24 @@
     }
 
     function renderSentenceItems(items) {
+        var totalHtml = '<div class="ev-total-stat">共 ' + items.length + ' 个句子</div>';
+
+        // Word-count filter bar
+        var WC_CATS = [
+            { label: '10词以下',  min: 0,  max: 9  },
+            { label: '10~20词',  min: 10, max: 20 },
+            { label: '20~30词',  min: 21, max: 30 },
+            { label: '30~40词',  min: 31, max: 40 },
+            { label: '40~50词',  min: 41, max: 50 },
+            { label: '50词以上', min: 51, max: 9999 },
+        ];
+        var wcBarHtml = '<div class="ev-wc-bar" id="ev-wc-bar-sent">';
+        wcBarHtml += '<button class="ev-wc-btn ev-wc-active" data-wc-min="0" data-wc-max="9999">全部</button>';
+        WC_CATS.forEach(function (cat) {
+            wcBarHtml += '<button class="ev-wc-btn" data-wc-min="' + cat.min + '" data-wc-max="' + cat.max + '">' + cat.label + '</button>';
+        });
+        wcBarHtml += '</div>';
+
         // Collect all roles present across all items
         var rolesPresent = {};
         items.forEach(function (item) {
@@ -1082,8 +1243,9 @@
             var roles = (item.parts || []).map(function (p) { return p.role; }).filter(function (r) { return r && r !== 'normal'; });
             var uniqueRoles = roles.filter(function (r, i) { return roles.indexOf(r) === i; });
             var enHtml = item.parts ? renderHighlightedEn(item.parts) : esc(item.en);
+            var wordCount = item.en ? item.en.trim().split(/\s+/).length : 0;
 
-            listHtml += '<div class="ev-inline-item" data-roles="' + uniqueRoles.join(',') + '">' +
+            listHtml += '<div class="ev-inline-item" data-roles="' + uniqueRoles.join(',') + '" data-wordcount="' + wordCount + '">' +
                 '<div class="ev-inline-top">' +
                     '<h4 class="ev-inline-word">' + esc(item.title) + '</h4>' +
                     (item.source ? '<span class="ev-inline-tag">' + esc(item.source) + '</span>' : '') +
@@ -1097,7 +1259,7 @@
         });
         listHtml += '</div>';
 
-        return '<div class="ev-az-wrapper" id="ev-sent-wrapper">' + barHtml + listHtml + '</div>';
+        return '<div class="ev-az-wrapper" id="ev-sent-wrapper">' + totalHtml + wcBarHtml + barHtml + listHtml + '</div>';
     }
 
     var configMap = {
@@ -1115,7 +1277,7 @@
         // Inject toggle bar
         var toggle = document.createElement('div');
         toggle.className = 'ev-card-toggle';
-        toggle.innerHTML = '<span class="ev-card-toggle-label"></span>' + chevronIcon;
+        toggle.innerHTML = '<span class="ev-card-toggle-label">共 ' + config.items.length + ' 项</span>' + chevronIcon;
         card.appendChild(toggle);
 
         // Render list
@@ -1128,10 +1290,11 @@
 
         // Click handler — ignore interactive child elements
         function handleToggle(e) {
-            if (e.target.closest('.ev-speak-btn'))      return;
-            if (e.target.closest('.ev-az-btn'))         return;
-            if (e.target.closest('.ev-az-search'))      return;
+            if (e.target.closest('.ev-speak-btn'))       return;
+            if (e.target.closest('.ev-az-btn'))          return;
+            if (e.target.closest('.ev-az-search'))       return;
             if (e.target.closest('.ev-gram-filter-btn')) return;
+            if (e.target.closest('.ev-wc-btn'))          return;
             var expanded = card.getAttribute('aria-expanded') === 'true';
             card.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
@@ -1139,15 +1302,6 @@
         card.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle(e); }
         });
-    });
-
-    // Speak button delegation
-    document.addEventListener('click', function (e) {
-        var btn = e.target.closest('.ev-speak-btn');
-        if (!btn) return;
-        e.stopPropagation();
-        var text = btn.getAttribute('data-speak-text');
-        if (text) evSpeak(text);
     });
 
     // A-Z tab delegation
@@ -1253,6 +1407,27 @@
             });
         }
 
+        scroll.scrollTop = 0;
+    });
+    // Word-count filter delegation
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.ev-wc-btn');
+        if (!btn) return;
+        e.stopPropagation();
+        var min = parseInt(btn.getAttribute('data-wc-min') || '0', 10);
+        var max = parseInt(btn.getAttribute('data-wc-max') || '9999', 10);
+        var bar = btn.closest('.ev-wc-bar');
+        if (!bar) return;
+        bar.querySelectorAll('.ev-wc-btn').forEach(function (b) {
+            b.classList.toggle('ev-wc-active', b === btn);
+        });
+        var wrapper = btn.closest('.ev-az-wrapper');
+        var scroll = wrapper && wrapper.querySelector('.ev-sent-scroll');
+        if (!scroll) return;
+        scroll.querySelectorAll('.ev-inline-item').forEach(function (it) {
+            var wc = parseInt(it.getAttribute('data-wordcount') || '0', 10);
+            it.style.display = (wc >= min && wc <= max) ? '' : 'none';
+        });
         scroll.scrollTop = 0;
     });
 })();

@@ -12,6 +12,74 @@
 
     {% include footer.html %}
 
+<!-- Floating scroll + GitHub panel -->
+<div id="wg-float-panel">
+    <button id="wg-scroll-top" class="wg-float-btn" title="回到顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+    <a id="wg-github-btn" class="wg-float-btn wg-float-gh" href="https://github.com/WGrape" target="_blank" rel="noopener noreferrer" title="关注 GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        <span>关注</span>
+    </a>
+    <button id="wg-scroll-bottom" class="wg-float-btn" title="滚动到底部" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+</div>
+<style>
+#wg-float-panel {
+    position: fixed;
+    right: 20px;
+    bottom: 36px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+.wg-float-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(10, 20, 32, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: rgba(170, 200, 230, 0.88);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 11px;
+    font-family: "Space Grotesk", sans-serif;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.18s, color 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.wg-float-btn:hover {
+    background: rgba(56, 189, 248, 0.18);
+    border-color: rgba(56, 189, 248, 0.45);
+    color: #38bdf8;
+    transform: scale(1.08);
+}
+.wg-float-gh {
+    width: 48px;
+    height: 48px;
+    background: rgba(10, 20, 32, 0.9);
+    border-color: rgba(56, 189, 248, 0.22);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    flex-direction: column;
+    gap: 2px;
+}
+.wg-float-gh:hover {
+    background: rgba(56, 189, 248, 0.22);
+}
+@media (max-width: 600px) {
+    #wg-float-panel { right: 12px; bottom: 24px; }
+}
+</style>
+
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/apple-touch-icon.png" width="0" height="0"> -->
