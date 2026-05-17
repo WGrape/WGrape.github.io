@@ -3,26 +3,65 @@
  * 英文学习 — 内容配置文件  /js/english-visuals-config.js
  * =====================================================
  *
- * ── 全局朗读设置 ─────────────────────────────────────
- *   speakLang   朗读语言  (en-US / en-GB / en-AU)
- *   speakRate   语速      0.1 ~ 2  (推荐 0.85)
- *   speakPitch  音调      0 ~ 2    (推荐 1.0)
+ * 📌 这是所有英文学习内容的唯一数据源，直接修改本文件即可。
  *
- * ── 三个板块 ─────────────────────────────────────────
- *   cs        计算机领域英文
- *   aiWord    AI + 单词
- *   aiSentence AI + 长句子翻译
+ * ── 每日一句 (dailyQuote) ────────────────────────────
+ *   每日一句优先从「词霸 API」实时获取，当网络不可用时
+ *   回退显示本文件中 dailyQuote.fallback 里配置的内容。
  *
- * ── 添加词条 ─────────────────────────────────────────
- *   cs / aiWord 条目：
- *     { word, phonetic, tag, en, zh }
+ *   fallback 字段：
+ *     en   英文句子
+ *     zh   中文翻译
  *
- *   aiSentence 条目：
- *     { title, en, zh, source }   (source 可选)
+ * ── 全局朗读设置 (speak) ─────────────────────────────
+ *   lang   朗读语言  (en-US / en-GB / en-AU)
+ *   rate   语速      0.1 ~ 2  (推荐 0.85)
+ *   pitch  音调      0 ~ 2    (推荐 1.0)
+ *
+ * ── 三个内容板块 ──────────────────────────────────────
+ *   cs          计算机领域英文
+ *   aiWord      AI + 单词
+ *   aiSentence  AI + 语法翻译
+ *
+ * ── 如何新增词条 ──────────────────────────────────────
+ *   cs / aiWord 新增一条，在 items 末尾追加：
+ *     {
+ *       word:     '单词',
+ *       phonetic: '/音标/',
+ *       tag:      '分类标签',
+ *       en:       '英文例句',
+ *       zh:       '中文释义',
+ *     },
+ *
+ *   aiSentence 新增一条，在 items 末尾追加：
+ *     {
+ *       title:  '句子标题（简短摘要）',
+ *       en:     '完整英文长句',
+ *       zh:     '中文翻译',
+ *       source: '来源（可选）',
+ *       parts:  [                          // 语法高亮（可选，删掉整行也不影响显示）
+ *         { text: '主语部分',   role: 'subject'   },
+ *         { text: ' 谓语部分 ', role: 'predicate' },
+ *         { text: '其余文字',   role: 'normal'    },
+ *       ],
+ *     },
+ *
+ *   parts 中 role 可选值：
+ *     subject / predicate / object / complement
+ *     relative-clause / adverbial-clause / adverbial
+ *     noun-clause / appositive / participial / normal
  * =====================================================
  */
 
 var EV_CONFIG = {
+
+  /* ── 每日一句 —— 网络不可用时显示此备用内容 ─────────── */
+  dailyQuote: {
+    fallback: {
+      en: 'Every day is a fresh page. Keep learning, and keep turning it.',
+      zh: '每一天都是崭新的一页。保持学习，也保持翻页。',
+    },
+  },
 
   speak: {
     lang:  'en-US',
@@ -216,9 +255,9 @@ var EV_CONFIG = {
     ],
   },
 
-  /* ── AI + 长句子翻译 ────────────────────────────── */
+  /* ── AI + 语法翻译 ────────────────────────────── */
   aiSentence: {
-    label:  'AI + 长句子翻译',
+    label:  'AI + 语法翻译',
     tag:    'Sentence',
     accent: '#34d399',
     items: [

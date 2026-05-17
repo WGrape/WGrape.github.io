@@ -731,7 +731,7 @@
 <section class="home-english-section{% if include.page_mode == 'true' %} english-page-mode{% endif %}">
     <div class="section-header">
         <h2 class="section-title">英文学习</h2>
-        <p class="section-subtitle">每日一句、计算机领域英文、AI+单词、AI+长句子翻译，每一次学习都让英文输入更轻盈一点。</p>
+        <p class="section-subtitle">每日一句、计算机领域英文、AI+单词、AI+语法翻译，每一次学习都让英文输入更轻盈一点。</p>
     </div>
 
     <article
@@ -806,11 +806,11 @@
 
         <article
             class="english-mini-card english-mini-card-ai-sentence{% unless include.page_mode == 'true' %} english-click-card{% else %} ev-expandable-card{% endunless %}"
-            {% unless include.page_mode == 'true' %}data-href="/english-visuals/#ai-sentence" data-target="_self" role="link" aria-label="查看AI+长句子翻译"{% else %}data-expand-key="aiSentence" role="button" aria-expanded="false" aria-label="展开AI+长句子翻译列表"{% endunless %}
+            {% unless include.page_mode == 'true' %}data-href="/english-visuals/#ai-sentence" data-target="_self" role="link" aria-label="查看AI+语法翻译"{% else %}data-expand-key="aiSentence" role="button" aria-expanded="false" aria-label="展开AI+语法翻译列表"{% endunless %}
             tabindex="0"
         >
             <div class="english-mini-meta">
-                <span class="english-mini-badge">AI+长句子翻译</span>
+                <span class="english-mini-badge">AI+语法翻译</span>
                 <span class="english-mini-tag">Sentence</span>
             </div>
             <h3 class="english-mini-title" id="mini-aisent-title">Reliable AI products are systems, not just models.</h3>
@@ -909,8 +909,9 @@
     }
 
     function setFallback() {
-        contentEl.textContent = 'Every day is a fresh page. Keep learning, and keep turning it.';
-        noteEl.textContent    = '每一天都是崭新的一页。保持学习，也保持翻页。';
+        var fb = (typeof EV_CONFIG !== 'undefined' && EV_CONFIG.dailyQuote && EV_CONFIG.dailyQuote.fallback) || {};
+        contentEl.textContent = fb.en || 'Every day is a fresh page. Keep learning, and keep turning it.';
+        noteEl.textContent    = fb.zh || '每一天都是崭新的一页。保持学习，也保持翻页。';
         dateEl.textContent    = 'Daily English';
         captionEl.textContent = '词霸每日一句';
     }
