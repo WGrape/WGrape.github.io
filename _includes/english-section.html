@@ -616,6 +616,37 @@
     border-color: rgba(56, 189, 248, 0.38);
     color: #bae6fd;
 }
+.ev-speak-btn.ev-speaking {
+    background: rgba(56, 189, 248, 0.25);
+    border-color: rgba(56, 189, 248, 0.6);
+}
+/* Sound wave animation bars */
+.ev-sound-waves {
+    display: none;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+}
+.ev-speak-btn.ev-speaking .ev-sound-waves {
+    display: inline-flex;
+}
+.ev-speak-btn.ev-speaking .ev-speak-icon {
+    display: none;
+}
+.ev-sound-bar {
+    width: 2px;
+    background: #7dd3fc;
+    border-radius: 1px;
+    animation: evSoundWave 0.6s ease-in-out infinite;
+}
+.ev-sound-bar:nth-child(1) { height: 4px; animation-delay: 0s; }
+.ev-sound-bar:nth-child(2) { height: 8px; animation-delay: 0.1s; }
+.ev-sound-bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+.ev-sound-bar:nth-child(4) { height: 6px; animation-delay: 0.3s; }
+@keyframes evSoundWave {
+    0%, 100% { transform: scaleY(0.5); opacity: 0.7; }
+    50% { transform: scaleY(1); opacity: 1; }
+}
 
 /* ── A-Z filter bar ── */
 .ev-az-wrapper {
@@ -898,7 +929,13 @@
             </div>
             <div class="english-footer">
                 <button class="ev-speak-btn" id="daily-english-speak" data-speak-text="" style="display:none">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    <span class="ev-speak-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+                    <span class="ev-sound-waves">
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                    </span>
                     朗读
                 </button>
                 <span class="english-caption" id="daily-english-caption">词霸每日一句</span>
@@ -924,11 +961,23 @@
             <p class="english-mini-zh" id="mini-cs-zh">幂等性：一个操作即使被重复执行多次，最终结果仍保持一致。</p>
             <div class="english-mini-speak-row">
                 <button class="ev-speak-btn" id="mini-cs-speak-word" data-speak-text="Idempotency">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    <span class="ev-speak-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+                    <span class="ev-sound-waves">
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                    </span>
                     朗读单词
                 </button>
                 <button class="ev-speak-btn" id="mini-cs-speak-en" data-speak-text="An idempotent operation produces the same result even if it is executed multiple times.">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    <span class="ev-speak-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+                    <span class="ev-sound-waves">
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                    </span>
                     朗读例句
                 </button>
             </div>
@@ -950,11 +999,23 @@
             <p class="english-mini-zh" id="mini-aiword-zh">对齐：让 AI 系统的行为尽可能符合人类目标、价值和预期。</p>
             <div class="english-mini-speak-row">
                 <button class="ev-speak-btn" id="mini-aiword-speak-word" data-speak-text="Alignment">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    <span class="ev-speak-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+                    <span class="ev-sound-waves">
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                    </span>
                     朗读单词
                 </button>
                 <button class="ev-speak-btn" id="mini-aiword-speak-en" data-speak-text="Alignment describes making an AI system behave in ways that match human goals, values, and expectations.">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    <span class="ev-speak-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+                    <span class="ev-sound-waves">
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                    </span>
                     朗读例句
                 </button>
             </div>
@@ -976,7 +1037,13 @@
             <p class="english-mini-zh" id="mini-aisent-zh">一个优秀的 AI 产品不只是聪明的模型，更是一个可靠的系统：它能获取上下文、调用工具，并以用户可直接采取行动的形式返回答案。</p>
             <div class="english-mini-speak-row">
                 <button class="ev-speak-btn" id="mini-aisent-speak-en" data-speak-text="A strong AI product is not just a smart model, but a reliable system that can retrieve context, use tools, and return answers in a form users can act on.">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    <span class="ev-speak-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+                    <span class="ev-sound-waves">
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                        <span class="ev-sound-bar"></span>
+                    </span>
                     朗读句子
                 </button>
             </div>
@@ -1001,10 +1068,29 @@
 <script>
 // ── Global speak helper (used on all pages) ───────────────
 (function () {
-    // Preload voices so they are available on first click
-    if (window.speechSynthesis) window.speechSynthesis.getVoices();
+    // Store voices when loaded (getVoices is async in many browsers)
+    var voicesLoaded = false;
 
-    function evSpeakGlobal(text) {
+    function loadVoices() {
+        if (window.speechSynthesis) {
+            var voices = window.speechSynthesis.getVoices();
+            if (voices.length) {
+                voicesLoaded = true;
+            }
+        }
+    }
+
+    // Preload voices so they are available on first click
+    if (window.speechSynthesis) {
+        // Load voices immediately (may or may not work depending on browser)
+        loadVoices();
+        // Wait for voiceschanged event to ensure voices are loaded
+        window.speechSynthesis.addEventListener('voiceschanged', loadVoices);
+    }
+
+    var activeSpeakBtn = null;
+
+    function evSpeakGlobal(text, btn) {
         if (!window.speechSynthesis) return;
         var spk = (typeof EV_CONFIG !== 'undefined' && EV_CONFIG.speak) || {};
         var lang = spk.lang || 'en-US';
@@ -1016,11 +1102,36 @@
         var voices = window.speechSynthesis.getVoices();
         if (voices.length) {
             var voice = voices.find(function (v) { return v.lang === lang; }) ||
-                        voices.find(function (v) { return v.lang.startsWith('en'); });
+                        voices.find(function (v) { return v.lang && v.lang.startsWith('en'); });
             if (voice) u.voice = voice;
         }
         if (window.speechSynthesis.paused) window.speechSynthesis.resume();
         window.speechSynthesis.cancel();
+
+        // Remove speaking class from previous button
+        if (activeSpeakBtn) {
+            activeSpeakBtn.classList.remove('ev-speaking');
+        }
+        // Add speaking class to current button
+        if (btn) {
+            activeSpeakBtn = btn;
+            btn.classList.add('ev-speaking');
+        }
+
+        // Remove speaking class when speech ends
+        u.onend = function() {
+            if (activeSpeakBtn) {
+                activeSpeakBtn.classList.remove('ev-speaking');
+                activeSpeakBtn = null;
+            }
+        };
+        u.onerror = function() {
+            if (activeSpeakBtn) {
+                activeSpeakBtn.classList.remove('ev-speaking');
+                activeSpeakBtn = null;
+            }
+        };
+
         // Chrome silently drops speak() called right after cancel(); a short
         // setTimeout lets the cancellation complete before the new utterance starts.
         setTimeout(function () { window.speechSynthesis.speak(u); }, 50);
@@ -1035,7 +1146,7 @@
         e.stopPropagation();
         e.preventDefault();
         var text = btn.getAttribute('data-speak-text');
-        if (text) evSpeakGlobal(text);
+        if (text) evSpeakGlobal(text, btn);
     }, true);
 })();
 
@@ -1184,8 +1295,9 @@
     if (typeof EV_CONFIG === 'undefined') return;
 
     var spk = EV_CONFIG.speak || {};
+    var subPageActiveBtn = null;
 
-    function evSpeak(text) {
+    function evSpeak(text, btn) {
         if (!window.speechSynthesis) return;
         var lang = spk.lang || 'en-US';
         var u = new SpeechSynthesisUtterance(text);
@@ -1195,15 +1307,46 @@
         var voices = window.speechSynthesis.getVoices();
         if (voices.length) {
             var voice = voices.find(function (v) { return v.lang === lang; }) ||
-                        voices.find(function (v) { return v.lang.startsWith('en'); });
+                        voices.find(function (v) { return v.lang && v.lang.startsWith('en'); });
             if (voice) u.voice = voice;
         }
         if (window.speechSynthesis.paused) window.speechSynthesis.resume();
         window.speechSynthesis.cancel();
+
+        // Remove speaking class from previous button
+        if (subPageActiveBtn) {
+            subPageActiveBtn.classList.remove('ev-speaking');
+        }
+        // Add speaking class to current button
+        if (btn) {
+            subPageActiveBtn = btn;
+            btn.classList.add('ev-speaking');
+        }
+
+        // Remove speaking class when speech ends
+        u.onend = function() {
+            if (subPageActiveBtn) {
+                subPageActiveBtn.classList.remove('ev-speaking');
+                subPageActiveBtn = null;
+            }
+        };
+        u.onerror = function() {
+            if (subPageActiveBtn) {
+                subPageActiveBtn.classList.remove('ev-speaking');
+                subPageActiveBtn = null;
+            }
+        };
+
         setTimeout(function () { window.speechSynthesis.speak(u); }, 50);
     }
 
-    var speakerIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+    var speakerIcon = '<span class="ev-speak-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>' +
+        '<span class="ev-sound-waves">' +
+            '<span class="ev-sound-bar"></span>' +
+            '<span class="ev-sound-bar"></span>' +
+            '<span class="ev-sound-bar"></span>' +
+            '<span class="ev-sound-bar"></span>' +
+        '</span>';
     var chevronIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
 
     function esc(s) {
