@@ -24,7 +24,8 @@ url: "" # 解决使用utterances评论功能时，登录重定向错误地址问
 #baseurl: "https://wgrape.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
 baseurl: ""
 # github_repo: "https://github.com/WGrape/Blog" # you code repository
-github_repo: "https://github.com/WGrape/Blog" # you code repository
+github_repo: "https://github.com/WGrape/Wgrape.github.io" # you code repository
+blog_github_repo: "https://github.com/WGrape/Blog" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.

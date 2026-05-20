@@ -128,7 +128,93 @@ nav_exclude: true
     </div>
 </section>
 
-<!-- 后续可以在这里添加其他板块，如开源项目、工具等 -->
+<!-- 开源项目板块 -->
+<section class="home-projects-section">
+    <div class="section-header">
+        <h2 class="section-title">开源项目</h2>
+        <p class="section-subtitle">分享技术，共建开源。以下是我维护的主要开源项目。</p>
+        <div class="home-blog-stats">
+            <div class="home-stat-item">
+                <span class="home-stat-num">1000+</span>
+                <span class="home-stat-label">Stars</span>
+            </div>
+            <div class="home-stat-divider"></div>
+            <div class="home-stat-item">
+                <span class="home-stat-num">5+</span>
+                <span class="home-stat-label">核心项目</span>
+            </div>
+            <div class="home-stat-divider"></div>
+            <div class="home-stat-item">
+                <span class="home-stat-num">MIT</span>
+                <span class="home-stat-label">开源协议</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-projects-grid">
+        <!-- lexer -->
+        <a href="https://github.com/WGrape/lexer" target="_blank" class="home-project-card">
+            <div class="home-project-image">
+                <div class="home-project-image-inner" style="background:#fff;">
+                    <img src="https://user-images.githubusercontent.com/35942268/226105723-86eb3042-fb51-4f51-b382-b833a952e9a2.png" alt="lexer">
+                </div>
+            </div>
+            <div class="home-project-content">
+                <h3 class="home-project-name">lexer</h3>
+                <p class="home-project-desc">基于DFA的JS开源词法分析器，支持多语言扩展，完全解耦词法分析与具体语言。</p>
+                <div class="home-project-features">
+                    <span class="home-project-feature"><span class="home-feature-title">🔍 完整词法分析</span>基于DFA准确识别各类Token。</span>
+                    <span class="home-project-feature"><span class="home-feature-title">🌐 多语言扩展</span>两个配置文件即可支持任意语言。</span>
+                </div>
+                <span class="home-project-star">⭐ 345+ Stars</span>
+            </div>
+        </a>
+        <!-- sparrow -->
+        <a href="https://github.com/WGrape/sparrow" target="_blank" class="home-project-card">
+            <div class="home-project-image">
+                <div class="home-project-image-inner" style="background:#fff;">
+                    <img src="https://github.com/WGrape/sparrow/assets/35942268/ab3ef3f3-8625-41df-99ed-50edde47a68e" alt="sparrow">
+                </div>
+            </div>
+            <div class="home-project-content">
+                <h3 class="home-project-name">sparrow</h3>
+                <p class="home-project-desc">一键启动多服务的Docker容器化编排工具，支持MySQL、Redis、Kafka等20+服务。</p>
+                <div class="home-project-features">
+                    <span class="home-project-feature"><span class="home-feature-title">🚀 一键启停</span>简单命令启动/停止全部或单个服务。</span>
+                    <span class="home-project-feature"><span class="home-feature-title">🌍 统一管理</span>支持Web可视化面板，团队环境一致。</span>
+                </div>
+                <span class="home-project-star">⭐ 102+ Stars</span>
+            </div>
+        </a>
+        <!-- esupdater -->
+        <a href="https://github.com/WGrape/esupdater" target="_blank" class="home-project-card">
+            <div class="home-project-image">
+                <div class="home-project-image-inner" style="background:#fff;">
+                    <img src="https://user-images.githubusercontent.com/35942268/147061994-f0d5a3ec-2d5f-4d72-af1c-139289547f25.png" alt="esupdater">
+                </div>
+            </div>
+            <div class="home-project-content">
+                <h3 class="home-project-name">esupdater</h3>
+                <p class="home-project-desc">基于Canal实现ES文档增量更新的高性能轻量PHP框架，吞吐量提升10倍以上。</p>
+                <div class="home-project-features">
+                    <span class="home-project-feature"><span class="home-feature-title">⚡ 高性能消费</span>一对多模型，吞吐量提升10倍以上。</span>
+                    <span class="home-project-feature"><span class="home-feature-title">🐳 全面容器化</span>一条命令完成安装、部署与维护。</span>
+                </div>
+                <span class="home-project-star">⭐ 211+ Stars</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="home-blog-actions">
+        <a href="/pages/my-projects.html" class="stat-enter-link">
+            <span class="stat-enter-text">查看全部项目</span>
+            <svg class="stat-enter-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+</section>
 
 <!-- 友情链接板块 -->
 <section class="home-friends-section">
@@ -155,6 +241,135 @@ nav_exclude: true
     min-height: 50vh;
     padding: 120px 20px 40px;
     margin-bottom: 20px;
+}
+
+/* ===== 开源项目板块 ===== */
+.home-projects-section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(85, 168, 178, 0.15);
+}
+
+.home-projects-section .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.home-projects-section .section-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 36px;
+    color: #f5f1e9;
+    margin-bottom: 10px;
+}
+
+.home-projects-section .section-subtitle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 15px;
+    color: var(--wg-muted);
+    opacity: 0.75;
+    margin-bottom: 24px;
+}
+
+.home-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 36px;
+}
+
+@media (max-width: 768px) {
+    .home-projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.home-project-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(85, 168, 178, 0.15);
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.home-project-card:hover {
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    text-decoration: none;
+}
+
+.home-project-image {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+}
+
+.home-project-image-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-project-image-inner img {
+    max-width: 60%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+.home-project-content {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.home-project-name {
+    font-family: "DM Serif Display", serif;
+    font-size: 18px;
+    color: #f5f1e9;
+    margin: 0;
+}
+
+.home-project-desc {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    color: var(--wg-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.home-project-features {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.home-project-feature {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    color: var(--wg-muted);
+    line-height: 1.5;
+}
+
+.home-feature-title {
+    font-weight: 700;
+    color: #7dd3fc;
+    margin-right: 4px;
+}
+
+.home-project-star {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    color: #fbbf24;
+    font-weight: 600;
+    margin-top: 4px;
 }
 
 /* ===== 友情链接板块 ===== */
