@@ -1,0 +1,14 @@
+services:
+  jekyll:
+    build: .
+    platform: linux/arm64
+    volumes:
+      - .:/srv/jekyll:cached
+      - /srv/jekyll/_site
+      - /srv/jekyll/.jekyll-cache
+      - /srv/jekyll/vendor/bundle
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+    environment:
+      - JEKYLL_ENV=development
