@@ -7,7 +7,7 @@ nav_exclude: true
 ---
 
 <!-- Hero Section -->
-<section class="hero-section">
+<section class="hero-section" id="hero">
     <div class="hero-bg">
         <div class="hero-orbit"></div>
         <div class="hero-orbit"></div>
@@ -44,9 +44,12 @@ nav_exclude: true
 <script src="/js/cet4.js"></script>
 <script src="/js/cet6.js"></script>
 <script src="/js/cet-kaoyan.js"></script>
+<!-- English Learning Section -->
+<section id="english">
 {% include english-section.html %}
+</section>
 
-<section class="home-visuals-section" style="padding: 0;">
+<section class="home-visuals-section" style="padding: 0;" id="visuals">
     <div class="section-header">
         <h2 class="section-title">可视化学习</h2>
         <p class="section-subtitle">通过直观的交互式可视化，理解复杂技术概念的本质。</p>
@@ -72,7 +75,7 @@ nav_exclude: true
 </section>
 
 <!-- Blog Section -->
-<section class="home-blog-section">
+<section class="home-blog-section" id="blog">
     <div class="section-header">
         <h2 class="section-title">技术博客</h2>
         <!-- <p class="section-subtitle">这里是我的数字工作室：探索后端、架构、AI技术，讲清楚复杂系统是怎么运转的。</p> -->
@@ -132,7 +135,7 @@ nav_exclude: true
 </section>
 
 <!-- 开源项目板块 -->
-<section class="home-projects-section">
+<section class="home-projects-section" id="projects">
     <div class="section-header">
         <h2 class="section-title">开源项目</h2>
         <p class="section-subtitle">分享技术，共建开源。以下是我维护的主要开源项目。</p>
@@ -220,7 +223,7 @@ nav_exclude: true
 </section>
 
 <!-- 友情链接板块 -->
-<section class="home-friends-section">
+<section class="home-friends-section" id="friends">
     <div class="section-header">
         <h2 class="section-title">友情链接</h2>
         <p class="section-subtitle">工具、项目与合作</p>
@@ -886,7 +889,141 @@ nav_exclude: true
     font-size: 13px;
     font-weight: bold;
 }
+
+/* ===== Right Side Navigation ===== */
+.home-nav {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+}
+
+.home-nav-inner {
+    position: relative;
+    padding: 20px 0;
+}
+
+.home-nav-line {
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
+}
+
+.home-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.home-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.home-nav-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.home-nav-item.active .home-nav-dot {
+    background: linear-gradient(135deg, #38bdf8, #a855f7);
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.home-nav-item.active .home-nav-dot::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+.home-nav-label {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(170, 184, 203, 0.6);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.home-nav-item:hover .home-nav-label,
+.home-nav-item.active .home-nav-label {
+    opacity: 1;
+    transform: translateX(0);
+    color: #f5f1e9;
+}
+
+.home-nav-item:hover .home-nav-dot {
+    border-color: rgba(56, 189, 248, 0.5);
+    background: rgba(56, 189, 248, 0.15);
+}
+
+/* Responsive for nav */
+@media (max-width: 1100px) {
+    .home-nav {
+        display: none;
+    }
+}
+
+/* Add scroll margin for sections */
+#hero, #english, #visuals, #blog, #projects, #friends {
+    scroll-margin-top: 100px;
+}
 </style>
+
+<!-- Right Side Navigation -->
+<nav class="home-nav">
+    <div class="home-nav-inner">
+        <div class="home-nav-line"></div>
+        <ul class="home-nav-list">
+            <li class="home-nav-item active" data-target="hero">
+                <span class="home-nav-dot"></span>
+                <span class="home-nav-label">主页</span>
+            </li>
+            <li class="home-nav-item" data-target="english">
+                <span class="home-nav-dot"></span>
+                <span class="home-nav-label">英文学习</span>
+            </li>
+            <li class="home-nav-item" data-target="visuals">
+                <span class="home-nav-dot"></span>
+                <span class="home-nav-label">可视化学习</span>
+            </li>
+            <li class="home-nav-item" data-target="blog">
+                <span class="home-nav-dot"></span>
+                <span class="home-nav-label">技术博客</span>
+            </li>
+            <li class="home-nav-item" data-target="projects">
+                <span class="home-nav-dot"></span>
+                <span class="home-nav-label">开源项目</span>
+            </li>
+            <li class="home-nav-item" data-target="friends">
+                <span class="home-nav-dot"></span>
+                <span class="home-nav-label">友情链接</span>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script>
@@ -940,6 +1077,48 @@ nav_exclude: true
             if (uvEl) rollTo(uvEl, !isNaN(uvVal) && uvVal > 0 ? uvVal : 1);
             if (pvEl) rollTo(pvEl, !isNaN(pvVal) && pvVal > 0 ? pvVal : 1);
         }, 1000);
+    });
+})();
+
+// Home page right side navigation
+(function() {
+    const navItems = document.querySelectorAll('.home-nav-item');
+    const sections = document.querySelectorAll('#hero, #english, #visuals, #blog, #projects, #friends');
+
+    // Click navigation to scroll to section
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Update navigation state on scroll
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('data-target') === id) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
     });
 })();
 </script>
