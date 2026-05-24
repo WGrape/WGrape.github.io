@@ -469,6 +469,45 @@
     color: #38bdf8;
 }
 
+/* Tag filter bar */
+.ev-tag-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 6px 0 8px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ev-tag-btn {
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    color: rgba(170,184,203,0.8);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: "Space Grotesk", sans-serif;
+    line-height: 1.6;
+}
+.ev-tag-btn:hover { border-color: rgba(168,85,247,0.4); color: #a855f7; }
+.ev-tag-btn.ev-tag-active {
+    background: rgba(168,85,247,0.15);
+    border-color: rgba(168,85,247,0.4);
+    color: #a855f7;
+}
+
+.ev-inline-item-tag {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(168,85,247,0.12);
+    color: #a855f7;
+    border: 1px solid rgba(168,85,247,0.25);
+    margin-left: auto;
+}
+
 @media (max-width: 768px) {
     .home-english-section .section-title { font-size: 32px; }
     .english-card {
@@ -1482,8 +1521,26 @@
             return a.localeCompare(b);
         });
 
+        // Collect all unique tags
+        var tagsSet = {};
+        items.forEach(function (item) {
+            if (item.tag) tagsSet[item.tag] = true;
+        });
+        var tags = Object.keys(tagsSet).sort();
+
         // Search input
         var searchHtml = '<input class="ev-az-search" type="text" placeholder="搜索单词…" data-az-search="' + listId + '" autocomplete="off">';
+
+        // Tag filter bar
+        var tagBarHtml = '';
+        if (tags.length > 0) {
+            tagBarHtml = '<div class="ev-tag-bar" data-tag-list="' + listId + '">';
+            tagBarHtml += '<button class="ev-tag-btn ev-tag-active" data-tag-value="all">全部</button>';
+            tags.forEach(function (tag) {
+                tagBarHtml += '<button class="ev-tag-btn" data-tag-value="' + esc(tag) + '">' + esc(tag) + '</button>';
+            });
+            tagBarHtml += '</div>';
+        }
 
         // A-Z tab bar
         var barHtml = '<div class="ev-az-bar" data-az-list="' + listId + '">';
@@ -1497,7 +1554,7 @@
         order.forEach(function (letter, i) {
             groupsHtml += '<div class="ev-az-group' + (i === 0 ? ' ev-az-visible' : '') + '" data-az-group="' + letter + '">';
             groups[letter].forEach(function (item) {
-                groupsHtml += '<div class="ev-inline-item">' +
+                groupsHtml += '<div class="ev-inline-item" data-item-tag="' + esc(item.tag || '') + '">' +
                     '<div class="ev-inline-top">' +
                         '<h4 class="ev-inline-word">' + esc(item.word) + '</h4>' +
                         (item.tag ? '<span class="ev-inline-tag">' + esc(item.tag) + '</span>' : '') +
@@ -1505,6 +1562,7 @@
                     '<p class="ev-inline-zh">' + esc(item.meaning) + '</p>' +
                     '<div class="ev-inline-footer">' +
                         speakBtn(item.word, '朗读单词') +
+                        (item.tag ? '<span class="ev-inline-item-tag">' + esc(item.tag) + '</span>' : '') +
                     '</div>' +
                 '</div>';
             });
@@ -1512,7 +1570,7 @@
         });
         groupsHtml += '</div>';
 
-        return '<div class="ev-az-wrapper"><div class="ev-total-stat">共 ' + items.length + ' 个单词</div>' + searchHtml + barHtml + groupsHtml + '</div>';
+        return '<div class="ev-az-wrapper"><div class="ev-total-stat">共 ' + items.length + ' 个单词</div>' + searchHtml + tagBarHtml + barHtml + groupsHtml + '</div>';
     }
 
     function renderWordItems(items, listId) {
@@ -1736,6 +1794,7 @@
             if (e.target.closest('.ev-az-search'))       return;
             if (e.target.closest('.ev-gram-filter-btn')) return;
             if (e.target.closest('.ev-wc-btn'))          return;
+            if (e.target.closest('.ev-tag-btn'))         return;
             var expanded = card.getAttribute('aria-expanded') === 'true';
             card.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
@@ -1744,6 +1803,49 @@
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle(e); }
         });
     });
+
+    // Helper function to apply both tag and letter filters
+    function applyFilters(listEl, activeLetter, activeTag) {
+        var searchEl = listEl.querySelector('.ev-az-search');
+        var q = searchEl ? searchEl.value.trim().toLowerCase() : '';
+
+        listEl.querySelectorAll('.ev-az-group').forEach(function (g) {
+            var groupLetter = g.getAttribute('data-az-group');
+            var shouldShowGroup = false;
+
+            g.querySelectorAll('.ev-inline-item').forEach(function (it) {
+                var showItem = true;
+
+                // Filter by letter first
+                if (groupLetter !== activeLetter) {
+                    showItem = false;
+                }
+
+                // Filter by tag
+                if (showItem && activeTag !== 'all') {
+                    var itemTag = it.getAttribute('data-item-tag') || '';
+                    if (itemTag !== activeTag) {
+                        showItem = false;
+                    }
+                }
+
+                // Filter by search
+                if (showItem && q) {
+                    var word  = (it.querySelector('.ev-inline-word')  || {}).textContent || '';
+                    var zh    = (it.querySelector('.ev-inline-zh')    || {}).textContent || '';
+                    var match = (word + ' ' + zh).toLowerCase().indexOf(q) !== -1;
+                    if (!match) {
+                        showItem = false;
+                    }
+                }
+
+                it.style.display = showItem ? '' : 'none';
+                if (showItem) shouldShowGroup = true;
+            });
+
+            g.classList.toggle('ev-az-visible', shouldShowGroup);
+        });
+    }
 
     // A-Z tab delegation
     document.addEventListener('click', function (e) {
@@ -1764,14 +1866,47 @@
             b.classList.toggle('ev-az-active', b === btn);
         });
 
-        // Show matching group, hide others; restore all items in group
-        listEl.querySelectorAll('.ev-az-group').forEach(function (g) {
-            var show = g.getAttribute('data-az-group') === letter;
-            g.classList.toggle('ev-az-visible', show);
-            if (show) {
-                g.querySelectorAll('.ev-inline-item').forEach(function (it) { it.style.display = ''; });
-            }
+        // Get active tag
+        var activeTag = 'all';
+        var tagBar = listEl.querySelector('.ev-tag-bar');
+        if (tagBar) {
+            var activeTagBtn = tagBar.querySelector('.ev-tag-active');
+            if (activeTagBtn) activeTag = activeTagBtn.getAttribute('data-tag-value');
+        }
+
+        // Apply combined filters
+        applyFilters(listEl, letter, activeTag);
+
+        // Scroll to top
+        var scrollEl = listEl.querySelector('.ev-az-scroll');
+        if (scrollEl) scrollEl.scrollTop = 0;
+    });
+
+    // Tag filter delegation
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.ev-tag-btn');
+        if (!btn) return;
+        e.stopPropagation();
+        var tag = btn.getAttribute('data-tag-value');
+        var listId  = btn.closest('.ev-tag-bar').getAttribute('data-tag-list');
+        var listEl  = document.getElementById(listId);
+        if (!listEl) return;
+
+        // Update active tag button
+        btn.closest('.ev-tag-bar').querySelectorAll('.ev-tag-btn').forEach(function (b) {
+            b.classList.toggle('ev-tag-active', b === btn);
         });
+
+        // Get active letter
+        var activeLetter = 'A';
+        var azBar = listEl.querySelector('.ev-az-bar');
+        if (azBar) {
+            var activeAzBtn = azBar.querySelector('.ev-az-active');
+            if (activeAzBtn) activeLetter = activeAzBtn.getAttribute('data-az-letter');
+        }
+
+        // Apply combined filters
+        applyFilters(listEl, activeLetter, tag);
 
         // Scroll to top
         var scrollEl = listEl.querySelector('.ev-az-scroll');
@@ -1786,35 +1921,23 @@
         var listId  = input.getAttribute('data-az-search');
         var listEl  = document.getElementById(listId);
         if (!listEl) return;
-        var q = input.value.trim().toLowerCase();
 
-        if (!q) {
-            // Restore: show only the active letter group
-            var activeLetter = null;
-            var activeBtn = listEl.closest('.ev-expandable-card').querySelector('.ev-az-btn.ev-az-active');
-            if (activeBtn) activeLetter = activeBtn.getAttribute('data-az-letter');
-            listEl.querySelectorAll('.ev-az-group').forEach(function (g) {
-                var show = !activeLetter || g.getAttribute('data-az-group') === activeLetter;
-                g.classList.toggle('ev-az-visible', show);
-                g.querySelectorAll('.ev-inline-item').forEach(function (it) { it.style.display = ''; });
-            });
-            return;
+        // Get active letter and tag
+        var activeLetter = 'A';
+        var azBar = listEl.querySelector('.ev-az-bar');
+        if (azBar) {
+            var activeAzBtn = azBar.querySelector('.ev-az-active');
+            if (activeAzBtn) activeLetter = activeAzBtn.getAttribute('data-az-letter');
+        }
+        var activeTag = 'all';
+        var tagBar = listEl.querySelector('.ev-tag-bar');
+        if (tagBar) {
+            var activeTagBtn = tagBar.querySelector('.ev-tag-active');
+            if (activeTagBtn) activeTag = activeTagBtn.getAttribute('data-tag-value');
         }
 
-        // Show all groups, filter by search
-        listEl.querySelectorAll('.ev-az-group').forEach(function (g) {
-            g.classList.add('ev-az-visible');
-            var anyVisible = false;
-            g.querySelectorAll('.ev-inline-item').forEach(function (it) {
-                var word  = (it.querySelector('.ev-inline-word')  || {}).textContent || '';
-                var en    = (it.querySelector('.ev-inline-en')    || {}).textContent || '';
-                var zh    = (it.querySelector('.ev-inline-zh')    || {}).textContent || '';
-                var match = (word + ' ' + en + ' ' + zh).toLowerCase().indexOf(q) !== -1;
-                it.style.display = match ? '' : 'none';
-                if (match) anyVisible = true;
-            });
-            g.classList.toggle('ev-az-visible', anyVisible);
-        });
+        // Apply combined filters (including search)
+        applyFilters(listEl, activeLetter, activeTag);
     });
 
     // Grammar filter button delegation
