@@ -74,66 +74,6 @@ nav_exclude: true
     </div>
 </section>
 
-<!-- Blog Section -->
-<section class="home-blog-section" id="blog">
-    <div class="section-header">
-        <h2 class="section-title">技术博客</h2>
-        <!-- <p class="section-subtitle">这里是我的数字工作室：探索后端、架构、AI技术，讲清楚复杂系统是怎么运转的。</p> -->
-        <p class="section-subtitle">分享开源项目、后端工程及架构、AI大模型与Agent工程架构、AI应用落地等计算机领域的原创技术文章。</p>
-        <div class="home-blog-stats">
-            <div class="home-stat-item">
-                <span class="home-stat-num">{{ site.posts | size }}</span>
-                <span class="home-stat-label">篇文章</span>
-            </div>
-            <div class="home-stat-divider"></div>
-            <div class="home-stat-item">
-                <span class="home-stat-num">2019</span>
-                <span class="home-stat-label">首次发布</span>
-            </div>
-            <div class="home-stat-divider"></div>
-            <div class="home-stat-item">
-                <span class="home-stat-num">2026</span>
-                <span class="home-stat-label">最近更新</span>
-            </div>
-            <div class="home-stat-divider"></div>
-            <div class="home-stat-item">
-                <span class="home-stat-num">Backend</span>
-                <span class="home-stat-label">重度偏好</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="home-posts-grid">
-        {% for post in site.posts limit:6 %}
-        <article class="home-post-card">
-            <a href="{{ post.url }}" class="home-post-link">
-                <div class="home-post-meta">
-                    <span class="home-post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-                    {% if post.tags.size > 0 %}
-                    <span class="home-post-tag">{{ post.tags[0] }}</span>
-                    {% endif %}
-                </div>
-                <h3 class="home-post-title">{{ post.title }}</h3>
-                {% if post.subtitle %}
-                <p class="home-post-subtitle">{{ post.subtitle }}</p>
-                {% endif %}
-                <p class="home-post-excerpt">{{ post.content | strip_html | truncate:120 }}</p>
-            </a>
-        </article>
-        {% endfor %}
-    </div>
-
-    <div class="home-blog-actions">
-        <a href="/blog/" class="stat-enter-link">
-            <span class="stat-enter-text">技术博客</span>
-            <svg class="stat-enter-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-        </a>
-    </div>
-</section>
-
 <!-- 开源项目板块 -->
 <section class="home-projects-section" id="projects">
     <div class="section-header">
@@ -214,6 +154,66 @@ nav_exclude: true
     <div class="home-blog-actions">
         <a href="/pages/my-projects.html" class="stat-enter-link">
             <span class="stat-enter-text">查看全部项目</span>
+            <svg class="stat-enter-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section class="home-blog-section" id="blog">
+    <div class="section-header">
+        <h2 class="section-title">技术博客</h2>
+        <!-- <p class="section-subtitle">这里是我的数字工作室：探索后端、架构、AI技术，讲清楚复杂系统是怎么运转的。</p> -->
+        <p class="section-subtitle">分享开源项目、后端工程及架构、AI大模型与Agent工程架构、AI应用落地等计算机领域的原创技术文章。</p>
+        <div class="home-blog-stats">
+            <div class="home-stat-item">
+                <span class="home-stat-num">{{ site.posts | size }}</span>
+                <span class="home-stat-label">篇文章</span>
+            </div>
+            <div class="home-stat-divider"></div>
+            <div class="home-stat-item">
+                <span class="home-stat-num">2019</span>
+                <span class="home-stat-label">首次发布</span>
+            </div>
+            <div class="home-stat-divider"></div>
+            <div class="home-stat-item">
+                <span class="home-stat-num">2026</span>
+                <span class="home-stat-label">最近更新</span>
+            </div>
+            <div class="home-stat-divider"></div>
+            <div class="home-stat-item">
+                <span class="home-stat-num">Backend</span>
+                <span class="home-stat-label">重度偏好</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-posts-grid">
+        {% for post in site.posts limit:6 %}
+        <article class="home-post-card">
+            <a href="{{ post.url }}" class="home-post-link">
+                <div class="home-post-meta">
+                    <span class="home-post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+                    {% if post.tags.size > 0 %}
+                    <span class="home-post-tag">{{ post.tags[0] }}</span>
+                    {% endif %}
+                </div>
+                <h3 class="home-post-title">{{ post.title }}</h3>
+                {% if post.subtitle %}
+                <p class="home-post-subtitle">{{ post.subtitle }}</p>
+                {% endif %}
+                <p class="home-post-excerpt">{{ post.content | strip_html | truncate:120 }}</p>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+
+    <div class="home-blog-actions">
+        <a href="/blog/" class="stat-enter-link">
+            <span class="stat-enter-text">技术博客</span>
             <svg class="stat-enter-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -1009,13 +1009,13 @@ nav_exclude: true
                 <span class="home-nav-dot"></span>
                 <span class="home-nav-label">可视化学习</span>
             </li>
-            <li class="home-nav-item" data-target="blog">
-                <span class="home-nav-dot"></span>
-                <span class="home-nav-label">技术博客</span>
-            </li>
             <li class="home-nav-item" data-target="projects">
                 <span class="home-nav-dot"></span>
                 <span class="home-nav-label">开源项目</span>
+            </li>
+            <li class="home-nav-item" data-target="blog">
+                <span class="home-nav-dot"></span>
+                <span class="home-nav-label">技术博客</span>
             </li>
             <li class="home-nav-item" data-target="friends">
                 <span class="home-nav-dot"></span>
