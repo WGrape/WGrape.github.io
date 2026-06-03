@@ -1443,7 +1443,13 @@
 (function () {
     if (typeof EV_CONFIG === 'undefined') return;
     var el;
-    var cs = EV_CONFIG.cs && EV_CONFIG.cs.items && EV_CONFIG.cs.items[0];
+    function pickRandomItem(items) {
+        if (!items || !items.length) return null;
+        var idx = Math.floor(Math.random() * items.length);
+        return items[idx];
+    }
+
+    var cs = pickRandomItem(EV_CONFIG.cs && EV_CONFIG.cs.items);
     if (cs) {
         el = document.getElementById('mini-cs-title'); if (el) el.textContent = cs.word;
         el = document.getElementById('mini-cs-en');    if (el) el.textContent = cs.en;
@@ -1451,7 +1457,7 @@
         el = document.getElementById('mini-cs-speak-word'); if (el) el.setAttribute('data-speak-text', cs.word);
         el = document.getElementById('mini-cs-speak-en');   if (el) el.setAttribute('data-speak-text', cs.en);
     }
-    var aw = EV_CONFIG.aiWord && EV_CONFIG.aiWord.items && EV_CONFIG.aiWord.items[0];
+    var aw = pickRandomItem(EV_CONFIG.aiWord && EV_CONFIG.aiWord.items);
     if (aw) {
         el = document.getElementById('mini-aiword-title'); if (el) el.textContent = aw.word;
         el = document.getElementById('mini-aiword-en');    if (el) el.textContent = aw.en;
@@ -1459,7 +1465,7 @@
         el = document.getElementById('mini-aiword-speak-word'); if (el) el.setAttribute('data-speak-text', aw.word);
         el = document.getElementById('mini-aiword-speak-en');   if (el) el.setAttribute('data-speak-text', aw.en);
     }
-    var as = EV_CONFIG.aiSentence && EV_CONFIG.aiSentence.items && EV_CONFIG.aiSentence.items[0];
+    var as = pickRandomItem(EV_CONFIG.aiSentence && EV_CONFIG.aiSentence.items);
     if (as) {
         el = document.getElementById('mini-aisent-title'); if (el) el.textContent = as.title || as.en.substring(0, 60) + '…';
         el = document.getElementById('mini-aisent-en');    if (el) el.textContent = as.en;
@@ -1467,21 +1473,21 @@
         el = document.getElementById('mini-aisent-speak-en'); if (el) el.setAttribute('data-speak-text', as.en);
     }
     // Populate vocabulary cards
-    var cet4 = typeof CET4_VOCAB !== 'undefined' && CET4_VOCAB && CET4_VOCAB[0];
+    var cet4 = pickRandomItem(typeof CET4_VOCAB !== 'undefined' ? CET4_VOCAB : null);
     if (cet4) {
         el = document.getElementById('mini-cet4-title'); if (el) el.textContent = cet4.word;
         el = document.getElementById('mini-cet4-en');    if (el) el.textContent = cet4.meaning;
         el = document.getElementById('mini-cet4-zh');    if (el) el.textContent = cet4.meaning;
         el = document.getElementById('mini-cet4-speak-word'); if (el) el.setAttribute('data-speak-text', cet4.word);
     }
-    var cet6 = typeof CET6_VOCAB !== 'undefined' && CET6_VOCAB && CET6_VOCAB[0];
+    var cet6 = pickRandomItem(typeof CET6_VOCAB !== 'undefined' ? CET6_VOCAB : null);
     if (cet6) {
         el = document.getElementById('mini-cet6-title'); if (el) el.textContent = cet6.word;
         el = document.getElementById('mini-cet6-en');    if (el) el.textContent = cet6.meaning;
         el = document.getElementById('mini-cet6-zh');    if (el) el.textContent = cet6.meaning;
         el = document.getElementById('mini-cet6-speak-word'); if (el) el.setAttribute('data-speak-text', cet6.word);
     }
-    var kaoyan = typeof CET_KAOYAN_VOCAB !== 'undefined' && CET_KAOYAN_VOCAB && CET_KAOYAN_VOCAB[0];
+    var kaoyan = pickRandomItem(typeof CET_KAOYAN_VOCAB !== 'undefined' ? CET_KAOYAN_VOCAB : null);
     if (kaoyan) {
         el = document.getElementById('mini-kaoyan-title'); if (el) el.textContent = kaoyan.word;
         el = document.getElementById('mini-kaoyan-en');    if (el) el.textContent = kaoyan.meaning;
