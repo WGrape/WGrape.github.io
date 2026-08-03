@@ -2245,6 +2245,7 @@
                 <button id="speak-rain-btn" class="wb-btn wb-btn-blue">🔊 朗读：开</button>
                 <button id="export-mastered-btn" class="wb-btn wb-btn-purple">📤 导出</button>
                 <label id="import-mastered-btn" class="wb-btn wb-btn-purple" style="cursor:pointer;">📥 导入<input type="file" id="mastered-import-file" accept=".json" style="display:none;"></label>
+                <button id="fullscreen-btn" class="wb-btn wb-btn-orange">⛶ 全屏</button>
             </div>
 
             <!-- 速度档位 -->
@@ -2378,6 +2379,10 @@
 .wb-btn-blue:hover   { background: rgba(56,189,248,0.2); }
 .wb-btn-purple { background: rgba(168,85,247,0.12); border-color: rgba(168,85,247,0.3); color: #a78bfa; }
 .wb-btn-purple:hover { background: rgba(168,85,247,0.2); }
+.wb-btn-orange  { background: rgba(251,146,60,0.12); border-color: rgba(251,146,60,0.35); color: #fb923c; }
+.wb-btn-orange:hover  { background: rgba(251,146,60,0.22); box-shadow: 0 0 14px rgba(251,146,60,0.2); }
+.warbattle-panel.wb-fullscreen { position:fixed !important; top:0 !important; left:0 !important; width:100vw !important; height:100vh !important; max-width:none !important; margin:0 !important; z-index:9999 !important; border-radius:0 !important; }
+.warbattle-panel.wb-fullscreen .warbattle-arena { height:calc(100vh - 180px) !important; min-height:300px; }
 
 /* ── Speed selector ── */
 .speed-btn {
@@ -2885,6 +2890,18 @@
         btn.textContent = speakEnabled ? '🔊 朗读：开' : '🔇 朗读：关';
     };
 
+    var toggleFullscreen = function() {
+        var panel = document.querySelector('.warbattle-panel');
+        var btn = document.getElementById('fullscreen-btn');
+        if (!panel || !btn) return;
+        var isFullscreen = panel.classList.toggle('wb-fullscreen');
+        btn.textContent = isFullscreen ? '⛶ 退出全屏' : '⛶ 全屏';
+        var header = document.querySelector('.site-nav');
+        if (header) header.style.display = isFullscreen ? 'none' : '';
+        var canvas = document.getElementById('battle-bg-canvas');
+        if (canvas) { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+    };
+
     // ── Import / Export ─────────────────────────────────────────────
     var exportMastered = function() {
         var vocabName = currentVocab === 'cet4' ? 'CET4' : currentVocab === 'cet6' ? 'CET6' : 'KAOYAN';
@@ -3104,6 +3121,27 @@
         if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
         if (resetBtn) resetBtn.addEventListener('click', resetProgress);
         if (speakBtn) speakBtn.addEventListener('click', toggleSpeak);
+
+        var fullscreenBtn = document.getElementById('fullscreen-btn');
+        if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) {
+                var panel = document.querySelector('.warbattle-panel');
+                var btn = document.getElementById('fullscreen-btn');
+                var header = document.querySelector('.site-nav');
+                if (panel) panel.classList.remove('wb-fullscreen');
+                if (btn) btn.textContent = '⛶ 全屏';
+                if (header) header.style.display = '';
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.key === 'F11') {
+                var panel = document.querySelector('.warbattle-panel');
+                if (panel && panel.classList.contains('wb-fullscreen')) {
+                    toggleFullscreen();
+                }
+            }
+        });
 
         // Speed selector
         document.querySelectorAll('.speed-btn').forEach(function(btn) {
