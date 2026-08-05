@@ -291,6 +291,50 @@
         linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(10, 20, 28, 0.88));
 }
 
+/* ── Word Wall card (homepage) ── */
+.english-mini-card-wall {
+    background:
+        radial-gradient(circle at top left, rgba(74, 222, 128, 0.18), transparent 42%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.14), transparent 38%),
+        linear-gradient(135deg, rgba(255,255,255,0.07), rgba(4, 14, 18, 0.90));
+    border-color: rgba(74,222,128,0.25);
+}
+.english-mini-card-wall:hover,
+.english-mini-card-wall:focus-visible {
+    border-color: rgba(74,222,128,0.55) !important;
+    box-shadow: 0 8px 32px rgba(74,222,128,0.18);
+}
+.english-mini-badge-wall {
+    color: #86efac !important;
+    background: rgba(74,222,128,0.14) !important;
+    border-color: rgba(74,222,128,0.3) !important;
+}
+.english-mini-tag-wall {
+    color: rgba(74,222,128,0.8) !important;
+    letter-spacing: 0.12em;
+}
+.ev-wall-entry-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #86efac;
+    background: rgba(74,222,128,0.14);
+    border: 1px solid rgba(74,222,128,0.3);
+    transition: background 0.2s, box-shadow 0.2s;
+    pointer-events: none;
+}
+.english-click-card:hover .ev-wall-entry-btn,
+.english-click-card:focus-visible .ev-wall-entry-btn {
+    background: rgba(74,222,128,0.22);
+    box-shadow: 0 0 12px rgba(74,222,128,0.3);
+}
+
 .english-mini-card-game {
     background:
         radial-gradient(circle at top left, rgba(251, 113, 50, 0.22), transparent 42%),
@@ -1270,6 +1314,30 @@
         </article>
 
         {% unless include.page_mode == 'true' %}
+        <!-- 单词墙入口卡片 -->
+        <article
+            class="english-mini-card english-mini-card-wall english-click-card"
+            data-href="/english-visuals/#word-wall"
+            data-target="_self"
+            role="link"
+            aria-label="进入单词墙"
+            tabindex="0"
+        >
+            <div class="english-mini-meta">
+                <span class="english-mini-badge english-mini-badge-wall">🧱 单词墙</span>
+                <span class="english-mini-tag english-mini-tag-wall">WALL</span>
+            </div>
+            <h3 class="english-mini-title" style="font-size:22px;letter-spacing:0.01em;">单词墙</h3>
+            <div class="english-mini-divider"></div>
+            <p class="english-mini-zh" style="color:rgba(170,184,203,0.7);font-size:12px;line-height:1.7;">
+                将单词铺满整面墙，逐个击破<br>
+                认识的标记掌握，不认识的翻转查看释义
+            </p>
+            <div class="english-mini-speak-row" style="margin-top:14px;">
+                <span class="ev-wall-entry-btn">进入单词墙 →</span>
+            </div>
+        </article>
+
         <article
             class="english-mini-card english-mini-card-game english-click-card"
             data-href="/english-visuals/#word-battle"
@@ -1293,7 +1361,7 @@
             </div>
         </article>
 
-        <article
+        <!-- <article
             class="english-mini-card english-mini-card-movie"
             tabindex="0"
             aria-label="双语电影学习（暂未上线）"
@@ -1311,7 +1379,7 @@
             <div class="english-mini-speak-row" style="margin-top:14px;">
                 <span class="ev-soon-badge">⏳ 暂未上线</span>
             </div>
-        </article>
+        </article> -->
 
         <article
             class="english-mini-card english-mini-card-more english-click-card"
@@ -2215,6 +2283,1135 @@
 {% endif %}
 
 {% if include.page_mode == 'true' %}
+<!-- 单词墙板块 -->
+<section id="word-wall" class="home-english-section english-page-mode">
+    <div class="section-header">
+        <h2 class="section-title">🧱 单词墙</h2>
+        <p class="section-subtitle">将单词铺满整面墙，认识的点掌握，想看释义点翻转，不会的标记并翻转</p>
+    </div>
+
+    <div class="wordwall-panel" id="wordwall-panel">
+        <!-- 控制区 -->
+        <div class="wordwall-controls">
+            <div class="ww-section-label">📚 选择词库</div>
+            <div class="ev-wc-bar ww-vocab-bar" style="margin-bottom:12px;">
+                <button class="ev-wc-btn ev-wc-active ww-vocab-btn" data-ww-vocab="cet4">CET4 词汇</button>
+                <button class="ev-wc-btn ww-vocab-btn" data-ww-vocab="cet6">CET6 词汇</button>
+                <button class="ev-wc-btn ww-vocab-btn" data-ww-vocab="kaoyan">考研词汇</button>
+            </div>
+
+            <div id="ww-stats" style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+                <span class="wb-stat" id="ww-total">📊 总计：0</span>
+                <span class="wb-stat ww-stat-clickable" id="ww-mastered" style="background:rgba(74,222,128,0.1);border-color:rgba(74,222,128,0.3);color:#4ade80;cursor:pointer;" title="点击查看已掌握单词">✅ 已掌握：0 ↗</span>
+                <span class="wb-stat ww-stat-clickable" id="ww-dunno" style="background:rgba(251,146,60,0.1);border-color:rgba(251,146,60,0.3);color:#fb923c;cursor:pointer;" title="点击查看不会的单词">❌ 不会：0 ↗</span>
+                <span class="wb-stat" id="ww-remaining">📝 待学习：0</span>
+            </div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                <button id="ww-prev-btn" class="wb-btn wb-btn-blue">◀ 上一页</button>
+                <span id="ww-page-info" style="font-size:11px;color:rgba(170,184,203,0.7);font-family:'Space Grotesk',sans-serif;padding:7px 4px;">第 1 / 1 页</span>
+                <button id="ww-next-btn" class="wb-btn wb-btn-blue">下一页 ▶</button>
+                <div style="flex:1;"></div>
+                <button id="ww-export-btn" class="wb-btn wb-btn-purple">📤 导出</button>
+                <label id="ww-import-btn" class="wb-btn wb-btn-purple" style="cursor:pointer;">📥 导入<input type="file" id="ww-import-file" accept=".json" style="display:none;"></label>
+                <button id="ww-fullscreen-btn" class="wb-btn wb-btn-orange">⛶ 全屏</button>
+            </div>
+
+            <!-- 翻页圆点 -->
+            <div id="ww-pagination" style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap;"></div>
+        </div>
+
+        <!-- 瓷砖网格区 -->
+        <div class="wordwall-grid-wrap">
+            <div class="wordwall-grid" id="wordwall-grid">
+                <div class="wordwall-loading" id="ww-loading">
+                    <div style="font-size:40px;margin-bottom:12px;">🧱</div>
+                    <div style="font-size:16px;font-weight:600;color:#f8f4ec;font-family:'Space Grotesk',sans-serif;">加载词库中...</div>
+                    <div style="font-size:12px;color:rgba(170,184,203,0.5);margin-top:6px;">选择词库后开始学习</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 单词墙：已掌握/不会 弹窗 -->
+<div id="ww-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px;">
+    <div id="ww-modal-box" style="background:linear-gradient(160deg,#0a1a14 0%,#0d1822 100%);border:1px solid rgba(74,222,128,0.18);border-radius:20px;width:100%;max-width:800px;max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 60px rgba(74,222,128,0.06),0 24px 80px rgba(0,0,0,0.8);">
+        <div style="padding:18px 22px 14px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+            <div>
+                <div id="ww-modal-title" style="font-size:17px;font-weight:700;color:#f8f4ec;font-family:'Space Grotesk',sans-serif;">✅ 已掌握单词</div>
+                <div id="ww-modal-subtitle" style="font-size:12px;color:rgba(170,184,203,0.5);margin-top:3px;font-family:'Space Grotesk',sans-serif;">CET4 · 共 0 个单词</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+                <button id="ww-modal-export-btn" class="wb-btn wb-btn-purple" style="font-size:12px;padding:5px 12px;">📤 导出</button>
+                <label id="ww-modal-import-btn" class="wb-btn wb-btn-purple" style="font-size:12px;padding:5px 12px;cursor:pointer;">📥 导入<input type="file" id="ww-modal-import-file" accept=".json" style="display:none;"></label>
+                <button id="ww-modal-close" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:rgba(170,184,203,0.8);cursor:pointer;padding:5px 12px;font-size:13px;font-family:'Space Grotesk',sans-serif;transition:all 0.18s;">✕</button>
+            </div>
+        </div>
+        <div style="padding:10px 22px 8px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;gap:8px;align-items:center;flex-shrink:0;flex-wrap:wrap;">
+            <input id="ww-modal-search" type="text" placeholder="🔍 搜索单词…" style="flex:1;min-width:140px;padding:6px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:99px;color:#f8f4ec;font-size:13px;font-family:'Space Grotesk',sans-serif;outline:none;">
+            <div id="ww-modal-az-bar" style="display:flex;flex-wrap:wrap;gap:4px;"></div>
+        </div>
+        <div id="ww-modal-word-list" style="flex:1;overflow-y:auto;padding:14px 22px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;min-height:120px;"></div>
+        <div style="padding:8px 22px;border-top:1px solid rgba(255,255,255,0.07);flex-shrink:0;text-align:center;">
+            <span id="ww-modal-hint" style="font-size:11px;color:rgba(170,184,203,0.35);font-family:'Space Grotesk',sans-serif;">点击单词右侧 ✕ 移除，该单词将重新出现</span>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ── Word Wall Panel ── */
+.wordwall-panel {
+    margin: 0 auto;
+    max-width: 1100px;
+    background: linear-gradient(160deg, rgba(8,22,18,0.92) 0%, rgba(8,18,28,0.95) 100%);
+    border: 1px solid rgba(74,222,128,0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(74,222,128,0.04), 0 8px 40px rgba(0,0,0,0.6);
+}
+.wordwall-controls {
+    padding: 18px 24px 14px;
+    border-bottom: 1px solid rgba(74,222,128,0.1);
+    background: linear-gradient(90deg, rgba(74,222,128,0.03) 0%, transparent 100%);
+}
+.ww-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(74,222,128,0.5);
+    margin-bottom: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ── Word Wall Grid ── */
+.wordwall-grid-wrap {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 16px 20px 20px;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(74,222,128,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(56,189,248,0.02) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(4,12,10,1) 0%, rgba(6,14,18,1) 100%);
+}
+.wordwall-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    align-items: start;
+}
+.wordwall-panel.ww-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
+    border-radius: 0 !important;
+}
+.wordwall-panel.ww-fullscreen .wordwall-grid-wrap {
+    max-height: calc(100vh - 140px) !important;
+}
+.wordwall-panel.ww-fullscreen .wordwall-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+}
+
+/* ── Word Tile (瓷砖) ── */
+.ww-tile {
+    position: relative;
+    perspective: 1000px;
+    min-height: 280px;
+    height: 280px;
+    cursor: default;
+    transition: transform 0.25s ease;
+    z-index: 1;
+}
+.ww-tile:hover {
+    transform: translateY(-6px);
+    z-index: 10;
+}
+.ww-tile-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: 16px;
+}
+.ww-tile.flipped .ww-tile-inner {
+    transform: rotateY(180deg);
+}
+.ww-tile.mastered .ww-tile-inner {
+    transform: rotateY(180deg) scale(0);
+    opacity: 0;
+    pointer-events: none;
+}
+.ww-tile-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.ww-tile-front {
+    background: linear-gradient(145deg, rgba(20,35,30,0.95) 0%, rgba(15,25,32,0.98) 100%);
+    border: 1px solid rgba(74,222,128,0.2);
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 0 1px rgba(74,222,128,0.08);
+}
+.ww-tile-back {
+    background: linear-gradient(145deg, rgba(35,20,25,0.97) 0%, rgba(28,18,22,0.99) 100%);
+    border: 1px solid rgba(251,146,60,0.25);
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,200,150,0.06),
+        0 0 0 1px rgba(251,146,60,0.08);
+    transform: rotateY(180deg);
+}
+.ww-tile:hover .ww-tile-front {
+    border-color: rgba(74,222,128,0.4);
+    box-shadow:
+        0 6px 28px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.07),
+        0 0 20px rgba(74,222,128,0.08);
+}
+.ww-tile:hover .ww-tile-back {
+    border-color: rgba(251,146,60,0.4);
+    box-shadow:
+        0 6px 28px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,200,150,0.08),
+        0 0 20px rgba(251,146,60,0.08);
+}
+
+/* Tile header (vocab tag) */
+.ww-tile-tag {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(74,222,128,0.5);
+    font-family: "Space Grotesk", sans-serif;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ww-tile-tag-level {
+    font-size: 10px;
+    color: rgba(170,184,203,0.35);
+    font-family: "Space Grotesk", sans-serif;
+}
+
+/* Word on tile */
+.ww-tile-word {
+    font-family: "DM Serif Display", serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #e8f5e9;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+.ww-tile-meaning {
+    font-size: 12px;
+    color: rgba(170,184,203,0.65);
+    line-height: 1.5;
+    font-family: "Space Grotesk", sans-serif;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Speak button */
+.ww-speak-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 99px;
+    background: rgba(74,222,128,0.08);
+    border: 1px solid rgba(74,222,128,0.2);
+    color: #86efac;
+    font-size: 12px;
+    font-family: "Space Grotesk", sans-serif;
+    cursor: pointer;
+    transition: all 0.18s;
+    align-self: flex-start;
+    margin-top: auto;
+}
+.ww-speak-btn:hover {
+    background: rgba(74,222,128,0.18);
+    border-color: rgba(74,222,128,0.4);
+    box-shadow: 0 0 10px rgba(74,222,128,0.15);
+}
+.ww-speak-icon svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* Example sentence */
+.ww-tile-example {
+    font-size: 13px;
+    color: rgba(170,184,203,0.55);
+    line-height: 1.55;
+    font-family: "Space Grotesk", sans-serif;
+    font-style: italic;
+    margin-bottom: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+    min-height: 40px;
+}
+
+/* Back face content */
+.ww-back-word {
+    font-family: "DM Serif Display", serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fdd9b9;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+.ww-back-meaning {
+    font-size: 14px;
+    color: rgba(255,220,180,0.85);
+    line-height: 1.5;
+    font-family: "Space Grotesk", sans-serif;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    background: rgba(251,146,60,0.06);
+    border-radius: 8px;
+    border-left: 3px solid rgba(251,146,60,0.4);
+}
+.ww-back-example-en {
+    font-size: 13px;
+    color: rgba(170,184,203,0.6);
+    line-height: 1.55;
+    font-style: italic;
+    margin-bottom: 5px;
+    font-family: "Space Grotesk", sans-serif;
+}
+.ww-back-example-zh {
+    font-size: 13px;
+    color: rgba(251,200,150,0.7);
+    line-height: 1.55;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+/* Back face action buttons */
+.ww-back-actions {
+    border-top-color: rgba(251,146,60,0.2);
+}
+.ww-back-actions .ww-btn-master {
+    background: rgba(74,222,128,0.1);
+    border-color: rgba(74,222,128,0.3);
+    color: #4ade80;
+}
+.ww-back-actions .ww-btn-master:hover {
+    background: rgba(74,222,128,0.2);
+    box-shadow: 0 0 12px rgba(74,222,128,0.2);
+}
+.ww-back-actions .ww-btn-flip {
+    background: rgba(96,165,250,0.12);
+    border-color: rgba(96,165,250,0.35);
+    color: #93c5fd;
+}
+.ww-back-actions .ww-btn-flip:hover {
+    background: rgba(96,165,250,0.22);
+    box-shadow: 0 0 12px rgba(96,165,250,0.2);
+}
+.ww-back-actions .ww-btn-dunno {
+    background: rgba(251,146,60,0.12);
+    border-color: rgba(251,146,60,0.35);
+    color: #fb923c;
+}
+.ww-back-actions .ww-btn-dunno:hover {
+    background: rgba(251,146,60,0.22);
+    box-shadow: 0 0 12px rgba(251,146,60,0.2);
+}
+
+/* Action buttons at bottom of front face */
+.ww-tile-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(74,222,128,0.1);
+}
+.ww-action-btn {
+    flex: 1;
+    padding: 9px 0;
+    border-radius: 10px;
+    border: 1px solid;
+    font-size: 13px;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: center;
+}
+.ww-btn-master {
+    background: rgba(74,222,128,0.12);
+    border-color: rgba(74,222,128,0.3);
+    color: #4ade80;
+}
+.ww-btn-master:hover {
+    background: rgba(74,222,128,0.22);
+    box-shadow: 0 0 12px rgba(74,222,128,0.2);
+}
+.ww-btn-dunno {
+    background: rgba(251,146,60,0.1);
+    border-color: rgba(251,146,60,0.25);
+    color: #fb923c;
+}
+.ww-btn-dunno:hover {
+    background: rgba(251,146,60,0.2);
+    box-shadow: 0 0 12px rgba(251,146,60,0.2);
+}
+.ww-btn-flip {
+    background: rgba(96,165,250,0.1);
+    border-color: rgba(96,165,250,0.25);
+    color: #60a5fa;
+}
+.ww-btn-flip:hover {
+    background: rgba(96,165,250,0.2);
+    box-shadow: 0 0 12px rgba(96,165,250,0.2);
+}
+
+/* Mastered animation */
+@keyframes wwMasterFade {
+    0% { transform: scale(1); opacity: 1; }
+    30% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(0.6); opacity: 0; }
+}
+.ww-tile.mastering .ww-tile-inner {
+    animation: wwMasterFade 0.45s ease-out forwards;
+}
+
+/* Loading state */
+.wordwall-loading {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: rgba(170,184,203,0.5);
+    font-family: "Space Grotesk", sans-serif;
+}
+
+/* Scrollbar styling for grid wrap */
+.wordwall-grid-wrap::-webkit-scrollbar { width: 6px; }
+.wordwall-grid-wrap::-webkit-scrollbar-track { background: transparent; }
+.wordwall-grid-wrap::-webkit-scrollbar-thumb { background: rgba(74,222,128,0.2); border-radius: 3px; }
+.wordwall-grid-wrap::-webkit-scrollbar-thumb:hover { background: rgba(74,222,128,0.35); }
+
+/* Pagination dots */
+.ww-page-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,222,128,0.3);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.18s;
+    padding: 0;
+    font-size: 0;
+}
+.ww-page-dot:hover { border-color: rgba(74,222,128,0.6); }
+.ww-page-dot.ww-dot-active {
+    background: rgba(74,222,128,0.6);
+    border-color: rgba(74,222,128,0.8);
+    box-shadow: 0 0 8px rgba(74,222,128,0.3);
+}
+
+@media (max-width: 600px) {
+    .wordwall-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important; gap: 10px; }
+    .ww-tile { min-height: 260px; height: 260px; }
+    .ww-tile-word { font-size: 26px; }
+    .ww-tile-face { padding: 16px; }
+    .ww-action-btn { padding: 7px 0; font-size: 12px; }
+}
+
+/* ── Word Wall Modal ── */
+.ww-stat-clickable {
+    cursor: pointer;
+    transition: all 0.18s;
+}
+.ww-stat-clickable:hover {
+    background: rgba(74,222,128,0.18) !important;
+    box-shadow: 0 0 12px rgba(74,222,128,0.15);
+}
+#ww-dunno.ww-stat-clickable:hover {
+    background: rgba(251,146,60,0.18) !important;
+    box-shadow: 0 0 12px rgba(251,146,60,0.15);
+}
+#ww-modal-box[data-mode="dunno"] { border-color: rgba(251,146,60,0.25); }
+#ww-modal-box[data-mode="dunno"] #ww-modal-title { color: #fb923c; }
+.ww-modal-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 5px 10px; border-radius: 99px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    color: #f8f4ec; font-size: 13px;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.15s;
+}
+.ww-modal-chip:hover { background: rgba(74,222,128,0.1); }
+#ww-modal-box[data-mode="dunno"] .ww-modal-chip:hover { background: rgba(251,146,60,0.12); }
+.ww-modal-chip-remove {
+    background: none; border: none;
+    color: rgba(248,113,113,0.55);
+    cursor: pointer; font-size: 11px;
+    padding: 1px 3px; line-height: 1;
+    border-radius: 50%;
+    transition: color 0.15s, background 0.15s;
+}
+.ww-modal-chip-remove:hover { color: #f87171; background: rgba(248,113,113,0.12); }
+.ww-az-btn {
+    padding: 2px 8px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    color: rgba(170,184,203,0.7); font-size: 11px;
+    cursor: pointer; transition: all 0.15s;
+    font-family: 'Space Grotesk', sans-serif;
+}
+.ww-az-btn:hover, .ww-az-btn.wz-active {
+    background: rgba(74,222,128,0.15);
+    border-color: rgba(74,222,128,0.4);
+    color: #4ade80;
+}
+#ww-modal-box[data-mode="dunno"] .ww-az-btn:hover,
+#ww-modal-box[data-mode="dunno"] .ww-az-btn.wz-active {
+    background: rgba(251,146,60,0.15);
+    border-color: rgba(251,146,60,0.4);
+    color: #fb923c;
+}
+#ww-modal-search:focus {
+    border-color: rgba(74,222,128,0.4) !important;
+    background: rgba(74,222,128,0.05) !important;
+}
+#ww-modal-close:hover { background: rgba(255,255,255,0.1); color: #f8f4ec; }
+</style>
+
+<script>
+(function() {
+    // ── Word Wall State ──
+    var wwCurrentVocab = 'cet4';
+    var wwPage = 0;
+    var wwPageSize = 500; // 每页显示的瓷砖数量
+    var wwAllData = [];
+    var wwFilteredData = [];
+    var wwMasteredWords = {};
+    var wwDunnoWords = {};
+
+    // localStorage keys
+    function wwGetMasteredKey(vocab) { return 'wordwall_mastered_' + vocab; }
+    function wwGetDunnoKey(vocab) { return 'wordwall_dunno_' + vocab; }
+
+    // Get vocabulary data
+    function wwGetVocabData() {
+        switch (wwCurrentVocab) {
+            case 'cet4': return typeof CET4_WALL_VOCAB !== 'undefined' ? CET4_WALL_VOCAB : [];
+            case 'cet6': return typeof CET6_WALL_VOCAB !== 'undefined' ? CET6_WALL_VOCAB : [];
+            case 'kaoyan': return typeof KAOYAN_WALL_VOCAB !== 'undefined' ? KAOYAN_WALL_VOCAB : [];
+            default: return [];
+        }
+    }
+
+    // Load words from localStorage
+    function wwLoadData() {
+        try {
+            var m = localStorage.getItem(wwGetMasteredKey(wwCurrentVocab));
+            wwMasteredWords = m ? JSON.parse(m) : {};
+        } catch(e) { wwMasteredWords = {}; }
+        try {
+            var d = localStorage.getItem(wwGetDunnoKey(wwCurrentVocab));
+            wwDunnoWords = d ? JSON.parse(d) : {};
+        } catch(e) { wwDunnoWords = {}; }
+    }
+
+    // Save words to localStorage
+    function wwSaveMastered() {
+        try { localStorage.setItem(wwGetMasteredKey(wwCurrentVocab), JSON.stringify(wwMasteredWords)); } catch(e) {}
+    }
+    function wwSaveDunno() {
+        try { localStorage.setItem(wwGetDunnoKey(wwCurrentVocab), JSON.stringify(wwDunnoWords)); } catch(e) {}
+    }
+
+    // Update stats display
+    function wwUpdateStats() {
+        var totalEl = document.getElementById('ww-total');
+        var masteredEl = document.getElementById('ww-mastered');
+        var dunnoEl = document.getElementById('ww-dunno');
+        var remainingEl = document.getElementById('ww-remaining');
+        var data = wwGetVocabData();
+        var masteredCount = Object.keys(wwMasteredWords).length;
+        var dunnoCount = Object.keys(wwDunnoWords).length;
+        var remaining = data.length - masteredCount;
+
+        if (totalEl) totalEl.textContent = '📊 总计：' + data.length;
+        if (masteredEl) masteredEl.textContent = '✅ 已掌握：' + masteredCount + ' ↗';
+        if (dunnoEl) dunnoEl.textContent = '❌ 不会：' + dunnoCount + ' ↗';
+        if (remainingEl) remainingEl.textContent = '📝 待学习：' + remaining;
+    }
+
+    // Filter out mastered words (dunno words still show, just tracked)
+    function wwFilterData() {
+        var all = wwGetVocabData();
+        wwFilteredData = all.filter(function(item) {
+            return !wwMasteredWords[item.word];
+        });
+        wwAllData = all;
+    }
+
+    // Render a single tile
+    function wwCreateTile(item, index) {
+        var tile = document.createElement('div');
+        tile.className = 'ww-tile';
+        tile.setAttribute('data-word', item.word);
+
+        var levelLabel = wwCurrentVocab === 'cet4' ? '四级' : wwCurrentVocab === 'cet6' ? '六级' : '考研';
+
+        tile.innerHTML =
+            '<div class="ww-tile-inner">' +
+            '<div class="ww-tile-face ww-tile-front">' +
+            '<div class="ww-tile-tag"><span>' + (item.tag || '') + '</span><span class="ww-tile-tag-level">' + levelLabel + '</span></div>' +
+            '<div class="ww-tile-word">' + escapeHtml(item.word) + '</div>' +
+            '<div class="ww-tile-example">' + escapeHtml(item.en || '') + '</div>' +
+            '<button class="ww-speak-btn" data-speak-word="' + escapeHtml(item.word) + '">' +
+            '<span class="ww-speak-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>' +
+            '朗读单词</button>' +
+            '<div class="ww-tile-actions">' +
+            '<button class="ww-action-btn ww-btn-master" data-word="' + escapeHtml(item.word) + '">✅ 掌握</button>' +
+            '<button class="ww-action-btn ww-btn-flip" data-word="' + escapeHtml(item.word) + '">🔄 翻转</button>' +
+            '<button class="ww-action-btn ww-btn-dunno" data-word="' + escapeHtml(item.word) + '">❌ 不会</button>' +
+            '</div>' +
+            '</div>' +
+            '<div class="ww-tile-face ww-tile-back">' +
+            '<div class="ww-back-word">' + escapeHtml(item.word) + '</div>' +
+            '<div class="ww-back-meaning">' + escapeHtml(item.meaning) + '</div>' +
+            '<div class="ww-back-example-en">' + escapeHtml(item.en || '') + '</div>' +
+            '<div class="ww-back-example-zh">' + escapeHtml(item.zh || '') + '</div>' +
+            '<div class="ww-tile-actions ww-back-actions">' +
+            '<button class="ww-action-btn ww-btn-master" data-word="' + escapeHtml(item.word) + '">✅ 掌握</button>' +
+            '<button class="ww-action-btn ww-btn-flip" data-word="' + escapeHtml(item.word) + '">↩ 翻回</button>' +
+            '<button class="ww-action-btn ww-btn-dunno" data-word="' + escapeHtml(item.word) + '">❌ 不会</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        return tile;
+    }
+
+    // Escape HTML
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // Render current page (max wwPageSize tiles)
+    function wwRenderPage() {
+        var grid = document.getElementById('wordwall-grid');
+        if (!grid) return;
+
+        grid.innerHTML = '';
+
+        if (wwFilteredData.length === 0) {
+            grid.innerHTML = '<div class="wordwall-loading">' +
+                '<div style="font-size:40px;margin-bottom:12px;">🎉</div>' +
+                '<div style="font-size:16px;font-weight:600;color:#f8f4ec;font-family:\'Space Grotesk\',sans-serif;">太棒了！</div>' +
+                '<div style="font-size:12px;color:rgba(170,184,203,0.5);margin-top:6px;">该词库的所有单词已全部掌握</div>' +
+                '</div>';
+            return;
+        }
+
+        // Clamp page
+        var totalPages = Math.ceil(wwFilteredData.length / wwPageSize);
+        if (wwPage >= totalPages) wwPage = totalPages - 1;
+        if (wwPage < 0) wwPage = 0;
+
+        var start = wwPage * wwPageSize;
+        var end = Math.min(start + wwPageSize, wwFilteredData.length);
+        var pageData = wwFilteredData.slice(start, end);
+
+        var frag = document.createDocumentFragment();
+        pageData.forEach(function(item, i) {
+            var tile = wwCreateTile(item, start + i);
+            // 已标记为"不会"的单词默认翻转显示
+            if (wwDunnoWords[item.word]) tile.classList.add('flipped');
+            frag.appendChild(tile);
+        });
+        grid.appendChild(frag);
+
+        wwUpdatePagination();
+        wwUpdatePageButtons();
+    }
+
+    // Render pagination dots
+    function wwUpdatePagination() {
+        var paginEl = document.getElementById('ww-pagination');
+        if (!paginEl) return;
+
+        var totalPages = Math.ceil(wwFilteredData.length / wwPageSize);
+        paginEl.innerHTML = '';
+        if (totalPages <= 1) return;
+
+        var maxDots = 15;
+        var startPage = Math.max(0, wwPage - Math.floor(maxDots / 2));
+        var endPage = Math.min(totalPages, startPage + maxDots);
+        if (endPage - startPage < maxDots) startPage = Math.max(0, endPage - maxDots);
+
+        for (var p = startPage; p < endPage; p++) {
+            var dot = document.createElement('button');
+            dot.className = 'ww-page-dot' + (p === wwPage ? ' ww-dot-active' : '');
+            dot.setAttribute('data-page', String(p));
+            dot.title = '第 ' + (p + 1) + ' 页';
+            paginEl.appendChild(dot);
+        }
+    }
+
+    // Update prev/next buttons and page info
+    function wwUpdatePageButtons() {
+        var totalPages = Math.ceil(wwFilteredData.length / wwPageSize);
+        var prevBtn = document.getElementById('ww-prev-btn');
+        var nextBtn = document.getElementById('ww-next-btn');
+        var pageInfo = document.getElementById('ww-page-info');
+
+        if (prevBtn) {
+            prevBtn.disabled = wwPage <= 0;
+            prevBtn.style.opacity = wwPage <= 0 ? '0.4' : '1';
+        }
+        if (nextBtn) {
+            nextBtn.disabled = wwPage >= totalPages - 1;
+            nextBtn.style.opacity = wwPage >= totalPages - 1 ? '0.4' : '1';
+        }
+        if (pageInfo) {
+            pageInfo.textContent = '第 ' + (wwPage + 1) + ' / ' + Math.max(totalPages, 1) + ' 页';
+        }
+    }
+
+    // Switch vocabulary
+    function wwSwitchVocab(vocab) {
+        wwCurrentVocab = vocab;
+        wwPage = 0;
+
+        document.querySelectorAll('.ww-vocab-btn').forEach(function(btn) {
+            btn.classList.toggle('ev-wc-active', btn.getAttribute('data-ww-vocab') === vocab);
+        });
+
+        wwLoadData();
+        wwFilterData();
+        wwUpdateStats();
+        wwRenderPage();
+    }
+
+    // Handle "master" click
+    function wwHandleMaster(word, tileEl) {
+        if (!tileEl) return;
+        wwMasteredWords[word] = true;
+        // Also remove from dunno if it was there
+        delete wwDunnoWords[word];
+        wwSaveMastered();
+        wwSaveDunno();
+
+        tileEl.classList.add('mastering');
+        setTimeout(function() {
+            tileEl.classList.remove('mastering');
+            tileEl.classList.add('mastered');
+
+            setTimeout(function() {
+                wwFilterData();
+                wwUpdateStats();
+                wwRenderPage();
+            }, 300);
+        }, 450);
+    }
+
+    // Handle "flip" click (toggle flip only, NO recording)
+    // Handle "flip" click (toggle flip, no data recording)
+    function wwHandleFlip(word, tileEl) {
+        if (!tileEl) return;
+        var isFlipped = tileEl.classList.contains('flipped');
+        tileEl.classList.toggle('flipped');
+        // If flipping back (was flipped → now front), remove from dunno list
+        if (isFlipped && wwDunnoWords[word]) {
+            delete wwDunnoWords[word];
+            wwSaveDunno();
+            wwUpdateStats();
+        }
+    }
+
+    // Handle "don't know" click (flip + record)
+    function wwHandleDunno(word, tileEl) {
+        if (!tileEl) return;
+        // Record this word as "dunno"
+        if (!wwDunnoWords[word]) {
+            wwDunnoWords[word] = true;
+            wwSaveDunno();
+            wwUpdateStats();
+        }
+        // Flip the tile
+        tileEl.classList.add('flipped');
+    }
+
+    // Speak word using Web Speech API or existing speak function
+    function wwSpeakWord(word) {
+        if (window._evSpeakGlobal) {
+            window._evSpeakGlobal(word);
+        } else if ('speechSynthesis' in window) {
+            var utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85;
+            speechSynthesis.speak(utterance);
+        }
+    }
+
+    // Export mastered + dunno words
+    function wwExportMastered() {
+        var vocabName = wwCurrentVocab === 'cet4' ? 'CET4' : wwCurrentVocab === 'cet6' ? 'CET6' : 'KAOYAN';
+        var payload = {
+            type: 'wordwall',
+            vocab: vocabName,
+            mastered: Object.keys(wwMasteredWords),
+            dunno: Object.keys(wwDunnoWords),
+            exportedAt: new Date().toISOString()
+        };
+        var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'wordwall_' + vocabName + '_' + new Date().toISOString().slice(0,10) + '.json';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+    }
+
+    // Import mastered + dunno words
+    function wwImportMastered(file) {
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                var data = JSON.parse(e.target.result);
+                // Support both new format (with mastered/dunno) and legacy (just words array)
+                var masteredWords = Array.isArray(data.mastered) ? data.mastered : (Array.isArray(data.words) ? data.words : []);
+                var dunnoWords = Array.isArray(data.dunno) ? data.dunno : [];
+                if (!masteredWords.length && !dunnoWords.length) { alert('文件格式错误或没有单词'); return; }
+                var addedM = 0, addedD = 0;
+                masteredWords.forEach(function(w) { if (typeof w === 'string' && w) { wwMasteredWords[w] = true; addedM++; }});
+                dunnoWords.forEach(function(w) { if (typeof w === 'string' && w) { wwDunnoWords[w] = true; addedD++; }});
+                wwSaveMastered();
+                wwSaveDunno();
+                wwFilterData();
+                wwUpdateStats();
+                wwRenderPage();
+                alert('✅ 成功导入 ' + addedM + ' 个已掌握、' + addedD + ' 个不会的单词');
+            } catch(ex) { alert('导入失败：文件格式不正确'); }
+        };
+        reader.readAsText(file);
+    }
+
+    // Toggle fullscreen
+    function wwToggleFullscreen() {
+        var panel = document.getElementById('wordwall-panel');
+        var btn = document.getElementById('ww-fullscreen-btn');
+        if (!panel || !btn) return;
+        var isFs = panel.classList.toggle('ww-fullscreen');
+        btn.textContent = isFs ? '⛶ 退出全屏' : '⛶ 全屏';
+        var header = document.querySelector('.site-nav');
+        if (header) header.style.display = isFs ? 'none' : '';
+    }
+
+    // ── Word Wall Modal (mastered / dunno) ──
+    var wwModalMode = '';     // '' | 'mastered' | 'dunno'
+    var wwModalLetter = 'all';
+
+    function wwOpenModal(mode) {
+        wwModalMode = mode;
+        wwModalLetter = '全部';
+        var overlay = document.getElementById('ww-modal-overlay');
+        var box = document.getElementById('ww-modal-box');
+        var searchEl = document.getElementById('ww-modal-search');
+        var titleEl = document.getElementById('ww-modal-title');
+        var hintEl = document.getElementById('ww-modal-hint');
+
+        if (!overlay) return;
+        if (searchEl) searchEl.value = '';
+
+        // Set theme
+        if (box) box.setAttribute('data-mode', mode);
+        if (titleEl) {
+            titleEl.textContent = mode === 'mastered' ? '✅ 已掌握单词' : '❌ 不会的单词';
+        }
+        if (hintEl) {
+            hintEl.textContent = mode === 'mastered'
+                ? '点击单词右侧 ✕ 移除，该单词将重新出现'
+                : '点击单词右侧 ✕ 移除，该单词将从"不会"列表中清除';
+        }
+
+        wwRenderModal();
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function wwCloseModal() {
+        var overlay = document.getElementById('ww-modal-overlay');
+        if (overlay) overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        wwModalMode = '';
+    }
+
+    function wwBuildAzBar(words) {
+        var bar = document.getElementById('ww-modal-az-bar');
+        if (!bar) return;
+        var seen = {};
+        var letters = ['全部'];
+        words.forEach(function(w) {
+            var l = w.charAt(0).toUpperCase();
+            if (/[A-Z]/.test(l) && !seen[l]) { seen[l] = true; letters.push(l); }
+        });
+        letters.sort(function(a, b) { if (a === '全部') return -1; return a.localeCompare(b); });
+        bar.innerHTML = '';
+        letters.forEach(function(l) {
+            var btn = document.createElement('button');
+            btn.className = 'ww-az-btn' + (l === wwModalLetter ? ' wz-active' : '');
+            btn.textContent = l;
+            btn.setAttribute('data-letter', l);
+            bar.appendChild(btn);
+        });
+    }
+
+    function wwRenderModal() {
+        if (!wwModalMode) return;
+
+        var data = wwGetVocabData();
+        var vocabLabel = wwCurrentVocab === 'cet4' ? 'CET4' : wwCurrentVocab === 'cet6' ? 'CET6' : '考研';
+        var wordMap = wwModalMode === 'mastered' ? wwMasteredWords : wwDunnoWords;
+        var words = Object.keys(wordMap).sort();
+        var subtitleEl = document.getElementById('ww-modal-subtitle');
+
+        if (subtitleEl) {
+            var label = wwModalMode === 'mastered' ? '已掌握' : '不会';
+            subtitleEl.textContent = vocabLabel + ' · 共 ' + words.length + ' 个' + label + '单词';
+        }
+
+        wwBuildAzBar(words);
+
+        // Filter
+        var q = '';
+        var searchEl = document.getElementById('ww-modal-search');
+        if (searchEl) q = searchEl.value.trim().toLowerCase();
+
+        var filtered = words.filter(function(w) {
+            var matchQ = !q || w.toLowerCase().indexOf(q) !== -1;
+            var matchL = wwModalLetter === '全部' || w.charAt(0).toUpperCase() === wwModalLetter;
+            return matchQ && matchL;
+        });
+
+        var list = document.getElementById('ww-modal-word-list');
+        if (!list) return;
+
+        if (filtered.length === 0) {
+            list.innerHTML = '<div style="width:100%;text-align:center;color:rgba(170,184,203,0.35);font-size:14px;padding:48px 0;font-family:\'Space Grotesk\',sans-serif;">'
+                + (q || wwModalLetter !== '全部' ? '没有找到匹配的单词' : '暂无数据')
+                + '</div>';
+            return;
+        }
+
+        // Build meaning map
+        var meanMap = {};
+        data.forEach(function(d) { meanMap[d.word] = d.meaning; });
+
+        list.innerHTML = '';
+        filtered.forEach(function(w) {
+            var chip = document.createElement('div');
+            chip.className = 'ww-modal-chip';
+            var mean = meanMap[w] || '';
+            if (mean.length > 20) mean = mean.substring(0, 20) + '…';
+            chip.innerHTML =
+                '<span style="font-weight:500;">' + escapeHtml(w) + '</span>'
+                + (mean ? '<span style="font-size:11px;color:rgba(170,184,203,0.45);margin:0 2px;">' + escapeHtml(mean) + '</span>' : '')
+                + '<button class="ww-modal-chip-remove" data-word="' + escapeHtml(w) + '" title="移除">✕</button>';
+            list.appendChild(chip);
+        });
+    }
+    // ── End Modal ──
+
+    // Initialize
+    function wwInit() {
+        // Check if elements exist
+        var grid = document.getElementById('wordwall-grid');
+        if (!grid) {
+            setTimeout(wwInit, 50);
+            return;
+        }
+
+        // Load initial state
+        wwLoadData();
+        wwFilterData();
+        wwUpdateStats();
+        wwRenderPage();
+
+        // Vocab switch buttons
+        document.querySelectorAll('.ww-vocab-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                wwSwitchVocab(this.getAttribute('data-ww-vocab'));
+            });
+        });
+
+        // Pagination dots (delegated)
+        var paginEl = document.getElementById('ww-pagination');
+        if (paginEl) paginEl.addEventListener('click', function(e) {
+            var dot = e.target.closest('.ww-page-dot');
+            if (!dot) return;
+            wwPage = parseInt(dot.getAttribute('data-page'), 10);
+            wwRenderPage();
+        });
+
+        // Prev/Next buttons
+        var prevBtn = document.getElementById('ww-prev-btn');
+        var nextBtn = document.getElementById('ww-next-btn');
+        if (prevBtn) prevBtn.addEventListener('click', function() { if (wwPage > 0) { wwPage--; wwRenderPage(); }});
+        if (nextBtn) nextBtn.addEventListener('click', function() { wwPage++; wwRenderPage(); });
+
+        // Tile action delegation (master/dunno/speak)
+        document.getElementById('wordwall-grid').addEventListener('click', function(e) {
+            // Speak button
+            var speakBtn = e.target.closest('.ww-speak-btn');
+            if (speakBtn) {
+                e.stopPropagation();
+                wwSpeakWord(speakBtn.getAttribute('data-speak-word'));
+                return;
+            }
+
+            // Master button
+            var masterBtn = e.target.closest('.ww-btn-master');
+            if (masterBtn) {
+                e.stopPropagation();
+                var tile = masterBtn.closest('.ww-tile');
+                wwHandleMaster(masterBtn.getAttribute('data-word'), tile);
+                return;
+            }
+
+            // Flip button (toggle only, no recording)
+            var flipBtn = e.target.closest('.ww-btn-flip');
+            if (flipBtn) {
+                e.stopPropagation();
+                var tileF = flipBtn.closest('.ww-tile');
+                wwHandleFlip(flipBtn.getAttribute('data-word'), tileF);
+                return;
+            }
+
+            // Dunno button
+            var dunnoBtn = e.target.closest('.ww-btn-dunno');
+            if (dunnoBtn) {
+                e.stopPropagation();
+                var tile2 = dunnoBtn.closest('.ww-tile');
+                wwHandleDunno(dunnoBtn.getAttribute('data-word'), tile2);
+                return;
+            }
+        });
+
+        // Export/Import
+        var exportBtn = document.getElementById('ww-export-btn');
+        var importFile = document.getElementById('ww-import-file');
+        if (exportBtn) exportBtn.addEventListener('click', wwExportMastered);
+        if (importFile) importFile.addEventListener('change', function() { wwImportMastered(this.files[0]); this.value = ''; });
+
+        // Fullscreen
+        var fsBtn = document.getElementById('ww-fullscreen-btn');
+        if (fsBtn) fsBtn.addEventListener('click', wwToggleFullscreen);
+
+        // ESC to exit fullscreen / modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                var panel = document.getElementById('wordwall-panel');
+                if (panel && panel.classList.contains('ww-fullscreen')) {
+                    wwToggleFullscreen();
+                }
+                var ov = document.getElementById('ww-modal-overlay');
+                if (ov && ov.style.display !== 'none') wwCloseModal();
+            }
+        });
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) {
+                var panel = document.getElementById('wordwall-panel');
+                var btn = document.getElementById('ww-fullscreen-btn');
+                var header = document.querySelector('.site-nav');
+                if (panel) panel.classList.remove('ww-fullscreen');
+                if (btn) btn.textContent = '⛶ 全屏';
+                if (header) header.style.display = '';
+            }
+        });
+
+        // ── Modal wiring ──
+        // Click stats to open modal
+        var masteredStatEl = document.getElementById('ww-mastered');
+        var dunnoStatEl = document.getElementById('ww-dunno');
+        if (masteredStatEl) masteredStatEl.addEventListener('click', function() { wwOpenModal('mastered'); });
+        if (dunnoStatEl) dunnoStatEl.addEventListener('click', function() { wwOpenModal('dunno'); });
+
+        // Close button + overlay click
+        var modalCloseBtn = document.getElementById('ww-modal-close');
+        var modalOverlay = document.getElementById('ww-modal-overlay');
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', wwCloseModal);
+        if (modalOverlay) modalOverlay.addEventListener('click', function(e) { if (e.target === this) wwCloseModal(); });
+
+        // Search input
+        var modalSearch = document.getElementById('ww-modal-search');
+        if (modalSearch) modalSearch.addEventListener('input', wwRenderModal);
+
+        // AZ bar click
+        var modalAzBar = document.getElementById('ww-modal-az-bar');
+        if (modalAzBar) modalAzBar.addEventListener('click', function(e) {
+            var btn = e.target.closest('.ww-az-btn');
+            if (!btn) return;
+            wwModalLetter = btn.getAttribute('data-letter');
+            wwRenderModal();
+        });
+
+        // Chip remove (delegated on document)
+        document.addEventListener('click', function(e) {
+            var rmBtn = e.target.closest('.ww-modal-chip-remove');
+            if (!rmBtn) return;
+            var word = rmBtn.getAttribute('data-word');
+            if (!word || !wwModalMode) return;
+            if (wwModalMode === 'mastered') {
+                delete wwMasteredWords[word];
+                wwSaveMastered();
+            } else {
+                delete wwDunnoWords[word];
+                wwSaveDunno();
+            }
+            wwFilterData();
+            wwUpdateStats();
+            wwRenderPage();
+            wwRenderModal();
+        });
+
+        // Modal export/import
+        var modalExportBtn = document.getElementById('ww-modal-export-btn');
+        var modalImportFile = document.getElementById('ww-modal-import-file');
+        if (modalExportBtn) modalExportBtn.addEventListener('click', wwExportMastered);
+        if (modalImportFile) modalImportFile.addEventListener('change', function() { wwImportMastered(this.files[0]); this.value = ''; });
+    }
+
+    wwInit();
+})();
+</script>
+
 <!-- 单词之战游戏板块 -->
 <section id="word-battle" class="home-english-section english-page-mode">
     <div class="section-header">
